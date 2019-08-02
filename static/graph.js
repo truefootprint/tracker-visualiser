@@ -1,5 +1,10 @@
 const urlParams = new URLSearchParams(window.location.search);
-const graph = urlParams.get('graph');
+
+const sector = urlParams.get('sector');
+const year = urlParams.get('year');
+const type = urlParams.get('type');
+const id = urlParams.get('id');
+const graph = `${sector}-${year}-${type}-${id}`;
 
 d3.json(`http://localhost:3000/company_rankings/${graph}`).then(ranking => {
   // Optional things we can set:

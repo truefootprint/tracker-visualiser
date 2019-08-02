@@ -1,4 +1,5 @@
 import Head from "next/head";
+import DrillDown from "../drill_down";
 import Breadcrumbs from "../breadcrumbs";
 
 const Graph = () => {
@@ -14,10 +15,9 @@ const Graph = () => {
       <link rel="stylesheet" type="text/css" href="/static/graph.css" />
     </Head>
 
-    <Breadcrumbs links={[
-      { name: "ESG", href: "?graph=Mining-2017-group-3" },
-      { name: "Environment", href: "?graph=Mining-2017-group-1" }
-    ]} />
+    <Breadcrumbs />
+    <p>-----------</p>
+    <DrillDown />
 
     <h1 className="title"></h1>
     <svg width="1000" height="600" />
