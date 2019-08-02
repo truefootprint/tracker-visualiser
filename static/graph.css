@@ -1,0 +1,35 @@
+.highlighted {
+  font-weight: bold;
+}
+
+[data-band="1"] {
+  fill: #9f9;
+}
+
+[data-band="1"].highlighted {
+  fill: #3f3;
+}
+
+[data-band="2"] {
+  fill: #fe9;
+}
+
+[data-band="2"].highlighted {
+  fill: #fe3;
+}
+
+[data-band="3"] {
+  fill: #fc9;
+}
+
+[data-band="3"].highlighted {
+  fill: #fc3;
+}
+
+[data-band="4"] {
+  fill: #f99;
+}
+
+[data-band="4"].highlighted {
+  fill: #f33;
+}

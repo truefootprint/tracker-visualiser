@@ -1,1 +1,3 @@
-export default () => <p>Hello, world!</p>
+import Graph from "../components/graph";
+
+export default Graph;
