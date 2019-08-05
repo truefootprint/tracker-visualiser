@@ -4,7 +4,6 @@ import Client from "../../helpers/client";
 import Layout from "../layout";
 import SideBar from "../side_bar";
 import Breadcrumbs from "../breadcrumbs";
-import DrillDown from "../drill_down";
 import Graph from "../graph";
 import css from "./styles.scss";
 
@@ -13,7 +12,7 @@ const Home = () => {
 
   const [sector, setSector] = useState("Mining");
   const [year, setYear] = useState("2018");
-  const [member, setMember] = useState({ type: "outcome", id: 1 });
+  const [member, setMember] = useState({ type: "group", id: 3 });
 
   const [rankings, setRankings] = useState(null);
   const [ancestry, setAncestry] = useState(null);
@@ -40,9 +39,7 @@ const Home = () => {
           {rankings && <Graph rankings={rankings} year={year} />}
         </div>
 
-        <SideBar year={year} setYear={setYear}>
-          {ancestry && <DrillDown ancestry={ancestry} setMember={setMember} />}
-        </SideBar>
+        <SideBar year={year} setYear={setYear} ancestry={ancestry} setMember={setMember} />
       </div>
     </Layout>
   );

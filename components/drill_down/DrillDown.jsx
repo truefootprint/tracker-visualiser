@@ -1,4 +1,5 @@
 import { useState } from "react";
+import css from "./styles.scss";
 
 const DrillDown = ({ ancestry, setMember }) => {
   const attributes = ancestry.attributes;
@@ -17,13 +18,13 @@ const DrillDown = ({ ancestry, setMember }) => {
   });
 
   const link = (child, index) => (
-    <a key={index} className="link" onClick={handleClick(child)}>
-      {child.name}
+    <a key={index} className={css.link} onClick={handleClick(child)}>
+      &gt; {child.name}
     </a>
   );
 
   return (
-    <div className="drill_down">
+    <div className={css.drill_down}>
       {children.map(link)}
     </div>
   );
