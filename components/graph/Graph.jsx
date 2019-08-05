@@ -2,7 +2,7 @@ import * as d3 from "d3";
 import { useEffect } from "react";
 import css from "./styles.scss";
 
-const Graph = ({ rankings }) => {
+const Graph = ({ rankings, year }) => {
   useEffect(() => {
     d3.select('.graph').html("");
 
@@ -31,16 +31,24 @@ const Graph = ({ rankings }) => {
 
     const [_, max] = d3.extent(values);
 
-    const marginX = 200;
+    const marginLeft = 200;
+    const marginRight = 80;
     const marginY = 80;
 
-    const width = 1200 - 2 * marginX;
+    const width = 1100 - marginLeft - marginRight;
     const height = 580 - 1 * marginY;
 
     const svg = d3.select('.graph');
 
     const chart = svg.append('g')
-        .attr('transform', `translate(${marginX}, 0)`);
+        .attr('transform', `translate(${marginLeft}, 0)`);
+
+    if (year !== "2018") {
+      chart.append('text')
+            .attr('class', css.year)
+            .attr('y', height)
+            .text(year);
+    }
 
     const axisMin = optionalMin || 0;
     const axisMax = optionalMax || max;
@@ -71,7 +79,7 @@ const Graph = ({ rankings }) => {
         .call(d3.axisBottom(xScale));
 
     svg.append('text')
-          .attr('x', width / 2 + marginX)
+          .attr('x', width / 2 + marginLeft)
           .attr('y', height + marginY * 1.7)
           .attr('text-anchor', 'middle')
           .text(axisLabel);
@@ -118,7 +126,7 @@ const Graph = ({ rankings }) => {
 
   return (
     <div className={css.graph}>
-      <svg className="graph" width="1200" height="580" />
+      <svg className="graph" width="1100" height="580" />
       <p className={css.nulls}></p>
     </div>
   );
