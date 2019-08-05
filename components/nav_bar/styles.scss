@@ -1,0 +1,33 @@
+.nav_bar {
+  display: flex;
+  align-items: center;
+  height: 8rem;
+  justify-content: space-between;
+  padding: 0 2rem;
+  box-shadow: 0 0 0.5rem #ccc;
+}
+
+.logo {
+  justify-self: flex-start;
+  zoom: 0.9;
+}
+
+.title {
+  justify-self: center;
+  text-align: center;
+  font-size: 2.3rem;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.icons {
+  justify-self: flex-end;
+  width: 15.75rem;
+  font-size: 1.3rem;
+  color: #555;
+  text-align: right;
+
+  i {
+    margin-left: 1rem;
+  }
+}
