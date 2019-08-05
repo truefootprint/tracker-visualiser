@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Client from "../../helpers/client";
 
+import Layout from "../layout";
 import Logo from "../logo";
 import Breadcrumbs from "../breadcrumbs";
 import DrillDown from "../drill_down";
@@ -24,13 +25,15 @@ const Home = () => {
     client.ancestry(member).then(({ data }) => setAncestry(data));
   }, [member]);
 
-  return <>
-    <Logo />
+  return (
+    <Layout>
+      <Logo />
 
-    {ancestry && <Breadcrumbs ancestry={ancestry} setMember={setMember} />}
-    {ancestry && <DrillDown ancestry={ancestry} setMember={setMember} />}
-    {rankings && <Graph rankings={rankings} />}
-  </>;
+      {ancestry && <Breadcrumbs ancestry={ancestry} setMember={setMember} />}
+      {ancestry && <DrillDown ancestry={ancestry} setMember={setMember} />}
+      {rankings && <Graph rankings={rankings} />}
+    </Layout>
+  );
 };
 
 export default Home;
