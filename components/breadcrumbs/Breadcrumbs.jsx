@@ -1,56 +1,50 @@
 import { useState } from "react";
-import axios from "axios";
 
-const Breadcrumbs = () => {
-  const [links, setLinks] = useState([]);
-  const last = links.length - 1;
+const Breadcrumbs = ({ ancestry, setMember }) => {
+  const attributes = ancestry.attributes;
 
-  let sector = 'Mining';
-  let year = 2018;
-  let type = 'group';
-  let id = 3;
-
-  if (typeof window !== "undefined") {
-    const urlParams = new URLSearchParams(window.location.search);
-
-    sector = urlParams.get('sector');
-    year = urlParams.get('year');
-    type = urlParams.get('type');
-    id = urlParams.get('id');
-  }
-
-  const f = (ancestors, attributes) => {
-    const first = ancestors[0];
-
-    if (first) {
-      const type = first.type;
-      const id = first.id;
-
-      const name = attributes[type][id].name;
-      const href = `?sector=${sector}&year=${year}&type=${type.toLowerCase()}&id=${id}`;
-
-      return f(first.ancestors, attributes).concat({ name, href });
-    } else {
-      return [];
-    }
+  const handleClick = (node) => {
+    return () => {
+      setMember({ type: node.type.toLowerCase(), id: node.id });
+    };
   };
 
-  axios.get(`http://localhost:3000/ancestry/${type}/${id}`)
-    .then(function (response) {
-      const d = response.data;
-      const bar = f(d.ancestors, d.attributes);
+  const paths = (ancestors) => (
+    ancestors.map(({ type, id, ancestors }) => {
+      const attr = attributes[type][id];
+      const name = attr.name;
+      const node = { type, id, name };
 
-      setLinks(bar);
+      if (ancestors.length === 0) {
+        return [node];
+      } else {
+        return paths(ancestors).flatMap(p => [...p, node]);
+      }
     })
+  );
+
+  const divider = <span className="divider"> &gt; </span>;
+
+  const breadcrumb = (node, index, array) => {
+    const showDivider = index < array.length - 1;
+
+    return (
+      <span key={index} className="breadcrumb">
+        <a onClick={handleClick(node)}>{node.name}</a>
+        {showDivider && divider}
+      </span>
+    );
+  };
+
+  const breadcrumbs = (path, index) => (
+    <div key={index} className="breadcrumbs">
+      {path.map(breadcrumb)}
+    </div>
+  );
 
   return (
-    <div>
-      {links.map((l, i) => (
-        <span key={i}>
-          <a href={l.href}>{l.name}</a>
-          {i < last && <span> &gt; </span>}
-        </span>
-      ))}
+    <div className="breadcrumbs_collection">
+      {paths(ancestry.ancestors).map(breadcrumbs)}
     </div>
   );
 };
