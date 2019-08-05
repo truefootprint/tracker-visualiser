@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { useEffect } from "react";
+import css from "./styles.scss";
 
 const Graph = ({ rankings }) => {
   useEffect(() => {
@@ -49,7 +50,7 @@ const Graph = ({ rankings }) => {
 
     const handleMouseOver = (d, index) => {
       chart.selectAll(`*[data-index='${index}']`)
-        .attr('class', 'highlighted');
+        .attr('class', css.higlighted);
     };
 
     const handleMouseOut = (d, index) => {
@@ -107,10 +108,10 @@ const Graph = ({ rankings }) => {
   }, [rankings]);
 
   return (
-    <div className="graph">
+    <div className={css.graph}>
       <h1>{rankings.name}</h1>
       <svg width="1000" height="600" />
-      <p className="nulls"></p>
+      <p className={css.nulls}></p>
     </div>
   );
 }
