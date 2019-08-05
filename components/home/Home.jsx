@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Client from "../../helpers/client";
 
+import Logo from "../logo";
 import Breadcrumbs from "../breadcrumbs";
 import DrillDown from "../drill_down";
 import Graph from "../graph";
@@ -24,6 +25,8 @@ const Home = () => {
   }, [member]);
 
   return <>
+    <Logo />
+
     {ancestry && <Breadcrumbs ancestry={ancestry} setMember={setMember} />}
     {ancestry && <DrillDown ancestry={ancestry} setMember={setMember} />}
     {rankings && <Graph rankings={rankings} />}

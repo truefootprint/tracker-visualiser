@@ -4,7 +4,7 @@ import css from "./styles.scss";
 
 const Graph = ({ rankings }) => {
   useEffect(() => {
-    d3.select('svg').html("");
+    d3.select('.graph').html("");
 
     // Optional things we can set:
     const optionalMin = null;
@@ -35,7 +35,7 @@ const Graph = ({ rankings }) => {
     const width = 1000 - 2 * margin;
     const height = 600 - 2 * margin;
 
-    const svg = d3.select('svg');
+    const svg = d3.select('.graph');
 
     const chart = svg.append('g')
         .attr('transform', `translate(${margin}, ${margin})`);
@@ -110,7 +110,7 @@ const Graph = ({ rankings }) => {
   return (
     <div className={css.graph}>
       <h1>{rankings.name}</h1>
-      <svg width="1000" height="600" />
+      <svg className="graph" width="1000" height="600" />
       <p className={css.nulls}></p>
     </div>
   );
