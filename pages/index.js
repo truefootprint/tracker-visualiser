@@ -1,3 +1,3 @@
-import Graph from "../components/graph";
+import Home from "../components/home";
 
-export default Graph;
+export default Home;
