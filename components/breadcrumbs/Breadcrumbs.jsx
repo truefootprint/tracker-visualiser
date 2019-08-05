@@ -51,9 +51,23 @@ const Breadcrumbs = ({ ancestry, sector, current, setMember }) => {
     </div>
   );
 
+  // We still want to render the Home > Mining > ESG breadcrumbs when there are
+  // no ancestors (i.e. we are at the top level).
+  const p = paths(ancestry.ancestors);
+  if (p.length === 0) {
+    return (
+      <div className={css.breadcrumbs_collection}>
+        <div className={css.breadcrumbs}>
+          {topLevel}
+          {bottomLevel}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={css.breadcrumbs_collection}>
-      {paths(ancestry.ancestors).map(breadcrumbs)}
+      {p.map(breadcrumbs)}
     </div>
   );
 };
