@@ -6,6 +6,7 @@ import NavBar from "../nav_bar";
 import Breadcrumbs from "../breadcrumbs";
 import DrillDown from "../drill_down";
 import Graph from "../graph";
+import css from "./styles.scss";
 
 const Home = () => {
   const client = new Client("http://localhost:3000");
@@ -29,7 +30,13 @@ const Home = () => {
     <Layout>
       <NavBar />
 
-      {ancestry && <Breadcrumbs ancestry={ancestry} setMember={setMember} />}
+      {ancestry && rankings &&
+        <Breadcrumbs ancestry={ancestry} sector={sector} current={rankings.name} setMember={setMember} />}
+
+      <h2 className={css.title}>
+        {rankings && rankings.name}
+      </h2>
+
       {ancestry && <DrillDown ancestry={ancestry} setMember={setMember} />}
       {rankings && <Graph rankings={rankings} />}
     </Layout>

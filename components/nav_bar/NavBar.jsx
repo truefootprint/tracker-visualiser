@@ -12,8 +12,8 @@ const NavBar = () => (
     </h1>
 
     <div className={css.icons}>
-      <i class="fas fa-search"></i>
-      <i class="fas fa-cog"></i>
+      <i className="fas fa-search"></i>
+      <i className="fas fa-cog"></i>
     </div>
   </div>
 );

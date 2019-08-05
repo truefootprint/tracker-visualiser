@@ -1,6 +1,7 @@
 import { useState } from "react";
+import css from "./styles.scss";
 
-const Breadcrumbs = ({ ancestry, setMember }) => {
+const Breadcrumbs = ({ ancestry, sector, current, setMember }) => {
   const attributes = ancestry.attributes;
 
   const handleClick = (node) => {
@@ -23,27 +24,35 @@ const Breadcrumbs = ({ ancestry, setMember }) => {
     })
   );
 
-  const divider = <span className="divider"> &gt; </span>;
+  const divider = <span className={css.divider}> &gt; </span>;
 
-  const breadcrumb = (node, index, array) => {
-    const showDivider = index < array.length - 1;
+  const breadcrumb = (node, index) => (
+    <span key={index} className={css.breadcrumb}>
+      <a onClick={handleClick(node)}>{node.name}</a>{divider}
+    </span>
+  );
 
-    return (
-      <span key={index} className="breadcrumb">
-        <a onClick={handleClick(node)}>{node.name}</a>
-        {showDivider && divider}
-      </span>
-    );
-  };
+  const topLevel = <>
+    <span className={css.breadcrumb}>
+      <a>Home</a>{divider}
+      <a>{sector}</a>{divider}
+    </span>
+  </>;
+
+  const bottomLevel = (
+    <span className={css.current}>{current}</span>
+  );
 
   const breadcrumbs = (path, index) => (
-    <div key={index} className="breadcrumbs">
+    <div key={index} className={css.breadcrumbs}>
+      {topLevel}
       {path.map(breadcrumb)}
+      {bottomLevel}
     </div>
   );
 
   return (
-    <div className="breadcrumbs_collection">
+    <div className={css.breadcrumbs_collection}>
       {paths(ancestry.ancestors).map(breadcrumbs)}
     </div>
   );

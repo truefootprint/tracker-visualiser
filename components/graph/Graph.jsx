@@ -31,14 +31,16 @@ const Graph = ({ rankings }) => {
 
     const [_, max] = d3.extent(values);
 
-    const margin = 80;
-    const width = 1000 - 2 * margin;
-    const height = 600 - 2 * margin;
+    const marginX = 200;
+    const marginY = 80;
+
+    const width = 1200 - 2 * marginX;
+    const height = 580 - 1 * marginY;
 
     const svg = d3.select('.graph');
 
     const chart = svg.append('g')
-        .attr('transform', `translate(${margin}, ${margin})`);
+        .attr('transform', `translate(${marginX}, 0)`);
 
     const axisMin = optionalMin || 0;
     const axisMax = optionalMax || max;
@@ -50,7 +52,7 @@ const Graph = ({ rankings }) => {
 
     const handleMouseOver = (d, index) => {
       chart.selectAll(`*[data-index='${index}']`)
-        .attr('class', css.higlighted);
+        .attr('class', css.highlighted);
     };
 
     const handleMouseOut = (d, index) => {
@@ -58,20 +60,25 @@ const Graph = ({ rankings }) => {
         .attr('class', '');
     };
 
-    chart.append('g').call(d3.axisLeft(yScale));
+    chart.append('g')
+      .attr('class', css.y_axis)
+      .call(d3.axisLeft(yScale));
+
 
     chart.append('g')
         .attr('transform', translateAxis)
+        .attr('class', css.x_axis)
         .call(d3.axisBottom(xScale));
 
     svg.append('text')
-          .attr('x', width / 2 + margin)
-          .attr('y', height + margin * 1.7)
+          .attr('x', width / 2 + marginX)
+          .attr('y', height + marginY * 1.7)
           .attr('text-anchor', 'middle')
-          .text(axisLabel)
+          .text(axisLabel);
 
     chart.append('g')
         .attr('transform', translateAxis)
+        .attr('class', css.grid_lines)
         .call(d3.axisBottom()
             .scale(xScale)
             .tickSize(-height, 0, 0)
@@ -97,20 +104,21 @@ const Graph = ({ rankings }) => {
       .enter()
       .append('text')
       .attr('data-index', (_, i) => i)
-      .attr('x', d => xScale(d.value))
-      .attr('y', d => yScale(d.name) + yScale.bandwidth() / 2)
+      .attr('x', d => xScale(d.value) + 10)
+      .attr('y', d => yScale(d.name) + yScale.bandwidth() / 2 + 4)
       .text(d => d.value)
       .on('mouseover', handleMouseOver)
       .on('mouseout', handleMouseOut);
 
     chart.selectAll('.tick text')
-      .attr('data-index', (_, i) => i);
+      .attr('data-index', (_, i) => i)
+      .on('mouseover', handleMouseOver)
+      .on('mouseout', handleMouseOut);
   }, [rankings]);
 
   return (
     <div className={css.graph}>
-      <h1>{rankings.name}</h1>
-      <svg className="graph" width="1000" height="600" />
+      <svg className="graph" width="1200" height="580" />
       <p className={css.nulls}></p>
     </div>
   );

@@ -2,6 +2,10 @@
   font-weight: bold;
 }
 
+[data-index] {
+  cursor: pointer;
+}
+
 [data-band="1"] {
   fill: #9f9;
 }
@@ -32,4 +36,28 @@
 
 [data-band="4"].highlighted {
   fill: #f33;
+}
+
+.x_axis {
+  font-size: 1rem;
+  color: #333;
+
+ :global(.tick) line, :global(.domain) {
+   stroke: #ddd;
+ }
+}
+
+.y_axis {
+  font-size: 1.3rem;
+  color: #333;
+
+ :global(.tick) line, :global(.domain) {
+   stroke: #ddd;
+ }
+}
+
+.grid_lines {
+  line, :global(.domain) {
+    stroke: #ddd;
+  }
 }
