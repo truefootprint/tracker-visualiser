@@ -12,7 +12,7 @@ const Home = () => {
 
   const [sector, setSector] = useState("Mining");
   const [year, setYear] = useState("2018");
-  const [member, setMember] = useState({ type: "group", id: 3 });
+  const [member, setMember] = useState({ type: "group", id: 1 });
 
   const [rankings, setRankings] = useState(null);
   const [ancestry, setAncestry] = useState(null);
