@@ -1,8 +1,10 @@
 import * as d3 from "d3";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import css from "./styles.scss";
 
 const Graph = ({ rankings, year }) => {
+  const [nulls, setNulls] = useState([]);
+
   useEffect(() => {
     d3.select('.graph').html("");
 
@@ -12,14 +14,14 @@ const Graph = ({ rankings, year }) => {
     const axisLabel = rankings.name;
     //
 
-    const companies = rankings.ranked_companies.filter(c => c.value !== null);
-    const nulls = rankings.ranked_companies.filter(c => c.value === null);
+    const companies = rankings.ranked_companies.filter(c => c.rank !== null);
+    const nulls = rankings.ranked_companies.filter(c => c.rank === null);
 
-    d3.select('.nulls').text(nulls.map(n => n.name).join(", "));
+    setNulls(nulls);
 
     const data = companies.map(d => ({
       name: d.name,
-      value: d.value.toPrecision(3),
+      value: d.value && d.value.toPrecision(3),
       band: d.band,
     }));
 
@@ -127,7 +129,8 @@ const Graph = ({ rankings, year }) => {
   return (
     <div className={css.graph}>
       <svg className="graph" width="1100" height="580" />
-      <p className={css.nulls}></p>
+
+      {nulls.map(c => <div>{c.name}</div>)}
     </div>
   );
 }
