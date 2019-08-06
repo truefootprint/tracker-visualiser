@@ -29,9 +29,9 @@ const Graph = ({ rankings, year }) => {
     const highlights = ["#3f3", "#fc3", "#f33"];
 
     const names = data.map(d => d.name);
-    const values = data.map(d => d.value);
+    const values = data.map(d => parseFloat(d.value));
 
-    const [_, max] = d3.extent(values);
+    const max = d3.max(values);
 
     const marginLeft = 200;
     const marginRight = 80;
