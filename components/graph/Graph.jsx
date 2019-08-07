@@ -11,16 +11,16 @@ const Graph = ({ rankings, year }) => {
     // Optional things we can set:
     const optionalMin = null;
     const optionalMax = null;
-    const axisLabel = rankings.name;
+    const axisLabel = rankings[0].rankable_name;
     //
 
-    const companies = rankings.ranked_companies.filter(c => c.rank !== null);
-    const nulls = rankings.ranked_companies.filter(c => c.rank === null);
+    const companies = rankings.filter(c => c.rank !== null);
+    const nulls = rankings.filter(c => c.rank === null);
 
     setNulls(nulls);
 
     const data = companies.map(d => ({
-      name: d.name,
+      name: d.company_name,
       value: d.value && d.value.toPrecision(3),
       band: d.band,
     }));
@@ -130,7 +130,7 @@ const Graph = ({ rankings, year }) => {
     <div className={css.graph}>
       <svg className="graph" width="1100" height="580" />
 
-      {nulls.map(c => <div>{c.name}</div>)}
+      {nulls.map(c => <div>{c.company_name}</div>)}
     </div>
   );
 }

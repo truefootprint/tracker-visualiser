@@ -6,7 +6,7 @@ class Client {
   }
 
   companyRankings(sector, year, { type, id }) {
-    return this.get(`/company_rankings/${sector}-${year}-${type}-${id}`);
+    return this.get(`/company_rankings/${sector}/${year}/${type}/${id}`);
   }
 
   ancestry({ type, id }) {

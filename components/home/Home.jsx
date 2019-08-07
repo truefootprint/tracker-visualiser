@@ -30,10 +30,10 @@ const Home = () => {
       <div className={css.home}>
         <div className={css.left}>
           {ancestry && rankings &&
-            <Breadcrumbs ancestry={ancestry} sector={sector} current={rankings.name} setMember={setMember} />}
+            <Breadcrumbs ancestry={ancestry} sector={sector} current={rankings[0].rankable_name} setMember={setMember} />}
 
           <h2 className={css.title}>
-            {rankings && rankings.name}
+            {rankings && rankings[0].rankable_name}
           </h2>
 
           {rankings && <Graph rankings={rankings} year={year} />}
