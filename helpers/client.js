@@ -2,7 +2,7 @@ import axios from "axios";
 
 class Client {
   constructor(host) {
-    this.host = host;
+    this.host = "http://localhost:3000";
   }
 
   companyRankings(sector, year, { type, id }) {

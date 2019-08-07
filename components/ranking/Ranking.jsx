@@ -1,12 +1,17 @@
+import { useEffect, useState } from "react";
+import Graph from "../graph";
+import Client from "../../helpers/client";
 import ordinal from "../../helpers/ordinal";
 import css from "./styles.scss";
 
-const Ranking = ({ ranking, setSubject }) => {
-  let value;
+const Ranking = ({ ranking, setSubject, sector, year, size, showValue }) => {
+  const [rankings, setRankings] = useState(null);
+
+  let inner;
   if (ranking.rank) {
-    value = <><b>{ordinal(ranking.rank)}</b> out of {ranking.out_of}</>;
+    inner = <><b>{ordinal(ranking.rank)}</b> out of {ranking.out_of}</>;
   } else {
-    value = <span className={css.none}>-</span>;
+    inner = <span className={css.none}>{ranking.company_name} did not answer.</span>;
   }
 
   const member = {
@@ -14,10 +19,21 @@ const Ranking = ({ ranking, setSubject }) => {
     id: ranking.rankable_id
   };
 
+  const client = new Client();
+
+  ranking.rank && useEffect(() => {
+    client.companyRankings(sector, year, member).then(({ data }) => setRankings(data));
+  }, [sector, year, ranking])
+
   return (
     <div className={css.ranking}>
-      <label className={css.label}>ranking:</label>
-      <a className={css.value} onClick={() => setSubject(member)}>{value}</a>
+      {rankings && <div className={css.thumbnail} onClick={() => setSubject(member)}>
+        <Graph rankings={rankings} year={year} thumbnail={true} size={size} />
+      </div>}
+
+      <a className={css.inner} onClick={() => setSubject(member)}>{inner}</a>
+
+      {showValue && <span className={css.value}>{ranking.value && ranking.value.toPrecision(3)}</span>}
     </div>
   );
 };

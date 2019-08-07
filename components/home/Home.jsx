@@ -5,11 +5,11 @@ import Rankable from "../rankable";
 import Company from "../company";
 
 const Home = () => {
-  const client = new Client("http://localhost:3000");
+  const client = new Client();
 
   const [sector, setSector] = useState("Mining");
   const [year, setYear] = useState("2018");
-  const [subject, setSubject] = useState({ type: "company", id: 19 });
+  const [subject, setSubject] = useState({ type: "company", id: 1 });
 
   const [rankings, setRankings] = useState(null);
   const [ancestry, setAncestry] = useState(null);
@@ -25,16 +25,10 @@ const Home = () => {
     client.ancestry(member).then(({ data }) => setAncestry(data));
   }, [subject]);
 
-  const foo = (subject) => {
-    setRankings(null);
-    setAncestry(null);
-    setSubject(subject);
-  };
-
   const props = {
     sector, setSector,
     year, setYear,
-    subject, setSubject: foo,
+    subject, setSubject,
     rankings, setRankings,
     ancestry, setAncestry,
     esg,

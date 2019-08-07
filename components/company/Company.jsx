@@ -2,7 +2,7 @@ import Breadcrumbs from "../breadcrumbs";
 import Ranking from "../ranking";
 import css from "./styles.scss";
 
-const Company = ({ ancestry, rankings, sector, setSubject, esg }) => {
+const Company = ({ ancestry, rankings, sector, year, setSubject, esg }) => {
   const ranking = (member) => (
     rankings.find(r => r.rankable_type.toLowerCase() == member.type.toLowerCase() && r.rankable_id == member.id)
   );
@@ -25,9 +25,17 @@ const Company = ({ ancestry, rankings, sector, setSubject, esg }) => {
         setSubject={setSubject}
       />
 
-      <img className={css.logo} src={rankings[0].company_logo} />
+      <div className={css.top_level}>
+        <img className={css.logo} src={rankings[0].company_logo} />
 
-      <Ranking ranking={ranking(esg)} setSubject={setSubject} />
+        <div className={css.title}>
+          {ranking(esg).rankable_name} rating:
+        </div>
+
+        <div className={css.ranking}>
+          <Ranking ranking={ranking(esg)} setSubject={setSubject} sector={sector} year={year} size={[240, 120]}/>
+        </div>
+      </div>
 
       <div className={css.breakdown}>
         {rootRanking.children.map(r => (
@@ -36,12 +44,26 @@ const Company = ({ ancestry, rankings, sector, setSubject, esg }) => {
               {r.rankable_name}:
             </div>
 
-            <Ranking ranking={r} setSubject={setSubject} />
-
-          <br/><br/> <br/><br/> <br/><br/> <br/><br/>
+            <div className={css.ranking}>
+              <Ranking ranking={r} setSubject={setSubject} sector={sector} year={year} size={[160, 80]} />
+            </div>
 
             {r.children.map(r => (
-              <Ranking ranking={r} setSubject={setSubject} />
+              <div className={css.outcome}>
+                <div className={css.title}>
+                  {r.rankable_name}
+                </div>
+
+                <div className={css.ranking}>
+                  <Ranking
+                    ranking={r}
+                    setSubject={setSubject}
+                    sector={sector}
+                    year={year} size={[80, 40]}
+                    showValue={true}
+                  />
+                </div>
+              </div>
             ))}
           </div>
         ))}

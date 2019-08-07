@@ -1,17 +1,22 @@
 .ranking {
-  font-size: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.label {
-
+.thumbnail {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 3rem;
 }
 
-.value {
-  margin-left: 3rem;
+.inner {
   color: #448AA9;
   cursor: pointer;
 
   b {
     font-weight: bold;
   }
+}
+
+.value {
+  margin-left: 3rem;
 }
