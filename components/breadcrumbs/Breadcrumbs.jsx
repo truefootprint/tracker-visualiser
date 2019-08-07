@@ -1,12 +1,12 @@
 import { useState } from "react";
 import css from "./styles.scss";
 
-const Breadcrumbs = ({ ancestry, sector, current, setMember }) => {
+const Breadcrumbs = ({ ancestry, sector, current, setSubject }) => {
   const attributes = ancestry.attributes;
 
   const handleClick = (node) => {
     return () => {
-      setMember({ type: node.type.toLowerCase(), id: node.id });
+      setSubject({ type: node.type.toLowerCase(), id: node.id });
     };
   };
 
