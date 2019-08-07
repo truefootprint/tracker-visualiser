@@ -2,9 +2,10 @@
   padding: 2rem 0 0 2rem;
 }
 
-.breadcrumb {
+.breadcrumb a {
   color: #448AA9;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .divider {

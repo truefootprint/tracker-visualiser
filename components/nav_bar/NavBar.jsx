@@ -3,9 +3,9 @@ import css from "./styles.scss";
 
 const NavBar = () => (
   <div className={css.nav_bar}>
-    <div className={css.logo}>
+    <a href="." className={css.logo}>
       <Logo />
-    </div>
+    </a>
 
     <h1 className={css.title}>
       Tracker

@@ -1,0 +1,23 @@
+.company {
+
+}
+
+.logo {
+  max-width: 15rem;
+  max-height: 8rem;
+
+  margin: 2rem 0 0 2rem;
+}
+
+.breakdown {
+  margin-top: 5rem;
+  display: flex;
+}
+
+.section {
+  flex: 1;
+
+  .title {
+    font-size: 2rem;
+  }
+}

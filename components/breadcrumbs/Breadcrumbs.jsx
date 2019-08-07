@@ -34,8 +34,8 @@ const Breadcrumbs = ({ ancestry, sector, current, setSubject }) => {
 
   const topLevel = <>
     <span className={css.breadcrumb}>
-      <a>Home</a>{divider}
-      <a>{sector}</a>{divider}
+      <a href=".">Home</a>{divider}
+      <a href=".">{sector}</a>{divider}
     </span>
   </>;
 

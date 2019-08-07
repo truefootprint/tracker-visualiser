@@ -2,7 +2,7 @@ import * as d3 from "d3";
 import { useEffect, useState } from "react";
 import css from "./styles.scss";
 
-const Graph = ({ rankings, year }) => {
+const Graph = ({ rankings, year, setSubject }) => {
   const [nulls, setNulls] = useState([]);
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const Graph = ({ rankings, year }) => {
     setNulls(nulls);
 
     const data = companies.map(d => ({
+      id: d.company_id,
       name: d.company_name,
       value: d.value && d.value.toPrecision(3),
       band: d.band,
@@ -70,10 +71,13 @@ const Graph = ({ rankings, year }) => {
         .attr('class', '');
     };
 
+    const visitCompany = (index) => {
+      setSubject({ type: "company", id: data[index].id });
+    };
+
     chart.append('g')
       .attr('class', css.y_axis)
       .call(d3.axisLeft(yScale));
-
 
     chart.append('g')
         .attr('transform', translateAxis)
@@ -123,7 +127,8 @@ const Graph = ({ rankings, year }) => {
     chart.selectAll('.tick text')
       .attr('data-index', (_, i) => i)
       .on('mouseover', handleMouseOver)
-      .on('mouseout', handleMouseOut);
+      .on('mouseout', handleMouseOut)
+      .on('click', (_, i) => visitCompany(i));
   }, [rankings]);
 
   return (
