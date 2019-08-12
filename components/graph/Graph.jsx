@@ -4,11 +4,15 @@ import Tooltip from "../tooltip";
 import css from "./styles.scss";
 
 const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
-  const [nulls, setNulls] = useState([]);
+  const [unranked, setUnranked] = useState([]);
   const [tooltip, setTooltip] = useState(null);
 
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
   const [svgWidth, svgHeight] = size || [1100, 580];
+
+  const visitCompanyById = (id) => {
+    setSubject({ type: "company", id: id });
+  }
 
   useEffect(() => {
     d3.select(`#${id}`).html("");
@@ -20,9 +24,9 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
     //
 
     const companies = rankings.filter(c => c.rank !== null);
-    const nulls = rankings.filter(c => c.rank === null);
+    const unranked = rankings.filter(c => c.rank === null);
 
-    setNulls(nulls);
+    setUnranked(unranked);
 
     const data = companies.map(d => ({
       id: d.company_id,
@@ -39,7 +43,7 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
 
     const marginLeft = thumbnail ? 0 : 200;
     const marginRight = thumbnail ? 0 : 80;
-    const marginY = thumbnail ? 0 : 80;
+    const marginY = thumbnail ? 0 : 60;
 
     const width = svgWidth - marginLeft - marginRight;
     const height = svgHeight - marginY;
@@ -73,8 +77,8 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
       setTooltip(null);
     };
 
-    const visitCompany = (index) => {
-      setSubject({ type: "company", id: data[index].id });
+    const visitCompanyByIndex = (index) => {
+      visitCompanyById(data[index].id);
     };
 
     if (!thumbnail) {
@@ -123,7 +127,7 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
         .attr('data-index', (_, i) => i)
         .on('mouseover', handleMouseOver)
         .on('mouseout', handleMouseOut)
-        .on('click', (_, i) => visitCompany(i));
+        .on('click', (_, i) => visitCompanyByIndex(i));
     }
 
     chart.selectAll()
@@ -146,8 +150,28 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
     <div className={css.graph}>
       <svg id={id} width={svgWidth} height={svgHeight} />
 
-      {!thumbnail && <Tooltip content={tooltip} />}
-      {!thumbnail && nulls.map((c, i) => <div key={i}>{c.company_name}</div>)}
+      {!thumbnail && <div>
+        <Tooltip content={tooltip} />
+
+        <div className={css.unranked}>
+          <h3 className={css.title}>
+            Insufficient data points
+          </h3>
+
+          {unranked.map((c, i) => (
+            <div className={css.row} key={i}>
+              <span className={css.left}>
+                <a onClick={() => visitCompanyById(c.company_id)}>
+                  {c.company_name}
+                </a>
+              </span>
+
+              <span className={css.right}>
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>}
     </div>
   );
 }

@@ -66,3 +66,32 @@
   font-size: 23.4rem;
   fill: #ececec;
 }
+
+.unranked {
+  .title {
+    font-size: 1.5rem;
+    margin: 0 0 2.5rem 195px;
+    color: #333;
+  }
+
+  .row {
+    margin: 0.7rem 0;
+  }
+
+  .left {
+    display: inline-block;
+    width: 200px;
+    text-align: right;
+    font-size: 1.3rem;
+    color: #448AA9;
+    cursor: pointer;
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+
+  .right {
+    display: inline-block;
+  }
+}
