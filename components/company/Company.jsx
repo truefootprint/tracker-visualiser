@@ -50,19 +50,35 @@ const Company = ({ ancestry, rankings, sector, year, setSubject, esg }) => {
         </div>
 
         <div className={css.ranking}>
-          <Ranking ranking={ranking(esg)} setSubject={setSubject} sector={sector} year={year} size={[240, 120]}/>
+          <Ranking
+            ranking={ranking(esg)}
+            setSubject={setSubject}
+            sector={sector}
+            year={year}
+            size={[240, 120]}
+            nullText="Insufficient data points."
+          />
         </div>
       </div>
 
       <div className={css.breakdown}>
         {rootRanking.children.map((r, i) => (
           <div key={i} className={css.section}>
-            <div className={css.title}>
-              {r.rankable_name}:
-            </div>
+            <div className={css.overall_ranking}>
+              <div className={css.title}>
+                {r.rankable_name}:
+              </div>
 
-            <div className={css.ranking}>
-              <Ranking ranking={r} setSubject={setSubject} sector={sector} year={year} size={[160, 80]} />
+              <div className={css.ranking}>
+                <Ranking
+                  ranking={r}
+                  setSubject={setSubject}
+                  sector={sector}
+                  year={year}
+                  size={[160, 80]}
+                  nullText="Insufficient data points."
+                />
+              </div>
             </div>
 
             {r.children.map((r, i) => (

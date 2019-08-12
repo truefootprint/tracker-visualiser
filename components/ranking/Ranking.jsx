@@ -4,14 +4,15 @@ import Client from "../../helpers/client";
 import ordinal from "../../helpers/ordinal";
 import css from "./styles.scss";
 
-const Ranking = ({ ranking, setSubject, sector, year, size }) => {
+const Ranking = ({ ranking, setSubject, sector, year, size, nullText }) => {
   const [rankings, setRankings] = useState(null);
+  const text = nullText || `${ranking.company_name} did not answer.`;
 
   let inner;
   if (ranking.rank) {
     inner = <><b>{ordinal(ranking.rank)}</b> out of {ranking.out_of}</>;
   } else {
-    inner = <span className={css.none}>{ranking.company_name} did not answer.</span>;
+    inner = <span className={css.none}>{text}</span>;
   }
 
   const member = {
