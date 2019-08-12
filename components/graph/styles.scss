@@ -38,6 +38,10 @@
   fill: #f33;
 }
 
+[data-current="true"] {
+  fill: #448AA9;
+}
+
 .x_axis {
   font-size: 1rem;
   color: #333;

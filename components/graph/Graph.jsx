@@ -4,7 +4,9 @@ import round from "../../helpers/round";
 import Tooltip from "../tooltip";
 import css from "./styles.scss";
 
-const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
+const Graph = ({ rankings, current, year, setSubject, thumbnail, size }) => {
+  const index = rankings.findIndex(r => r.company_id === (current && current.company_id));
+
   const [unranked, setUnranked] = useState([]);
   const [tooltip, setTooltip] = useState(null);
 
@@ -132,6 +134,7 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
         .append('rect')
         .attr('data-index', (_, i) => i)
         .attr('data-band', d => d.band)
+        .attr('data-current', (_, i) => i === index)
         .attr('y', d => yScale(d.name))
         .attr('height', yScale.bandwidth())
         .on('mouseover', handleMouseOver)

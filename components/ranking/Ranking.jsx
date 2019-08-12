@@ -38,7 +38,7 @@ const Ranking = ({ ranking, setSubject, sector, year, size, nullText, suffix, ch
   return (
     <div className={css.ranking}>
       {rankings && <div className={css.thumbnail} onClick={() => setSubject(member)}>
-        <Graph rankings={rankings} year={year} thumbnail={true} size={size} />
+        <Graph rankings={rankings} current={ranking} year={year} thumbnail={true} size={size} />
       </div>}
 
       <a className={css.inner} onClick={() => setSubject(member)}>{inner}</a>
