@@ -11,7 +11,9 @@ const Company = ({ ancestry, rankings, sector, year, setSubject, esg }) => {
     rankings.find(r => r.rankable_type.toLowerCase() == member.type.toLowerCase() && r.rankable_id == member.id)
   );
 
-  const auditorId = rankings.find(r => r.auditor_id).auditor_id;
+  const auditorRanking = rankings.find(r => r.auditor_id);
+  const auditorId = (typeof auditorRanking !== "undefined") ? auditorRanking.auditor_id : null;
+
   auditorId && useEffect(() => {
     (new Client()).company(auditorId).then(({ data }) => setAuditor(data));
   }, [auditorId])
