@@ -145,7 +145,8 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
   return (
     <div className={css.graph}>
       <svg id={id} width={svgWidth} height={svgHeight} />
-      <Tooltip content={tooltip} />
+
+      {!thumbnail && <Tooltip content={tooltip} />}
       {!thumbnail && nulls.map((c, i) => <div key={i}>{c.company_name}</div>)}
     </div>
   );

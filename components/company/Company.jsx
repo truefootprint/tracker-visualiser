@@ -54,13 +54,19 @@ const Company = ({ ancestry, rankings, sector, year, setSubject, esg }) => {
                   {r.rankable_name}
                 </div>
 
+                <div className={css.subtitle}>
+                  <span className={css.value}>{r.value}</span>&nbsp;
+
+                  {r.auditor_name &&
+                  <span className={css.auditor}>(Audited by {r.auditor_name})</span>}
+                </div>
+
                 <div className={css.ranking}>
                   <Ranking
                     ranking={r}
                     setSubject={setSubject}
                     sector={sector}
                     year={year} size={[80, 40]}
-                    showValue={true}
                   />
                 </div>
               </div>

@@ -4,7 +4,7 @@ import Client from "../../helpers/client";
 import ordinal from "../../helpers/ordinal";
 import css from "./styles.scss";
 
-const Ranking = ({ ranking, setSubject, sector, year, size, showValue }) => {
+const Ranking = ({ ranking, setSubject, sector, year, size }) => {
   const [rankings, setRankings] = useState(null);
 
   let inner;
@@ -32,8 +32,6 @@ const Ranking = ({ ranking, setSubject, sector, year, size, showValue }) => {
       </div>}
 
       <a className={css.inner} onClick={() => setSubject(member)}>{inner}</a>
-
-      {showValue && <span className={css.value}>{ranking.value && ranking.value.toPrecision(3)}</span>}
     </div>
   );
 };
