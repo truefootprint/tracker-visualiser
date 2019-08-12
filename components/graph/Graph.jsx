@@ -77,6 +77,14 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
       }
 
       chart.append('g')
+          .attr('transform', translateAxis)
+          .attr('class', css.grid_lines)
+          .call(d3.axisBottom()
+              .scale(xScale)
+              .tickSize(-height, 0, 0)
+              .tickFormat(''))
+
+      chart.append('g')
         .attr('class', css.y_axis)
         .call(d3.axisLeft(yScale));
 
@@ -107,14 +115,6 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
         .on('mouseover', handleMouseOver)
         .on('mouseout', handleMouseOut)
         .on('click', (_, i) => visitCompany(i));
-
-      chart.append('g')
-          .attr('transform', translateAxis)
-          .attr('class', css.grid_lines)
-          .call(d3.axisBottom()
-              .scale(xScale)
-              .tickSize(-height, 0, 0)
-              .tickFormat(''))
     }
 
     chart.selectAll()
