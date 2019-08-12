@@ -64,6 +64,7 @@ const Company = ({ ancestry, rankings, sector, year, setYear, setSubject, esg })
             year={year}
             size={[240, 120]}
             nullText="Insufficient data points."
+            suffix={` in ${sector}`}
           />
         </div>
       </div>
