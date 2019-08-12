@@ -9,6 +9,10 @@ class Client {
     return this.get(`/company_rankings/${sector}/${year}/${type}/${id}`);
   }
 
+  company(id) {
+    return this.get(`/companies/${id}`);
+  }
+
   ancestry({ type, id }) {
     return this.get(`/ancestry/${type}/${id}`);
   }

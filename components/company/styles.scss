@@ -20,6 +20,20 @@
   }
 }
 
+.auditor {
+  float: right;
+  margin-right: 2rem;
+
+  .text {
+    margin-top: 4.5rem;
+  }
+
+  .logo {
+    max-width: 12rem;
+    max-height: 6rem;
+  }
+}
+
 .breakdown {
   margin-top: 4rem;
   display: flex;

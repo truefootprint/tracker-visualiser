@@ -1,11 +1,20 @@
+import { useState, useEffect } from "react";
 import Breadcrumbs from "../breadcrumbs";
 import Ranking from "../ranking";
+import Client from "../../helpers/client";
 import css from "./styles.scss";
 
 const Company = ({ ancestry, rankings, sector, year, setSubject, esg }) => {
+  const [auditor, setAuditor] = useState(null);
+
   const ranking = (member) => (
     rankings.find(r => r.rankable_type.toLowerCase() == member.type.toLowerCase() && r.rankable_id == member.id)
   );
+
+  const auditorId = rankings.find(r => r.auditor_id).auditor_id;
+  auditorId && useEffect(() => {
+    (new Client()).company(auditorId).then(({ data }) => setAuditor(data));
+  }, [auditorId])
 
   const rootRanking = ranking(esg);
 
@@ -18,6 +27,12 @@ const Company = ({ ancestry, rankings, sector, year, setSubject, esg }) => {
 
   return (
     <div className={css.company}>
+      {auditor && <div className={css.auditor}>
+        <p className={css.text}>Audited by:</p>
+
+        <img className={css.logo} src={auditor.logo} />
+      </div>}
+
       <Breadcrumbs
         ancestry={ancestry}
         sector={sector}
@@ -38,8 +53,8 @@ const Company = ({ ancestry, rankings, sector, year, setSubject, esg }) => {
       </div>
 
       <div className={css.breakdown}>
-        {rootRanking.children.map(r => (
-          <div className={css.section}>
+        {rootRanking.children.map((r, i) => (
+          <div key={i} className={css.section}>
             <div className={css.title}>
               {r.rankable_name}:
             </div>
@@ -48,8 +63,8 @@ const Company = ({ ancestry, rankings, sector, year, setSubject, esg }) => {
               <Ranking ranking={r} setSubject={setSubject} sector={sector} year={year} size={[160, 80]} />
             </div>
 
-            {r.children.map(r => (
-              <div className={css.outcome}>
+            {r.children.map((r, i) => (
+              <div key={i} className={css.outcome}>
                 <div className={css.title}>
                   {r.rankable_name}
                 </div>
