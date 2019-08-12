@@ -30,6 +30,24 @@ const Company = ({ ancestry, rankings, sector, year, setYear, setSubject, esg })
     return childRanking;
   });
 
+  const info = (ranking) => {
+    if (ranking.value === null) {
+      return null;
+    }
+
+    return (
+      <div>
+        {<div className={css.value}>
+          <span className={css.value}>{ranking.value}</span>
+          <span className={css.unit}>{ranking.unit_name}</span>
+        </div>}
+
+        {ranking.auditor_name &&
+        <div className={css.auditor_name}>(Audited by {ranking.auditor_name})</div>}
+      </div>
+    );
+  };
+
   return (
     <div className={css.company}>
       {auditor && <div className={css.auditor}>
@@ -95,20 +113,10 @@ const Company = ({ ancestry, rankings, sector, year, setYear, setSubject, esg })
                   {r.rankable_name}
                 </div>
 
-                <div className={css.subtitle}>
-                  <span className={css.value}>{r.value}</span>&nbsp;
-
-                  {r.auditor_name &&
-                  <span className={css.auditor}>(Audited by {r.auditor_name})</span>}
-                </div>
-
                 <div className={css.ranking}>
-                  <Ranking
-                    ranking={r}
-                    setSubject={setSubject}
-                    sector={sector}
-                    year={year} size={[80, 40]}
-                  />
+                  <Ranking ranking={r} setSubject={setSubject} sector={sector} year={year} size={[80, 40]}>
+                    {info(r)}
+                  </Ranking>
                 </div>
               </div>
             ))}
@@ -117,6 +125,7 @@ const Company = ({ ancestry, rankings, sector, year, setYear, setSubject, esg })
       </div>
     </div>
   )
+
 };
 
 export default Company;

@@ -16,3 +16,22 @@
     font-weight: bold;
   }
 }
+
+.chevron {
+  float: right;
+  margin: 0.5rem 2rem 0 0;
+  color: #333;
+  cursor: pointer;
+
+  &.up {
+    transform: rotate(180deg);
+  }
+
+  &.down {
+    transform: rotate(0deg);
+  }
+}
+
+.info {
+
+}
