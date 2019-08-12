@@ -22,8 +22,10 @@ const Ranking = ({ ranking, setSubject, sector, year, size, nullText }) => {
 
   const client = new Client();
 
-  ranking.rank && useEffect(() => {
-    client.companyRankings(sector, year, member).then(({ data }) => setRankings(data));
+  useEffect(() => {
+    if (ranking.rank) {
+      client.companyRankings(sector, year, member).then(({ data }) => setRankings(data));
+    }
   }, [sector, year, ranking])
 
   return (

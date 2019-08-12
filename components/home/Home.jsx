@@ -9,7 +9,7 @@ const Home = () => {
 
   const [sector, setSector] = useState("Mining");
   const [year, setYear] = useState("2018");
-  const [subject, setSubject] = useState({ type: "company", id: 18 });
+  const [subject, setSubject] = useState({ type: "company", id: 5 });
 
   const [rankings, setRankings] = useState(null);
   const [ancestry, setAncestry] = useState(null);
@@ -28,13 +28,17 @@ const Home = () => {
   const nullifyDataAndSetSubject = (subject) => {
     setRankings(null);
     setAncestry(null);
-
     setSubject(subject);
+  }
+
+  const nullifyDataAndSetYear = (year) => {
+    setRankings(null);
+    setYear(year);
   }
 
   const props = {
     sector, setSector,
-    year, setYear,
+    year, setYear: nullifyDataAndSetYear,
     subject, setSubject: nullifyDataAndSetSubject,
     rankings, setRankings,
     ancestry, setAncestry,

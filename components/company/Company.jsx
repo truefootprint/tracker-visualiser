@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import Breadcrumbs from "../breadcrumbs";
 import Ranking from "../ranking";
+import Year from "../year";
 import Client from "../../helpers/client";
 import css from "./styles.scss";
 
-const Company = ({ ancestry, rankings, sector, year, setSubject, esg }) => {
+const Company = ({ ancestry, rankings, sector, year, setYear, setSubject, esg }) => {
   const [auditor, setAuditor] = useState(null);
 
   const ranking = (member) => (
@@ -14,8 +15,10 @@ const Company = ({ ancestry, rankings, sector, year, setSubject, esg }) => {
   const auditorRanking = rankings.find(r => r.auditor_id);
   const auditorId = (typeof auditorRanking !== "undefined") ? auditorRanking.auditor_id : null;
 
-  auditorId && useEffect(() => {
-    (new Client()).company(auditorId).then(({ data }) => setAuditor(data));
+  useEffect(() => {
+    if (auditorId) {
+      (new Client()).company(auditorId).then(({ data }) => setAuditor(data));
+    }
   }, [auditorId])
 
   const rootRanking = ranking(esg);
@@ -47,6 +50,10 @@ const Company = ({ ancestry, rankings, sector, year, setSubject, esg }) => {
 
         <div className={css.title}>
           {ranking(esg).rankable_name} rating:
+
+          <div className={css.year}>
+            <Year year={year} setYear={setYear} />
+          </div>
         </div>
 
         <div className={css.ranking}>

@@ -1,16 +1,11 @@
+import Year from "../year";
 import DrillDown from "../drill_down";
 import css from "./styles.scss";
-
-const years = [2018, 2017];
 
 const SideBar = ({ year, setYear, ancestry, setSubject }) => (
   <div className={css.side_bar}>
     <div className={css.year}>
-      <select defaultValue={year} onChange={e => setYear(e.target.value)}>
-        {years.map((y, index) => (
-          <option key={index} value={y}>{y}</option>
-        ))}
-      </select>
+      <Year year={year} setYear={setYear} />
     </div>
 
     {ancestry && <DrillDown ancestry={ancestry} setSubject={setSubject} />}
