@@ -1,9 +1,11 @@
 import * as d3 from "d3";
 import { useEffect, useState } from "react";
+import Tooltip from "../tooltip";
 import css from "./styles.scss";
 
 const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
   const [nulls, setNulls] = useState([]);
+  const [tooltip, setTooltip] = useState(null);
 
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
   const [svgWidth, svgHeight] = size || [1100, 580];
@@ -27,6 +29,7 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
       name: d.company_name,
       value: d.value && d.value.toPrecision(3),
       band: d.band,
+      auditor_name: d.auditor_name,
     }));
 
     const names = data.map(d => d.name);
@@ -57,11 +60,17 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
     const handleMouseOver = (d, index) => {
       chart.selectAll(`*[data-index='${index}']`)
         .attr('class', css.highlighted);
+
+      if (d.auditor_name) {
+        setTooltip(`Audited by ${d.auditor_name}`);
+      }
     };
 
     const handleMouseOut = (d, index) => {
       chart.selectAll(`*[data-index='${index}']`)
         .attr('class', '');
+
+      setTooltip(null);
     };
 
     const visitCompany = (index) => {
@@ -77,14 +86,6 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
       }
 
       chart.append('g')
-          .attr('transform', translateAxis)
-          .attr('class', css.grid_lines)
-          .call(d3.axisBottom()
-              .scale(xScale)
-              .tickSize(-height, 0, 0)
-              .tickFormat(''))
-
-      chart.append('g')
         .attr('class', css.y_axis)
         .call(d3.axisLeft(yScale));
 
@@ -92,6 +93,14 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
           .attr('transform', translateAxis)
           .attr('class', css.x_axis)
           .call(d3.axisBottom(xScale));
+
+      chart.append('g')
+          .attr('transform', translateAxis)
+          .attr('class', css.grid_lines)
+          .call(d3.axisBottom()
+              .scale(xScale)
+              .tickSize(-height, 0, 0)
+              .tickFormat(''))
 
       svg.append('text')
             .attr('x', width / 2 + marginLeft)
@@ -136,7 +145,8 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
   return (
     <div className={css.graph}>
       <svg id={id} width={svgWidth} height={svgHeight} />
-      {!thumbnail && nulls.map(c => <div>{c.company_name}</div>)}
+      <Tooltip content={tooltip} />
+      {!thumbnail && nulls.map((c, i) => <div key={i}>{c.company_name}</div>)}
     </div>
   );
 }
