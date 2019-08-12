@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import round from "../../helpers/round";
 import Breadcrumbs from "../breadcrumbs";
 import Ranking from "../ranking";
 import Year from "../year";
@@ -38,7 +39,7 @@ const Company = ({ ancestry, rankings, sector, year, setYear, setSubject, esg })
     return (
       <div>
         {<div className={css.value}>
-          <span className={css.value}>{ranking.value}</span>
+          <span className={css.value}>{round(ranking.value)}</span>
           <span className={css.unit}>{ranking.unit_name}</span>
         </div>}
 

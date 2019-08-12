@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { useEffect, useState } from "react";
+import round from "../../helpers/round";
 import Tooltip from "../tooltip";
 import css from "./styles.scss";
 
@@ -20,7 +21,7 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
     // Optional things we can set:
     const optionalMin = null;
     const optionalMax = null;
-    const axisLabel = rankings[0].rankable_name;
+    const axisLabel = rankings[0].unit_name;
     //
 
     const companies = rankings.filter(c => c.rank !== null);
@@ -31,7 +32,7 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
     const data = companies.map(d => ({
       id: d.company_id,
       name: d.company_name,
-      value: d.value && d.value.toPrecision(3),
+      value: d.value,
       band: d.band,
       auditor_name: d.auditor_name,
     }));
@@ -42,7 +43,7 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
     const max = d3.max(values);
 
     const marginLeft = thumbnail ? 0 : 200;
-    const marginRight = thumbnail ? 0 : 80;
+    const marginRight = thumbnail ? 0 : 100;
     const marginY = thumbnail ? 0 : 60;
 
     const width = svgWidth - marginLeft - marginRight;
@@ -94,23 +95,18 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
         .call(d3.axisLeft(yScale));
 
       chart.append('g')
-          .attr('transform', translateAxis)
-          .attr('class', css.x_axis)
-          .call(d3.axisBottom(xScale));
-
-      chart.append('g')
-          .attr('transform', translateAxis)
-          .attr('class', css.grid_lines)
-          .call(d3.axisBottom()
-              .scale(xScale)
-              .tickSize(-height, 0, 0)
-              .tickFormat(''))
+        .attr('transform', translateAxis)
+        .attr('class', css.x_axis)
+        .call(d3.axisBottom(xScale)
+          .ticks(3)
+          .tickSize(-height, 0, 0));
 
       svg.append('text')
-            .attr('x', width / 2 + marginLeft)
-            .attr('y', height + marginY * 1.7)
-            .attr('text-anchor', 'middle')
-            .text(axisLabel);
+        .attr('x', svgWidth - marginRight)
+        .attr('y', height + marginY * 0.8)
+        .attr('class', css.x_axis_label)
+        .attr('text-anchor', 'middle')
+        .text(axisLabel);
 
       chart.selectAll()
         .data(data)
@@ -119,7 +115,7 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
         .attr('data-index', (_, i) => i)
         .attr('x', d => xScale(d.value) + 10)
         .attr('y', d => yScale(d.name) + yScale.bandwidth() / 2 + 4)
-        .text(d => d.value)
+        .text(d => round(d.value))
         .on('mouseover', handleMouseOver)
         .on('mouseout', handleMouseOut);
 
@@ -155,8 +151,12 @@ const Graph = ({ rankings, year, setSubject, thumbnail, size }) => {
 
         <div className={css.unranked}>
           <h3 className={css.title}>
-            Insufficient data points
+            Unranked companies
           </h3>
+
+          <p className={css.subtitle}>
+            These companies did not provide sufficient data to be given a rank:
+          </p>
 
           {unranked.map((c, i) => (
             <div className={css.row} key={i}>
