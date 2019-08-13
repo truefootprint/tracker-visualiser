@@ -78,11 +78,16 @@ const LineGraph = ({ rankings, thumbnail, size }) => {
     const x = (d) => xScale(d.year) + xScale.bandwidth() / 2;
     const y = (d) => yScale(d.value);
 
-    const plot = (data) => {
+    const labelX = (d) => x(d) + 20;
+    const labelY = (d) => y(d) + 6;
+
+    const plot = (data, index) => {
       const dataWithValues = data.filter(d => d.value !== null);
+      const companyLabel = thumbnail ? "" : data[0].company_name;
 
       const path = svg.append("path")
         .datum(dataWithValues)
+        .attr('data-index', index)
         .attr('transform', offset)
         .attr("class", css.line)
         .attr("d", d3.line().x(x).y(y).curve(d3.curveMonotoneX));
@@ -101,6 +106,7 @@ const LineGraph = ({ rankings, thumbnail, size }) => {
         .data(dataWithValues)
         .enter()
         .append("circle")
+        .attr('data-index', index)
         .attr('transform', offset)
         .attr("class", css.dot)
         .attr("cx", x)
@@ -108,14 +114,26 @@ const LineGraph = ({ rankings, thumbnail, size }) => {
         .attr("r", thumbnail ? 3 : 8)
         .on('mouseover', handleMouseOver)
         .on('mouseout', handleMouseOut);
+
+      svg.selectAll(".dot")
+        .data([dataWithValues[dataWithValues.length - 1]])
+        .enter()
+        .append("text")
+        .attr('data-index', index)
+        .attr('transform', offset)
+        .attr("x", labelX)
+        .attr("y", labelY)
+        .attr('text-anchor', 'left')
+        .attr('class', css.company_label)
+        .text(companyLabel);
     };
 
-    plot(rankings);
+    plot(rankings, 1);
 
   }, [rankings]);
 
   return (
-    <div className={`${css.graph} ${thumbnail && css.thumbnail}`}>
+    <div className={thumbnail && css.thumbnail}>
       <svg id={id} width={svgWidth} height={svgHeight} />
       <Tooltip content={tooltip} />
     </div>

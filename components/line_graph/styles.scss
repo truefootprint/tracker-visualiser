@@ -1,12 +1,13 @@
-.graph {
-  circle {
-    fill: #246;
-  }
-}
+circle[data-index="0"]         { fill: #246 }
+.line[data-index="0"]          { stroke: #448AA9 }
+.company_label[data-index="0"] { fill: #246 }
+
+circle[data-index="1"]         { fill: red }
+.line[data-index="1"]          { stroke: red }
+.company_label[data-index="1"] { fill: red }
 
 .line {
   fill: none;
-  stroke: #448AA9;
   stroke-width: 3;
 }
 
