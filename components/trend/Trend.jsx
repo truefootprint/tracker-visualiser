@@ -29,7 +29,7 @@ const Trend = ({ ancestry, sector, rankings, setSubject }) => {
         sector={sector}
         above={{ type: "company", id: rankings[0].company_id, name: rankings[0].company_name }}
         below={{ type: "outcome", id: rankings[0].rankable_id, name: rankings[0].rankable_name }}
-        current="Trend"
+        current="History"
         setSubject={setSubject}
       />
 

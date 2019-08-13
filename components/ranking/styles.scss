@@ -5,7 +5,16 @@
 .thumbnail {
   display: inline-block;
   vertical-align: middle;
-  margin-right: 3rem;
+  margin-right: 2rem;
+
+  position: relative;
+  left: -1rem;
+  padding: 0.5rem;
+
+  &:hover {
+    border: 1px solid #9bf;
+    cursor: pointer;
+  }
 }
 
 .inner {
