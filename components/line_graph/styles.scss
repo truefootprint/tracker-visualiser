@@ -1,10 +1,14 @@
 .graph {
   margin-top: 2rem;
+
+  circle {
+    fill: #246;
+  }
 }
 
 .line {
   fill: none;
-  stroke: #ffab00;
+  stroke: #448AA9;
   stroke-width: 3;
 }
 
@@ -12,7 +16,23 @@
   cursor: pointer;
 }
 
+.x_axis {
+  font-size: 1.3rem;
+  color: #333;
+
+ :global(.tick) line, :global(.domain) {
+   stroke: #ddd;
+ }
+}
+
+.y_axis {
+  font-size: 1rem;
+
+ :global(.tick) line, :global(.domain) {
+   stroke: #ddd;
+ }
+}
+
 .y_axis_label {
   font-style: italic;
 }
-

@@ -5,21 +5,11 @@ import Info from "../info";
 import * as d3 from "d3";
 import css from "./styles.scss";
 
-const LineGraph = () => {
-  const [rankings, setRankings] = useState(null);
+const LineGraph = ({ rankings }) => {
   const [tooltip, setTooltip] = useState(null);
 
-  const sector = "Mining";
-  const outcomeId = 5;
-  const companyId = 6;
-
-  useEffect(() => {
-    (new Client()).trend(sector, outcomeId, companyId)
-      .then(({ data }) => setRankings(data));
-  }, [sector, outcomeId, companyId])
-
   const id = "foo";
-  const [svgWidth, svgHeight] = [1100, 580];
+  const [svgWidth, svgHeight] = [1300, 400];
 
   useEffect(() => {
     if (rankings === null) {
@@ -111,7 +101,7 @@ const LineGraph = () => {
         .attr("class", css.dot)
         .attr("cx", x)
         .attr("cy", y)
-        .attr("r", 5)
+        .attr("r", 8)
         .on('mouseover', handleMouseOver)
         .on('mouseout', handleMouseOut);
     };
