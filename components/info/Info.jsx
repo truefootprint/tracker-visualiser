@@ -1,7 +1,7 @@
 import round from "../../helpers/round";
 import css from "./styles.scss";
 
-const Info = ({ ranking }) => {
+const Info = ({ ranking, children }) => {
   if (ranking.value === null) {
     return null;
   }
@@ -15,6 +15,8 @@ const Info = ({ ranking }) => {
 
       {ranking.auditor_name &&
       <div className={css.auditor_name}>(Audited by {ranking.auditor_name})</div>}
+
+      {children}
     </div>
   );
 };

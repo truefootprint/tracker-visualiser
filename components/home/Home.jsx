@@ -3,6 +3,7 @@ import Client from "../../helpers/client";
 import Layout from "../layout";
 import Rankable from "../rankable";
 import Company from "../company";
+import Trend from "../trend";
 
 const Home = () => {
   const client = new Client();
@@ -51,9 +52,9 @@ const Home = () => {
 
   return (
     <Layout>
-      {subject.type === "company" ?
-        <Company {...props} /> :
-        <Rankable {...props} /> }
+      {subject.type === "company"  && <Company {...props} />}
+      {(subject.type === "outcome" || subject.type === "group") && <Rankable {...props} />}
+      {subject.type === "trend"    && <Trend {...props} />}
     </Layout>
   );
 };

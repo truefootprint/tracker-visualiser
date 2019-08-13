@@ -1,7 +1,7 @@
 import { useState } from "react";
 import css from "./styles.scss";
 
-const Breadcrumbs = ({ ancestry, sector, current, setSubject }) => {
+const Breadcrumbs = ({ ancestry, sector, above, below, current, setSubject }) => {
   const attributes = ancestry.attributes;
 
   const handleClick = (node) => {
@@ -32,15 +32,23 @@ const Breadcrumbs = ({ ancestry, sector, current, setSubject }) => {
     </span>
   );
 
-  const topLevel = <>
+  const topLevel = (
     <span className={css.breadcrumb}>
       <a href=".">Home</a>{divider}
       <a href=".">{sector}</a>{divider}
+      {above && <>
+        <a onClick={handleClick(above)}>{above.name}</a>{divider}
+      </>}
     </span>
-  </>;
+  );
 
   const bottomLevel = (
-    <span className={css.current}>{current}</span>
+    <span className={css.breadcrumb}>
+      {below && <>
+        <a onClick={handleClick(below)}>{below.name}</a>{divider}
+      </>}
+      <span className={css.current}>{current}</span>
+    </span>
   );
 
   const breadcrumbs = (path, index) => (

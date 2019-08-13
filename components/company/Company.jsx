@@ -31,6 +31,10 @@ const Company = ({ ancestry, rankings, sector, year, setYear, setSubject, esg })
     return childRanking;
   });
 
+  const visitTrend = (r) => {
+    setSubject({ type: "trend", id: `${r.rankable_id}-${r.company_id}` });
+  };
+
   return (
     <div className={css.company}>
       {auditor && <div className={css.auditor}>
@@ -98,7 +102,9 @@ const Company = ({ ancestry, rankings, sector, year, setYear, setSubject, esg })
 
                 <div className={css.ranking}>
                   <Ranking ranking={r} setSubject={setSubject} sector={sector} year={year} size={[80, 40]}>
-                    <Info ranking={r} />
+                    <Info ranking={r}>
+                      <a onClick={() => visitTrend(r)}>click me</a>
+                    </Info>
                   </Ranking>
                 </div>
               </div>
