@@ -1,37 +1,45 @@
 import { useEffect, useState } from "react";
+import Client from "../../helpers/client";
+import Tooltip from "../tooltip";
+import Info from "../info";
 import * as d3 from "d3";
 import css from "./styles.scss";
 
-const data = [
-  { year: 2013, value: 200 },
-  { year: 2014, value: 500 },
-  { year: 2015, value: null },
-  { year: 2016, value: 150 },
-  { year: 2017, value: 150 },
-  { year: 2018, value: 250 },
-];
-
-const data2 = [
-  { year: 2013, value: 100 },
-  { year: 2014, value: 250 },
-  { year: 2015, value: 200 },
-  { year: 2016, value: null },
-  { year: 2017, value: 50 },
-  { year: 2018, value: 250 },
-];
-
 const LineGraph = () => {
-  const id = "foo";
+  const [rankings, setRankings] = useState(null);
+  const [tooltip, setTooltip] = useState(null);
 
+  const sector = "Mining";
+  const outcomeId = 5;
+  const companyId = 6;
+
+  useEffect(() => {
+    (new Client()).trend(sector, outcomeId, companyId)
+      .then(({ data }) => setRankings(data));
+  }, [sector, outcomeId, companyId])
+
+  const id = "foo";
   const [svgWidth, svgHeight] = [1100, 580];
 
   useEffect(() => {
+    if (rankings === null) {
+      return;
+    }
+
+    const handleMouseOver = (d) => {
+      setTooltip(<Info ranking={d} />);
+    };
+
+    const handleMouseOut = (d) => {
+      setTooltip(null);
+    };
+
     d3.select(`#${id}`).html("");
 
-    const marginLeft = 200;
-    const marginRight = 100;
-    const marginTop = 10;
-    const marginBottom = 60;
+    const marginLeft = 100;
+    const marginRight = 10;
+    const marginTop = 25;
+    const marginBottom = 30;
 
     const width = svgWidth - marginLeft - marginRight;
     const height = svgHeight - marginTop - marginBottom;
@@ -41,8 +49,8 @@ const LineGraph = () => {
     const offset = `translate(${marginLeft}, ${marginTop})`;
     const chart = svg.append('g').attr('transform', offset);
 
-    const years = data.map(d => d.year);
-    const values = data.map(d => parseFloat(d.value));
+    const years = rankings.map(d => d.year);
+    const values = rankings.map(d => parseFloat(d.value));
 
     const max = d3.max(values);
 
@@ -63,13 +71,15 @@ const LineGraph = () => {
       .attr('class', css.x_axis)
       .call(d3.axisBottom(xScale));
 
-    // x-axis label
+    const axisLabel = rankings[0].unit_name;
+
+    // y-axis label
     svg.append('text')
-      .attr('x', svgWidth - marginRight)
-      .attr('y', height + marginBottom * 0.8)
-      .attr('class', css.x_axis_label)
-      .attr('text-anchor', 'middle')
-      .text("hello");
+      .attr('x', marginLeft - 35)
+      .attr('y', 15)
+      .attr('class', css.y_axis_label)
+      .attr('text-anchor', 'left')
+      .text(axisLabel);
 
     const x = (d) => xScale(d.year) + xScale.bandwidth() / 2;
     const y = (d) => yScale(d.value);
@@ -89,7 +99,7 @@ const LineGraph = () => {
         .attr("stroke-dasharray", length + " " + length) // TODO: dashes
         .attr("stroke-dashoffset", length)
         .transition()
-        .duration(2000)
+        .duration(length * 2)
         .ease(d3.easeLinear)
         .attr("stroke-dashoffset", 0);
 
@@ -102,16 +112,18 @@ const LineGraph = () => {
         .attr("cx", x)
         .attr("cy", y)
         .attr("r", 5)
+        .on('mouseover', handleMouseOver)
+        .on('mouseout', handleMouseOut);
     };
 
-    plot(data);
-    plot(data2);
+    plot(rankings);
 
-  }, [data]);
+  }, [rankings]);
 
   return (
     <div className={css.graph}>
       <svg id={id} width={svgWidth} height={svgHeight} />
+      <Tooltip content={tooltip} />
     </div>
   );
 }

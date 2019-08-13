@@ -9,6 +9,10 @@ class Client {
     return this.get(`/company_rankings/${sector}/${year}/${type}/${id}`);
   }
 
+  trend(sector, outcomeId, companyId) {
+    return this.get(`/company_rankings/${sector}/trend/outcome/${outcomeId}/${companyId}`);
+  }
+
   company(id) {
     return this.get(`/companies/${id}`);
   }

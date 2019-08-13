@@ -75,6 +75,10 @@
 
   .ranking {
     font-size: 1.2rem;
+
+    :global(.info) {
+      margin-top: 1rem;
+    }
   }
 
   &:nth-child(even) {
@@ -84,18 +88,4 @@
 
 .title {
   line-height: 1.3;
-}
-
-.value {
-  font-weight: bold;
-}
-
-.value {
-  margin-top: 1rem;
-  text-align: right;
-}
-
-.auditor_name {
-  margin-top: 0.5rem;
-  text-align: right;
 }

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import round from "../../helpers/round";
 import Breadcrumbs from "../breadcrumbs";
 import Ranking from "../ranking";
 import Year from "../year";
+import Info from "../info";
 import Client from "../../helpers/client";
 import css from "./styles.scss";
 
@@ -30,24 +30,6 @@ const Company = ({ ancestry, rankings, sector, year, setYear, setSubject, esg })
 
     return childRanking;
   });
-
-  const info = (ranking) => {
-    if (ranking.value === null) {
-      return null;
-    }
-
-    return (
-      <div>
-        {<div className={css.value}>
-          <span className={css.value}>{round(ranking.value)}</span>
-          <span className={css.unit}>{ranking.unit_name}</span>
-        </div>}
-
-        {ranking.auditor_name &&
-        <div className={css.auditor_name}>(Audited by {ranking.auditor_name})</div>}
-      </div>
-    );
-  };
 
   return (
     <div className={css.company}>
@@ -116,7 +98,7 @@ const Company = ({ ancestry, rankings, sector, year, setYear, setSubject, esg })
 
                 <div className={css.ranking}>
                   <Ranking ranking={r} setSubject={setSubject} sector={sector} year={year} size={[80, 40]}>
-                    {info(r)}
+                    <Info ranking={r} />
                   </Ranking>
                 </div>
               </div>
