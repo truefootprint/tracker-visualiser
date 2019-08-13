@@ -43,7 +43,7 @@ const Ranking = ({ ranking, setSubject, sector, year, size, nullText, suffix, ch
 
       <a className={css.inner} onClick={() => setSubject(member)}>{inner}</a>
 
-      {children && <span>
+      {ranking.value !== null && <span>
         <i className={`${css.chevron} ${selected} fas fa-chevron-down`} onClick={toggleInfo}></i>
 
         {showInfo && <div className={css.info}>

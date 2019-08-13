@@ -8,7 +8,7 @@ import css from "./styles.scss";
 const LineGraph = ({ rankings }) => {
   const [tooltip, setTooltip] = useState(null);
 
-  const id = "foo";
+  const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
   const [svgWidth, svgHeight] = [1300, 400];
 
   useEffect(() => {

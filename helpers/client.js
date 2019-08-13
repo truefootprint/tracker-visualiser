@@ -19,7 +19,7 @@ class Client {
 
   ancestry({ type, id }) {
     if (type === "trend") {
-      const outcomeId = id.split("-")[1];
+      const outcomeId = id.split("-")[0];
       return this.get(`/ancestry/outcome/${outcomeId}`);
     } else {
       return this.get(`/ancestry/${type}/${id}`);
