@@ -1,3 +1,9 @@
+.line_graph {
+  circle         { fill: black; }
+  .line          { stroke: black; }
+  .company_label { fill: black; }
+}
+
 circle[data-index="0"]         { fill: #246 }
 .line[data-index="0"]          { stroke: #448AA9 }
 .company_label[data-index="0"] { fill: #246 }
@@ -5,6 +11,14 @@ circle[data-index="0"]         { fill: #246 }
 circle[data-index="1"]         { fill: red }
 .line[data-index="1"]          { stroke: red }
 .company_label[data-index="1"] { fill: red }
+
+circle[data-index="2"]         { fill: green }
+.line[data-index="2"]          { stroke: green }
+.company_label[data-index="2"] { fill: green }
+
+circle[data-index="3"]         { fill: blue }
+.line[data-index="3"]          { stroke: blue }
+.company_label[data-index="3"] { fill: blue }
 
 .line {
   fill: none;

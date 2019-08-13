@@ -5,17 +5,13 @@ import Info from "../info";
 import * as d3 from "d3";
 import css from "./styles.scss";
 
-const LineGraph = ({ rankings, thumbnail, size }) => {
+const LineGraph = ({ rankingGroups, thumbnail, size }) => {
   const [tooltip, setTooltip] = useState(null);
 
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
   const [svgWidth, svgHeight] = size || [1300, 400];
 
   useEffect(() => {
-    if (rankings === null) {
-      return;
-    }
-
     const handleMouseOver = (d) => {
       setTooltip(<Info ranking={d} />);
     };
@@ -39,9 +35,9 @@ const LineGraph = ({ rankings, thumbnail, size }) => {
     const offset = `translate(${marginLeft}, ${marginTop})`;
     const chart = svg.append('g').attr('transform', offset);
 
-    const years = rankings.map(d => d.year);
-    const values = rankings.map(d => parseFloat(d.value));
+    const years = rankingGroups[0].map(d => d.year);
 
+    const values = rankingGroups.flatMap(group => group.map(d => parseFloat(d.value)));
     const max = d3.max(values);
 
     const axisMin = 0;
@@ -64,8 +60,7 @@ const LineGraph = ({ rankings, thumbnail, size }) => {
       .attr('class', css.x_axis)
       .call(d3.axisBottom(xScale).tickFormat(thumbnail ? "" : null));
 
-
-    const axisLabel = thumbnail ? "" : rankings[0].unit_name;
+    const axisLabel = thumbnail ? "" : rankingGroups[0][0].unit_name;
 
     // y-axis label
     svg.append('text')
@@ -115,25 +110,28 @@ const LineGraph = ({ rankings, thumbnail, size }) => {
         .on('mouseover', handleMouseOver)
         .on('mouseout', handleMouseOut);
 
-      svg.selectAll(".dot")
-        .data([dataWithValues[dataWithValues.length - 1]])
-        .enter()
-        .append("text")
-        .attr('data-index', index)
-        .attr('transform', offset)
-        .attr("x", labelX)
-        .attr("y", labelY)
-        .attr('text-anchor', 'left')
-        .attr('class', css.company_label)
-        .text(companyLabel);
+      const lastDatum = dataWithValues[dataWithValues.length - 1];
+
+      if (lastDatum) {
+        svg.selectAll(".dot")
+          .data([lastDatum])
+          .enter()
+          .append("text")
+          .attr('data-index', index)
+          .attr('transform', offset)
+          .attr("x", labelX)
+          .attr("y", labelY)
+          .attr('text-anchor', 'left')
+          .attr('class', css.company_label)
+          .text(companyLabel);
+      }
     };
 
-    plot(rankings, 1);
-
-  }, [rankings]);
+    rankingGroups.forEach((rankings, index) => plot(rankings, index));
+  }, [rankingGroups]);
 
   return (
-    <div className={thumbnail && css.thumbnail}>
+    <div className={`${css.line_graph} ${thumbnail && css.thumbnail}`}>
       <svg id={id} width={svgWidth} height={svgHeight} />
       <Tooltip content={tooltip} />
     </div>

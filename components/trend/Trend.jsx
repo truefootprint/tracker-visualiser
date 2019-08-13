@@ -7,6 +7,9 @@ import css from "./styles.scss";
 const Trend = ({ ancestry, sector, rankings, setSubject }) => {
   const [auditor, setAuditor] = useState(null);
 
+  const [comparisonIds, setComparisonIds] = useState([1, 2, 3]);
+  const [comparisons, setComparisons] = useState({});
+
   const auditorRanking = rankings.find(r => r.auditor_id);
   const auditorId = (typeof auditorRanking !== "undefined") ? auditorRanking.auditor_id : null;
 
@@ -14,7 +17,23 @@ const Trend = ({ ancestry, sector, rankings, setSubject }) => {
     if (auditorId) {
       (new Client()).company(auditorId).then(({ data }) => setAuditor(data));
     }
-  }, [auditorId])
+  }, [auditorId]);
+
+  useEffect(() => {
+    comparisonIds.forEach(id => {
+      if (comparisons[id]) {
+        return;
+      }
+
+      const trend = { type: "trend", id: `${rankings[0].rankable_id}-${id}` };
+
+      (new Client()).companyRankings(sector, null, trend)
+        .then(({ data }) => setComparisons(prev => ({ ...prev, [id]: data })));
+    });
+  }, [comparisonIds]);
+
+  let rankingGroups = comparisonIds.map(id => comparisons[id]).filter(v => v);
+  rankingGroups.unshift(rankings);
 
   return (
     <div className={css.trend}>
@@ -41,7 +60,7 @@ const Trend = ({ ancestry, sector, rankings, setSubject }) => {
         {rankings[0].rankable_name}
       </h2>
 
-      <LineGraph rankings={rankings} />
+      <LineGraph rankingGroups={rankingGroups} />
     </div>
   );
 };

@@ -16,9 +16,13 @@ const TrendThumbnail = ({ sector, ranking, setSubject }) => {
       .then(({ data }) => setRankings(data));
   }, [sector, ranking])
 
+  if (!rankings) {
+    return null;
+  }
+
   return (
     <a className={css.trend_thumbnail} onClick={() => setSubject(trend)}>
-      <LineGraph rankings={rankings} thumbnail={true} size={[90, 45]} />
+      <LineGraph rankingGroups={[rankings]} thumbnail={true} size={[90, 45]} />
     </a>
   )
 };
