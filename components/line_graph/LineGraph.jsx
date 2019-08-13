@@ -5,11 +5,11 @@ import Info from "../info";
 import * as d3 from "d3";
 import css from "./styles.scss";
 
-const LineGraph = ({ rankings }) => {
+const LineGraph = ({ rankings, thumbnail, size }) => {
   const [tooltip, setTooltip] = useState(null);
 
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
-  const [svgWidth, svgHeight] = [1300, 400];
+  const [svgWidth, svgHeight] = size || [1300, 400];
 
   useEffect(() => {
     if (rankings === null) {
@@ -26,10 +26,10 @@ const LineGraph = ({ rankings }) => {
 
     d3.select(`#${id}`).html("");
 
-    const marginLeft = 100;
-    const marginRight = 10;
-    const marginTop = 25;
-    const marginBottom = 30;
+    const marginLeft = thumbnail ? 8 : 100;
+    const marginRight = thumbnail ? 0 : 10;
+    const marginTop = thumbnail ? 4 : 25;
+    const marginBottom = thumbnail ? 8 : 30;
 
     const width = svgWidth - marginLeft - marginRight;
     const height = svgHeight - marginTop - marginBottom;
@@ -53,15 +53,19 @@ const LineGraph = ({ rankings }) => {
     // y-axis
     chart.append('g')
       .attr('class', css.y_axis)
-      .call(d3.axisLeft(yScale));
+      .call(d3.axisLeft(yScale)
+        .ticks(thumbnail ? 4 : null)
+        .tickFormat(thumbnail ? "" : null)
+      );
 
     // x-axis
     chart.append('g')
       .attr('transform', `translate(0, ${height})`)
       .attr('class', css.x_axis)
-      .call(d3.axisBottom(xScale));
+      .call(d3.axisBottom(xScale).tickFormat(thumbnail ? "" : null));
 
-    const axisLabel = rankings[0].unit_name;
+
+    const axisLabel = thumbnail ? "" : rankings[0].unit_name;
 
     // y-axis label
     svg.append('text')
@@ -89,7 +93,7 @@ const LineGraph = ({ rankings }) => {
         .attr("stroke-dasharray", length + " " + length) // TODO: dashes
         .attr("stroke-dashoffset", length)
         .transition()
-        .duration(length * 2)
+        .duration(thumbnail ? 0 : length * 2)
         .ease(d3.easeLinear)
         .attr("stroke-dashoffset", 0);
 
@@ -101,7 +105,7 @@ const LineGraph = ({ rankings }) => {
         .attr("class", css.dot)
         .attr("cx", x)
         .attr("cy", y)
-        .attr("r", 8)
+        .attr("r", thumbnail ? 3 : 8)
         .on('mouseover', handleMouseOver)
         .on('mouseout', handleMouseOut);
     };
@@ -111,7 +115,7 @@ const LineGraph = ({ rankings }) => {
   }, [rankings]);
 
   return (
-    <div className={css.graph}>
+    <div className={`${css.graph} ${thumbnail && css.thumbnail}`}>
       <svg id={id} width={svgWidth} height={svgHeight} />
       <Tooltip content={tooltip} />
     </div>

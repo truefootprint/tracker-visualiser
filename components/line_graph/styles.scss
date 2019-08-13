@@ -36,3 +36,11 @@
 .y_axis_label {
   font-style: italic;
 }
+
+.thumbnail {
+  .x_axis, .y_axis {
+     :global(.tick) line, :global(.domain) {
+       stroke: #555;
+     }
+  }
+}
