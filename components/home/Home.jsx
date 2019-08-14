@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Client from "../../helpers/client";
 import Layout from "../layout";
+import History from "../history";
 import Rankable from "../rankable";
 import Company from "../company";
 import Trend from "../trend";
@@ -10,7 +11,7 @@ const Home = () => {
 
   const [sector, setSector] = useState("Mining");
   const [year, setYear] = useState("2018");
-  const [subject, setSubject] = useState({ type: "trend", id: "1-6" });
+  const [subject, setSubject] = useState({ type: "group", id: "1" });
 
   const [rankings, setRankings] = useState(null);
   const [ancestry, setAncestry] = useState(null);
@@ -52,6 +53,8 @@ const Home = () => {
 
   return (
     <Layout>
+      <History {...props} />
+
       {subject.type === "company"  && <Company {...props} />}
       {(subject.type === "outcome" || subject.type === "group") && <Rankable {...props} />}
       {subject.type === "trend"    && <Trend {...props} />}
