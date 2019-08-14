@@ -44,7 +44,7 @@ const Ranking = ({ ranking, setSubject, subject, sector, year, size, nullText, s
 
       <Indicator sector={sector} year={year} ranking={ranking} />
 
-      {ranking.value !== null && <span>
+      {ranking.rankable_type === "Outcome" && ranking.value !== null && <span>
         <i className={`${css.icon} ${showInfo && css.selected} fas fa-info-circle`} onClick={toggleInfo}></i>
 
         {showInfo && <div className={css.info}>
