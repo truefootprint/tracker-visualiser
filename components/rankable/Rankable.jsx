@@ -20,7 +20,7 @@ const Rankable = ({ rankings, ancestry, sector, year, setYear, setSubject }) => 
       <Graph rankings={rankings} year={year} setSubject={setSubject} />
     </div>
 
-    <SideBar year={year} setYear={setYear} ancestry={ancestry} setSubject={setSubject} />
+    <SideBar rankings={rankings} year={year} setYear={setYear} ancestry={ancestry} setSubject={setSubject} />
   </div>
 );
 
