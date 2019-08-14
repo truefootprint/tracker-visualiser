@@ -8,7 +8,7 @@ const TrendThumbnail = ({ sector, ranking, setSubject }) => {
 
   const trend = {
     type: "trend",
-    id: `${ranking.rankable_id}-${ranking.company_id}`
+    id: `${ranking.rankable_type}-${ranking.rankable_id}-${ranking.company_id}`
   };
 
   useEffect(() => {

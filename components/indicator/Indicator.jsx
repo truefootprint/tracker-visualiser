@@ -14,7 +14,7 @@ const Indicator = ({ sector, year, ranking }) => {
   };
 
   useEffect(() => {
-    if (ranking.rank && ranking.rankable_type === "Outcome") {
+    if (ranking.rank) {
       (new Client()).companyRanking(sector, year - 1, ranking.company_id, member)
         .then(({ data }) => setPreviousRanking(data));
     }
@@ -29,7 +29,7 @@ const Indicator = ({ sector, year, ranking }) => {
 
   let icon, trend;
 
-  if (!current || !previous) {
+  if (current === null || previous === null) {
     return null;
   } else if (current < previous) {
     icon = "fa-long-arrow-alt-up";

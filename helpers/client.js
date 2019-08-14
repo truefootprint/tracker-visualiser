@@ -7,14 +7,14 @@ class Client {
 
   companyRankings(sector, year, { type, id }) {
     if (type === "trend") {
-      return this.get(`/company_rankings/${sector}/all/${type}/${id}`);
+      return this.get(`/company_rankings/${sector}/all/history/${id}`);
     } else {
       return this.get(`/company_rankings/${sector}/${year}/${type}/${id}`);
     }
   }
 
   companyRanking(sector, year, company, { type, id }) {
-    return this.get(`/company_rankings/${sector}/${year}/${type}/${id}-${company}`);
+    return this.get(`/company_rankings/${sector}/${year}/history/${type}-${id}-${company}`);
   }
 
   company(id) {
@@ -23,8 +23,9 @@ class Client {
 
   ancestry({ type, id }) {
     if (type === "trend") {
-      const outcomeId = id.split("-")[0];
-      return this.get(`/ancestry/outcome/${outcomeId}`);
+      const [rankableType, rankableId] = id.split("-");
+
+      return this.get(`/ancestry/${rankableType.toLowerCase()}/${rankableId}`);
     } else {
       return this.get(`/ancestry/${type}/${id}`);
     }

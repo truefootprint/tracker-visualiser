@@ -31,7 +31,10 @@ const Trend = ({ ancestry, sector, rankings, year, setSubject }) => {
         return;
       }
 
-      const trend = { type: "trend", id: `${rankings[0].rankable_id}-${id}` };
+      const trend = {
+        type: "trend",
+        id: `${rankings[0].rankable_type}-${rankings[0].rankable_id}-${id}`
+      };
 
       client.companyRankings(sector, null, trend)
         .then(({ data }) => setComparisons(prev => ({ ...prev, [id]: data })));
