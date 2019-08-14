@@ -7,6 +7,20 @@
   }
 }
 
+.company_dropdown {
+  float: right;
+  margin: 6.5rem 5.5rem 0 0;
+
+  label {
+    margin-right: 0.5rem;
+  }
+
+  select {
+    font-size: 1rem;
+    background: white;
+  }
+}
+
 .auditor {
   float: right;
   margin-right: 2rem;
@@ -16,8 +30,8 @@
   }
 
   .logo {
-    max-width: 10rem;
-    max-height: 5rem;
+    max-width: 7rem;
+    max-height: 3.5rem;
   }
 }
 

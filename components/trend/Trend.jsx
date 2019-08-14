@@ -1,21 +1,27 @@
 import { useState, useEffect } from "react";
 import Breadcrumbs from "../breadcrumbs";
 import LineGraph from "../line_graph";
+import CompanyDropdown from "../company_dropdown";
 import Client from "../../helpers/client";
 import css from "./styles.scss";
 
-const Trend = ({ ancestry, sector, rankings, setSubject }) => {
+const Trend = ({ ancestry, sector, rankings, year, setSubject }) => {
   const [auditor, setAuditor] = useState(null);
 
-  const [comparisonIds, setComparisonIds] = useState([1, 2, 3]);
+  const [comparisonIds, setComparisonIds] = useState([]);
   const [comparisons, setComparisons] = useState({});
+
+  const [companyListing, setCompanyListing] = useState([]);
 
   const auditorRanking = rankings.find(r => r.auditor_id);
   const auditorId = (typeof auditorRanking !== "undefined") ? auditorRanking.auditor_id : null;
 
+  const companyId = rankings[0].company_id;
+  const client = new Client();
+
   useEffect(() => {
     if (auditorId) {
-      (new Client()).company(auditorId).then(({ data }) => setAuditor(data));
+      client.company(auditorId).then(({ data }) => setAuditor(data));
     }
   }, [auditorId]);
 
@@ -27,10 +33,19 @@ const Trend = ({ ancestry, sector, rankings, setSubject }) => {
 
       const trend = { type: "trend", id: `${rankings[0].rankable_id}-${id}` };
 
-      (new Client()).companyRankings(sector, null, trend)
+      client.companyRankings(sector, null, trend)
         .then(({ data }) => setComparisons(prev => ({ ...prev, [id]: data })));
     });
   }, [comparisonIds]);
+
+  useEffect(() => {
+    const member = {
+      type: rankings[0].rankable_type.toLowerCase(),
+      id: rankings[0].rankable_id
+    };
+
+    client.companyRankings(sector, year, member).then(({ data }) => setCompanyListing(data));
+  }, []);
 
   let rankingGroups = comparisonIds.map(id => comparisons[id]).filter(v => v);
   rankingGroups.unshift(rankings);
@@ -42,6 +57,12 @@ const Trend = ({ ancestry, sector, rankings, setSubject }) => {
 
         <img className={css.logo} src={auditor.logo} />
       </div>}
+
+      <div className={css.company_dropdown}>
+        <label>Compare to:</label>
+
+        <CompanyDropdown rankings={companyListing} exclusionId={companyId} onSelect={id => setComparisonIds([id])} />
+      </div>
 
       <Breadcrumbs
         ancestry={ancestry}

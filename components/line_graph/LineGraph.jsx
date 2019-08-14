@@ -93,7 +93,7 @@ const LineGraph = ({ rankingGroups, thumbnail, size }) => {
         .attr("stroke-dasharray", length + " " + length) // TODO: dashes
         .attr("stroke-dashoffset", length)
         .transition()
-        .duration(thumbnail ? 0 : length * 2)
+        .duration(thumbnail ? 0 : 1000)
         .ease(d3.easeLinear)
         .attr("stroke-dashoffset", 0);
 
