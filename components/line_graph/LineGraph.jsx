@@ -9,7 +9,7 @@ const LineGraph = ({ rankingGroups, thumbnail, size }) => {
   const [tooltip, setTooltip] = useState(null);
 
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
-  const [svgWidth, svgHeight] = size || [1300, 400];
+  const [svgWidth, svgHeight] = size || [1400, 400];
 
   useEffect(() => {
     const handleMouseOver = (d) => {
@@ -23,7 +23,7 @@ const LineGraph = ({ rankingGroups, thumbnail, size }) => {
     d3.select(`#${id}`).html("");
 
     const marginLeft = thumbnail ? 8 : 100;
-    const marginRight = thumbnail ? 0 : 10;
+    const marginRight = thumbnail ? 0 : 80;
     const marginTop = thumbnail ? 4 : 25;
     const marginBottom = thumbnail ? 8 : 30;
 

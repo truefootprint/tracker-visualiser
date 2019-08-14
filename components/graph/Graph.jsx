@@ -11,7 +11,7 @@ const Graph = ({ rankings, current, year, setSubject, thumbnail, size }) => {
   const [tooltip, setTooltip] = useState(null);
 
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
-  const [svgWidth, svgHeight] = size || [1100, 580];
+  const [svgWidth, svgHeight] = size || [1100, 550];
 
   const visitCompanyById = (id) => {
     setSubject({ type: "company", id: id });
@@ -27,7 +27,8 @@ const Graph = ({ rankings, current, year, setSubject, thumbnail, size }) => {
     //
 
     const companies = rankings.filter(c => c.rank !== null);
-    const unranked = rankings.filter(c => c.rank === null);
+    const unranked = rankings.filter(c => c.rank === null)
+      .sort((a, b) => a.company_name < b.company_name ? -1 : 1);
 
     setUnranked(unranked);
 
@@ -44,9 +45,9 @@ const Graph = ({ rankings, current, year, setSubject, thumbnail, size }) => {
 
     const max = d3.max(values);
 
-    const marginLeft = thumbnail ? 0 : 200;
+    const marginLeft = thumbnail ? 0 : 220;
     const marginRight = thumbnail ? 0 : 100;
-    const marginY = thumbnail ? 0 : 60;
+    const marginY = thumbnail ? 0 : 50;
 
     const width = svgWidth - marginLeft - marginRight;
     const height = svgHeight - marginY;
