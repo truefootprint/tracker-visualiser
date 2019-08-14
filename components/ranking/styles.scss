@@ -8,7 +8,7 @@
   margin-right: 2rem;
 
   position: relative;
-  left: -1rem;
+  left: -0.5rem;
   padding: 0.5rem;
 
   &:hover {
@@ -26,21 +26,14 @@
   }
 }
 
-.chevron {
+.icon {
   float: right;
-  margin: 0.5rem 2rem 0 0;
-  color: #333;
+  margin: 1rem 1rem 0 0;
+  color: #aaa;
+  font-size: 1.5rem;
   cursor: pointer;
 
-  &.up {
-    transform: rotate(180deg);
+  &.selected {
+    color: #666;
   }
-
-  &.down {
-    transform: rotate(0deg);
-  }
-}
-
-.info {
-
 }

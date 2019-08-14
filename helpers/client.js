@@ -13,6 +13,10 @@ class Client {
     }
   }
 
+  companyRanking(sector, year, company, { type, id }) {
+    return this.get(`/company_rankings/${sector}/${year}/${type}/${id}-${company}`);
+  }
+
   company(id) {
     return this.get(`/companies/${id}`);
   }
