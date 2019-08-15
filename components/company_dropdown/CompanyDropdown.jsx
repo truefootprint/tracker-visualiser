@@ -6,6 +6,8 @@ const CompanyDropdown = ({ rankings, exclusionId, onSelect }) => {
 
   return (
     <select onChange={e => onSelect(e.target.value)}>
+      <option disabled selected value> -- select an option -- </option>
+
       {listing.map(({ id, name }) => (
 
         <option key={id} value={id}>
