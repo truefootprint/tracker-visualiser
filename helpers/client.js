@@ -6,7 +6,7 @@ class Client {
   }
 
   companyRankings(sector, threshold, year, { type, id }) {
-    let t = threshold.replace(".", "-");
+    let t = threshold.toString().replace(".", "-");
 
     if (type === "trend") {
       return this.get(`/company_rankings/${sector}/${t}/all/history/${id}`);
@@ -16,7 +16,7 @@ class Client {
   }
 
   companyRanking(sector, threshold, year, company, { type, id }) {
-    let t = threshold.replace(".", "-");
+    let t = threshold.toString().replace(".", "-");
 
     return this.get(`/company_rankings/${sector}/${t}/${year}/history/${type}-${id}-${company}`);
   }

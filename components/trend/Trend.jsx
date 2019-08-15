@@ -39,7 +39,7 @@ const Trend = ({ ancestry, sector, threshold, rankings, year, setSubject }) => {
       client.companyRankings(sector, threshold, null, trend)
         .then(({ data }) => setComparisons(prev => ({ ...prev, [id]: data })));
     });
-  }, [comparisonIds]);
+  }, [sector, threshold, comparisonIds]);
 
   useEffect(() => {
     const member = {
@@ -48,7 +48,7 @@ const Trend = ({ ancestry, sector, threshold, rankings, year, setSubject }) => {
     };
 
     client.companyRankings(sector, threshold, year, member).then(({ data }) => setCompanyListing(data));
-  }, []);
+  }, [sector, threshold, year]);
 
   let rankingGroups = comparisonIds.map(id => comparisons[id]).filter(v => v);
   rankingGroups.unshift(rankings);

@@ -18,7 +18,7 @@ const Indicator = ({ sector, threshold, year, ranking }) => {
       (new Client()).companyRanking(sector, threshold, year - 1, ranking.company_id, member)
         .then(({ data }) => setPreviousRanking(data));
     }
-  }, [sector, year, ranking])
+  }, [sector, threshold, year, ranking])
 
   const percentile = (ranking) => (
     ranking && ranking.rank && ranking.rank / ranking.out_of

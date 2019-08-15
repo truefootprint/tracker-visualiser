@@ -1,21 +1,29 @@
+import { useState } from "react";
 import Logo from "../logo";
+import Settings from "../settings";
 import css from "./styles.scss";
 
-const NavBar = () => (
-  <div className={css.nav_bar}>
-    <a href="." className={css.logo}>
-      <Logo />
-    </a>
+const NavBar = ({ threshold, setThreshold }) => {
+  const [showSettings, setShowSettings] = useState(true);
 
-    <h1 className={css.title}>
-      Tracker
-    </h1>
+  return (
+    <div className={css.nav_bar}>
+      <a href="." className={css.logo}>
+        <Logo />
+      </a>
 
-    <div className={css.icons}>
-      <i className="fas fa-search"></i>
-      <i className="fas fa-cog"></i>
+      <h1 className={css.title}>
+        Tracker
+      </h1>
+
+      <div className={css.icons}>
+        <i className="fas fa-search"></i>
+        <i className={`fas fa-cog ${showSettings && css.selected}`} onClick={() => setShowSettings(!showSettings)}></i>
+      </div>
+
+      {showSettings && <Settings threshold={threshold} setThreshold={setThreshold} />}
     </div>
-  </div>
-);
+  );
+};
 
 export default NavBar;

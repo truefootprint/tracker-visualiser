@@ -28,7 +28,7 @@ const Ranking = ({ ranking, setSubject, subject, sector, threshold, year, size, 
     if (ranking.rank) {
       client.companyRankings(sector, threshold, year, member).then(({ data }) => setRankings(data));
     }
-  }, [sector, year, ranking])
+  }, [sector, threshold, year, ranking])
 
   const toggleInfo = () => {
     setShowInfo(!showInfo);

@@ -21,12 +21,17 @@ const Home = () => {
 
   useEffect(() => {
     client.companyRankings(sector, threshold, year, subject).then(({ data }) => setRankings(data));
-  }, [sector, year, subject])
+  }, [sector, threshold, year, subject])
 
   useEffect(() => {
     const member = subject.type === "company" ? esg : subject;
     client.ancestry(member).then(({ data }) => setAncestry(data));
   }, [subject]);
+
+  const nullifyDataAndSetThreshold = (threshold) => {
+    setRankings(null);
+    setThreshold(threshold);
+  };
 
   const nullifyDataAndSetSubject = (subject) => {
     setRankings(null);
@@ -41,7 +46,7 @@ const Home = () => {
 
   const props = {
     sector, setSector,
-    threshold, setThreshold,
+    threshold, setThreshold: nullifyDataAndSetThreshold,
     year, setYear: nullifyDataAndSetYear,
     subject, setSubject: nullifyDataAndSetSubject,
     rankings, setRankings,
@@ -54,7 +59,7 @@ const Home = () => {
   }
 
   return (
-    <Layout>
+    <Layout {...props}>
       <History {...props} />
 
       {subject.type === "company"  && <Company {...props} />}

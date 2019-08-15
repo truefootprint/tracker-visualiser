@@ -1,0 +1,63 @@
+.settings {
+  position: absolute;
+  top: 6.2rem;
+  right: 0;
+
+  width: 20.2rem;
+  height: 25rem;
+  background: white;
+  box-shadow: 0 0 1rem #ccc;
+}
+
+.title {
+  font-size: 2rem;
+  text-align: center;
+  color: #444;
+  margin-top: 2rem;
+}
+
+.sentence {
+  font-size: 1.5rem;
+  color: #444;
+  padding: 2rem 0 2rem 1.5rem;
+  line-height: 1.7;
+}
+
+.counter {
+  border: 1px solid grey;
+  padding: 0.1rem 0.4rem;
+  background: #eee;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+.controls {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  bottom: 0.4rem;
+  width: 2.5rem;
+  height: 2.5rem;
+
+  i {
+    font-size: 2rem;
+    position: absolute;
+    left: 0.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    color: #555;
+  }
+
+  .up {
+    top: -0.25rem;
+  }
+
+  .down {
+    bottom: -0.25rem;
+  }
+
+  .disabled {
+    color: #ccc;
+    cursor: inherit;
+  }
+}
