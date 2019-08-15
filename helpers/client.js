@@ -5,16 +5,20 @@ class Client {
     this.host = "http://localhost:3000";
   }
 
-  companyRankings(sector, year, { type, id }) {
+  companyRankings(sector, threshold, year, { type, id }) {
+    let t = threshold.replace(".", "-");
+
     if (type === "trend") {
-      return this.get(`/company_rankings/${sector}/all/history/${id}`);
+      return this.get(`/company_rankings/${sector}/${t}/all/history/${id}`);
     } else {
-      return this.get(`/company_rankings/${sector}/${year}/${type}/${id}`);
+      return this.get(`/company_rankings/${sector}/${t}/${year}/${type}/${id}`);
     }
   }
 
-  companyRanking(sector, year, company, { type, id }) {
-    return this.get(`/company_rankings/${sector}/${year}/history/${type}-${id}-${company}`);
+  companyRanking(sector, threshold, year, company, { type, id }) {
+    let t = threshold.replace(".", "-");
+
+    return this.get(`/company_rankings/${sector}/${t}/${year}/history/${type}-${id}-${company}`);
   }
 
   company(id) {

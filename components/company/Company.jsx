@@ -7,7 +7,7 @@ import Info from "../info";
 import Client from "../../helpers/client";
 import css from "./styles.scss";
 
-const Company = ({ ancestry, rankings, sector, year, setYear, setSubject, esg }) => {
+const Company = ({ ancestry, rankings, sector, threshold, year, setYear, setSubject, esg }) => {
   const [auditor, setAuditor] = useState(null);
 
   const ranking = (member) => (
@@ -63,6 +63,7 @@ const Company = ({ ancestry, rankings, sector, year, setYear, setSubject, esg })
             ranking={ranking(esg)}
             setSubject={setSubject}
             sector={sector}
+            threshold={threshold}
             year={year}
             size={[240, 120]}
             nullText="Insufficient data points."
@@ -84,6 +85,7 @@ const Company = ({ ancestry, rankings, sector, year, setYear, setSubject, esg })
                   ranking={r}
                   setSubject={setSubject}
                   sector={sector}
+                  threshold={threshold}
                   year={year}
                   size={[160, 80]}
                   nullText="Insufficient data points."
@@ -98,9 +100,16 @@ const Company = ({ ancestry, rankings, sector, year, setYear, setSubject, esg })
                 </div>
 
                 <div className={css.ranking}>
-                  <Ranking ranking={r} setSubject={setSubject} sector={sector} year={year} size={[80, 40]}>
+                  <Ranking
+                    ranking={r}
+                    setSubject={setSubject}
+                    sector={sector}
+                    threshold={threshold}
+                    year={year}
+                    size={[80, 40]}>
+
                     <Info ranking={r}>
-                      <TrendThumbnail sector={sector} ranking={r} setSubject={setSubject} />
+                      <TrendThumbnail sector={sector} threshold={threshold} ranking={r} setSubject={setSubject} />
                     </Info>
                   </Ranking>
                 </div>

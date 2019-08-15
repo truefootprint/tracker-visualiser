@@ -10,6 +10,7 @@ const Home = () => {
   const client = new Client();
 
   const [sector, setSector] = useState("Mining");
+  const [threshold, setThreshold] = useState("0.1");
   const [year, setYear] = useState("2018");
   const [subject, setSubject] = useState({ type: "group", id: "1" });
 
@@ -19,7 +20,7 @@ const Home = () => {
   const esg = { type: "group", id: 1 };
 
   useEffect(() => {
-    client.companyRankings(sector, year, subject).then(({ data }) => setRankings(data));
+    client.companyRankings(sector, threshold, year, subject).then(({ data }) => setRankings(data));
   }, [sector, year, subject])
 
   useEffect(() => {
@@ -40,6 +41,7 @@ const Home = () => {
 
   const props = {
     sector, setSector,
+    threshold, setThreshold,
     year, setYear: nullifyDataAndSetYear,
     subject, setSubject: nullifyDataAndSetSubject,
     rankings, setRankings,

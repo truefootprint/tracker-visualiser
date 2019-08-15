@@ -4,7 +4,7 @@ import Client from "../../helpers/client";
 import ordinal from "../../helpers/ordinal";
 import css from "./styles.scss";
 
-const Indicator = ({ sector, year, ranking }) => {
+const Indicator = ({ sector, threshold, year, ranking }) => {
   const [previousRanking, setPreviousRanking] = useState(null);
   const [tooltip, setTooltip] = useState(null);
 
@@ -15,7 +15,7 @@ const Indicator = ({ sector, year, ranking }) => {
 
   useEffect(() => {
     if (ranking.rank) {
-      (new Client()).companyRanking(sector, year - 1, ranking.company_id, member)
+      (new Client()).companyRanking(sector, threshold, year - 1, ranking.company_id, member)
         .then(({ data }) => setPreviousRanking(data));
     }
   }, [sector, year, ranking])
