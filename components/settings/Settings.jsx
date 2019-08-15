@@ -1,3 +1,4 @@
+import Icon from "../icon";
 import css from "./styles.scss";
 
 const thresholds = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1];
@@ -34,8 +35,8 @@ const Settings = ({ threshold, setThreshold }) => {
         Require at least <span className={css.counter}>{percentage}%</span>
 
         <div className={css.controls}>
-          <i className={`${css.up} ${upDisabled && css.disabled} && css.disabled} fas fa-caret-up`} onClick={up}></i>
-          <i className={`${css.down} ${downDisabled && css.disabled} fas fa-caret-down`} onClick={down}></i>
+          <Icon name="caret-up" className={`${css.up} ${upDisabled && css.disabled}`} onClick={up} />
+          <Icon name="caret-down" className={`${css.down} ${downDisabled && css.disabled}`} onClick={down} />
         </div>
 
         of outcomes to qualify for an ESG rank.

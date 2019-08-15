@@ -3,6 +3,7 @@ import Tooltip from "../tooltip";
 import Client from "../../helpers/client";
 import ordinal from "../../helpers/ordinal";
 import css from "./styles.scss";
+import Icon from "../icon";
 
 const Indicator = ({ sector, threshold, year, ranking }) => {
   const [previousRanking, setPreviousRanking] = useState(null);
@@ -32,13 +33,13 @@ const Indicator = ({ sector, threshold, year, ranking }) => {
   if (current === null || previous === null) {
     return null;
   } else if (current < previous) {
-    icon = "fa-long-arrow-alt-up";
+    icon = "long-arrow-alt-up";
     trend = css.better;
   } else if (current > previous) {
-    icon = "fa-long-arrow-alt-down";
+    icon = "long-arrow-alt-down";
     trend = css.worse;
   } else {
-    icon = "fa-equals";
+    icon = "equals";
     trend = css.same;
   }
 
@@ -56,12 +57,7 @@ const Indicator = ({ sector, threshold, year, ranking }) => {
 
   return (
     <span className={css.indicator}>
-      <i
-        className={`fas ${icon} ${trend}`}
-        onMouseOver={handleMouseOver}
-        onMouseOut={handleMouseOut}>
-      </i>
-
+      <Icon name={icon} className={trend} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
       <Tooltip content={tooltip} />
     </span>
   );

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Logo from "../logo";
 import Settings from "../settings";
+import Icon from "../icon";
 import css from "./styles.scss";
 
 const NavBar = ({ threshold, setThreshold }) => {
@@ -17,8 +18,8 @@ const NavBar = ({ threshold, setThreshold }) => {
       </h1>
 
       <div className={css.icons}>
-        <i className="fas fa-search"></i>
-        <i className={`fas fa-cog ${showSettings && css.selected}`} onClick={() => setShowSettings(!showSettings)}></i>
+        <Icon name="search" />
+        <Icon name="cog" className={showSettings && css.selected} onClick={() => setShowSettings(!showSettings)} />
       </div>
 
       {showSettings && <Settings threshold={threshold} setThreshold={setThreshold} />}

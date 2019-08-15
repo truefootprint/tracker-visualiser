@@ -21,6 +21,7 @@
   color: #444;
   padding: 2rem 0 2rem 1.5rem;
   line-height: 1.7;
+  user-select: none;
 }
 
 .counter {
@@ -37,27 +38,27 @@
   position: relative;
   bottom: 0.4rem;
   width: 2.5rem;
-  height: 2.5rem;
+  height: 3rem;
 
-  i {
-    font-size: 2rem;
+  svg {
     position: absolute;
-    left: 0.5rem;
-    height: 1.5rem;
+    left: 0.3rem;
+    width: 2rem;
+    height: 2rem;
     cursor: pointer;
-    color: #555;
+    fill: #555;
   }
 
-  .up {
-    top: -0.25rem;
+  .up svg {
+    top: -0.2rem;
   }
 
-  .down {
-    bottom: -0.25rem;
+  .down svg {
+    bottom: -0.3rem;
   }
 
-  .disabled {
-    color: #ccc;
+  .disabled svg {
+    fill: #ccc;
     cursor: inherit;
   }
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Graph from "../graph";
 import Indicator from "../indicator";
+import Icon from "../icon";
 import Client from "../../helpers/client";
 import ordinal from "../../helpers/ordinal";
 import css from "./styles.scss";
@@ -45,7 +46,7 @@ const Ranking = ({ ranking, setSubject, subject, sector, threshold, year, size, 
       <Indicator sector={sector} threshold={threshold} year={year} ranking={ranking} />
 
       {ranking.rankable_type === "Outcome" && ranking.value !== null && <span>
-        <i className={`${css.icon} ${showInfo && css.selected} fas fa-info-circle`} onClick={toggleInfo}></i>
+        <Icon name="info-circle" className={`${css.icon} ${showInfo && css.selected}`} onClick={toggleInfo} />
 
         {showInfo && <div className={css.info}>
           {children}

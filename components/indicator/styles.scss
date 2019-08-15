@@ -1,22 +1,27 @@
 .indicator {
-  font-size: 1.5rem;
   margin-left: 1rem;
   cursor: pointer;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 .better {
-  color: #0b0;
+  fill: #0b0;
   position: relative;
-  top: 0.1rem;
+  top: 0.3rem;
 }
 
 .worse {
-  color: #c00;
+  fill: #c00;
   position: relative;
-  top: 0.15rem;
+  top: 0.3rem;
 }
 
 .same {
-  color: grey;
-  font-size: 1.1rem;
+  fill: grey;
+  position: relative;
+  top: 0.33rem;
 }

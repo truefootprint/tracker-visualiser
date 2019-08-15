@@ -24,15 +24,17 @@
   justify-self: flex-end;
   width: 15.75rem;
   font-size: 1.3rem;
-  color: #bbb;
   text-align: right;
 
-  i {
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: #bbb;
     margin-left: 1rem;
     cursor: pointer;
+  }
 
-    &.selected {
-      color: #444;
-    }
+  .selected svg {
+    fill: #444;
   }
 }
