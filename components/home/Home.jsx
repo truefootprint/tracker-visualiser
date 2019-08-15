@@ -55,7 +55,9 @@ const Home = () => {
   };
 
   if (rankings === null || ancestry === null) {
-    return null;
+    return (
+      <Layout {...props} />
+    );
   }
 
   return (

@@ -4,7 +4,7 @@ import Settings from "../settings";
 import css from "./styles.scss";
 
 const NavBar = ({ threshold, setThreshold }) => {
-  const [showSettings, setShowSettings] = useState(true);
+  const [showSettings, setShowSettings] = useState(false);
 
   return (
     <div className={css.nav_bar}>
