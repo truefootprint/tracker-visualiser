@@ -5,7 +5,7 @@ import CompanyDropdown from "../company_dropdown";
 import Client from "../../helpers/client";
 import css from "./styles.scss";
 
-const Trend = ({ ancestry, sector, threshold, rankings, year, setSubject }) => {
+const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, setSubject }) => {
   const [auditor, setAuditor] = useState(null);
 
   const [comparisonIds, setComparisonIds] = useState([]);
@@ -36,10 +36,10 @@ const Trend = ({ ancestry, sector, threshold, rankings, year, setSubject }) => {
         id: `${rankings[0].rankable_type}-${rankings[0].rankable_id}-${id}`
       };
 
-      client.companyRankings(sector, threshold, null, trend)
+      client.companyRankings(sector, distribution, threshold, null, trend)
         .then(({ data }) => setComparisons(prev => ({ ...prev, [id]: data })));
     });
-  }, [sector, threshold, comparisonIds]);
+  }, [sector, distribution, threshold, comparisonIds]);
 
   useEffect(() => {
     const member = {
@@ -47,8 +47,8 @@ const Trend = ({ ancestry, sector, threshold, rankings, year, setSubject }) => {
       id: rankings[0].rankable_id
     };
 
-    client.companyRankings(sector, threshold, year, member).then(({ data }) => setCompanyListing(data));
-  }, [sector, threshold, year]);
+    client.companyRankings(sector, distribution, threshold, year, member).then(({ data }) => setCompanyListing(data));
+  }, [sector, distribution, threshold, year]);
 
   let rankingGroups = comparisonIds.map(id => comparisons[id]).filter(v => v);
   rankingGroups.unshift(rankings);

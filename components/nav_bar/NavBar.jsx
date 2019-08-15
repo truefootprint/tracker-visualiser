@@ -4,7 +4,7 @@ import Settings from "../settings";
 import Icon from "../icon";
 import css from "./styles.scss";
 
-const NavBar = ({ threshold, setThreshold }) => {
+const NavBar = ({ distribution, setDistribution, threshold, setThreshold }) => {
   const [showSettings, setShowSettings] = useState(false);
 
   return (
@@ -22,7 +22,11 @@ const NavBar = ({ threshold, setThreshold }) => {
         <Icon name="cog" className={showSettings && css.selected} onClick={() => setShowSettings(!showSettings)} />
       </div>
 
-      {showSettings && <Settings threshold={threshold} setThreshold={setThreshold} />}
+      {showSettings && <Settings
+        distribution={distribution}
+        setDistribution={setDistribution}
+        threshold={threshold}
+        setThreshold={setThreshold} />}
     </div>
   );
 };

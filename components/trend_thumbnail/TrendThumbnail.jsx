@@ -3,7 +3,7 @@ import Client from "../../helpers/client";
 import LineGraph from "../line_graph";
 import css from "./styles.scss";
 
-const TrendThumbnail = ({ sector, threshold, ranking, setSubject }) => {
+const TrendThumbnail = ({ sector, distribution, threshold, ranking, setSubject }) => {
   const [rankings, setRankings] = useState(null);
 
   const trend = {
@@ -12,9 +12,9 @@ const TrendThumbnail = ({ sector, threshold, ranking, setSubject }) => {
   };
 
   useEffect(() => {
-    (new Client()).companyRankings(sector, threshold, null, trend)
+    (new Client()).companyRankings(sector, distribution, threshold, null, trend)
       .then(({ data }) => setRankings(data));
-  }, [sector, threshold, ranking])
+  }, [sector, distribution, threshold, ranking])
 
   if (!rankings) {
     return null;

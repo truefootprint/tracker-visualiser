@@ -6,7 +6,7 @@ import Client from "../../helpers/client";
 import ordinal from "../../helpers/ordinal";
 import css from "./styles.scss";
 
-const Ranking = ({ ranking, setSubject, subject, sector, threshold, year, size, nullText, suffix, children }) => {
+const Ranking = ({ ranking, setSubject, subject, sector, distribution, threshold, year, size, nullText, suffix, children }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [rankings, setRankings] = useState(null);
   const text = nullText || `${ranking.company_name} did not answer.`;
@@ -27,9 +27,9 @@ const Ranking = ({ ranking, setSubject, subject, sector, threshold, year, size, 
 
   useEffect(() => {
     if (ranking.rank) {
-      client.companyRankings(sector, threshold, year, member).then(({ data }) => setRankings(data));
+      client.companyRankings(sector, distribution, threshold, year, member).then(({ data }) => setRankings(data));
     }
-  }, [sector, threshold, year, ranking])
+  }, [sector, distribution, threshold, year, ranking])
 
   const toggleInfo = () => {
     setShowInfo(!showInfo);
@@ -43,7 +43,7 @@ const Ranking = ({ ranking, setSubject, subject, sector, threshold, year, size, 
 
       <a className={css.inner} onClick={() => setSubject(member)}>{inner}</a>
 
-      <Indicator sector={sector} threshold={threshold} year={year} ranking={ranking} />
+      <Indicator sector={sector} distribution={distribution} threshold={threshold} year={year} ranking={ranking} />
 
       {ranking.rankable_type === "Outcome" && ranking.value !== null && <span>
         <Icon name="info-circle" className={`${css.icon} ${showInfo && css.selected}`} onClick={toggleInfo} />

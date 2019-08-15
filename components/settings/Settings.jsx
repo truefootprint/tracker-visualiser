@@ -1,9 +1,10 @@
 import Icon from "../icon";
+import Distribution from "../distribution";
 import css from "./styles.scss";
 
 const thresholds = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1];
 
-const Settings = ({ threshold, setThreshold }) => {
+const Settings = ({ distribution, setDistribution, threshold, setThreshold }) => {
   const decimal = parseFloat(threshold);
   const percentage = decimal * 100;
   let index = thresholds.indexOf(decimal);
@@ -29,18 +30,26 @@ const Settings = ({ threshold, setThreshold }) => {
 
   return (
     <div className={css.settings}>
-      <p className={css.title}>Settings</p>
+      <h4 className={css.header}>
+        Completeness
+      </h4>
 
       <p className={css.sentence}>
         Require at least <span className={css.counter}>{percentage}%</span>
 
-        <div className={css.controls}>
+        <span className={css.controls}>
           <Icon name="caret-up" className={`${css.up} ${upDisabled && css.disabled}`} onClick={up} />
           <Icon name="caret-down" className={`${css.down} ${downDisabled && css.disabled}`} onClick={down} />
-        </div>
+        </span>
 
         of outcomes to qualify for an ESG rank.
       </p>
+
+      <h4 className={css.header}>
+        ESG Weightings
+      </h4>
+
+      <Distribution distribution={distribution} setDistribution={setDistribution} />
     </div>
   );
 };

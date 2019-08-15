@@ -5,7 +5,7 @@ import ordinal from "../../helpers/ordinal";
 import css from "./styles.scss";
 import Icon from "../icon";
 
-const Indicator = ({ sector, threshold, year, ranking }) => {
+const Indicator = ({ sector, distribution, threshold, year, ranking }) => {
   const [previousRanking, setPreviousRanking] = useState(null);
   const [tooltip, setTooltip] = useState(null);
 
@@ -16,10 +16,10 @@ const Indicator = ({ sector, threshold, year, ranking }) => {
 
   useEffect(() => {
     if (ranking.rank) {
-      (new Client()).companyRanking(sector, threshold, year - 1, ranking.company_id, member)
+      (new Client()).companyRanking(sector, distribution, threshold, year - 1, ranking.company_id, member)
         .then(({ data }) => setPreviousRanking(data));
     }
-  }, [sector, threshold, year, ranking])
+  }, [sector, distribution, threshold, year, ranking])
 
   const percentile = (ranking) => (
     ranking && ranking.rank && ranking.rank / ranking.out_of

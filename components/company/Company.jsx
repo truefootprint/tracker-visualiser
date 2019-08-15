@@ -7,7 +7,7 @@ import Info from "../info";
 import Client from "../../helpers/client";
 import css from "./styles.scss";
 
-const Company = ({ ancestry, rankings, sector, threshold, year, setYear, setSubject, esg }) => {
+const Company = ({ ancestry, rankings, sector, distribution, threshold, year, setYear, setSubject, esg }) => {
   const [auditor, setAuditor] = useState(null);
 
   const ranking = (member) => (
@@ -63,6 +63,7 @@ const Company = ({ ancestry, rankings, sector, threshold, year, setYear, setSubj
             ranking={ranking(esg)}
             setSubject={setSubject}
             sector={sector}
+            distribution={distribution}
             threshold={threshold}
             year={year}
             size={[240, 120]}
@@ -85,6 +86,7 @@ const Company = ({ ancestry, rankings, sector, threshold, year, setYear, setSubj
                   ranking={r}
                   setSubject={setSubject}
                   sector={sector}
+                  distribution={distribution}
                   threshold={threshold}
                   year={year}
                   size={[160, 80]}
@@ -104,12 +106,18 @@ const Company = ({ ancestry, rankings, sector, threshold, year, setYear, setSubj
                     ranking={r}
                     setSubject={setSubject}
                     sector={sector}
+                    distribution={distribution}
                     threshold={threshold}
                     year={year}
                     size={[80, 40]}>
 
                     <Info ranking={r}>
-                      <TrendThumbnail sector={sector} threshold={threshold} ranking={r} setSubject={setSubject} />
+                      <TrendThumbnail
+                        sector={sector}
+                        distribution={distribution}
+                        threshold={threshold}
+                        ranking={r}
+                        setSubject={setSubject} />
                     </Info>
                   </Ranking>
                 </div>
@@ -119,8 +127,7 @@ const Company = ({ ancestry, rankings, sector, threshold, year, setYear, setSubj
         ))}
       </div>
     </div>
-  )
-
+  );
 };
 
 export default Company;
