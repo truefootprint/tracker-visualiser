@@ -1,5 +1,6 @@
 .settings {
   position: fixed;
+  z-index: 2;
   top: 6.2rem;
   right: 0;
 
@@ -7,6 +8,7 @@
   height: 35rem;
   background: white;
   box-shadow: 0 0 1rem #ccc;
+
 }
 
 .header {
