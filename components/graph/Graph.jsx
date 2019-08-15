@@ -4,7 +4,7 @@ import round from "../../helpers/round";
 import Tooltip from "../tooltip";
 import css from "./styles.scss";
 
-const Graph = ({ rankings, current, year, setSubject, thumbnail, size }) => {
+const Graph = ({ rankings, current, threshold, year, setSubject, thumbnail, size }) => {
   const index = rankings.findIndex(r => r.company_id === (current && current.company_id));
 
   const [unranked, setUnranked] = useState([]);
@@ -17,6 +17,8 @@ const Graph = ({ rankings, current, year, setSubject, thumbnail, size }) => {
     setSubject({ type: "company", id: id });
   }
 
+  const thresholdPercentage = parseFloat(threshold) * 100;
+
   useEffect(() => {
     d3.select(`#${id}`).html("");
 
@@ -28,7 +30,15 @@ const Graph = ({ rankings, current, year, setSubject, thumbnail, size }) => {
 
     const companies = rankings.filter(c => c.rank !== null);
     const unranked = rankings.filter(c => c.rank === null)
-      .sort((a, b) => a.company_name < b.company_name ? -1 : 1);
+      .sort((a, b) => {
+        if (a.data_points > b.data_points) {
+          return -1;
+        } else if (a.data_points < b.data_points) {
+          return 1;
+        }
+
+        return a.company_name < b.company_name ? -1 : 1;
+      });
 
     setUnranked(unranked);
 
@@ -159,7 +169,8 @@ const Graph = ({ rankings, current, year, setSubject, thumbnail, size }) => {
           </h3>
 
           <p className={css.subtitle}>
-            These companies did not provide sufficient data to be given a rank:
+            To get an ESG score, companies need to provide data for at least {thresholdPercentage}% of the outcomes.
+            <br/>These companies did not provide sufficient data:
           </p>
 
           {unranked.map((c, i) => (
@@ -171,6 +182,9 @@ const Graph = ({ rankings, current, year, setSubject, thumbnail, size }) => {
               </span>
 
               <span className={css.right}>
+                {c.data_points === 0 && "No data points" }
+                {c.data_points === 1 && "Only 1 data point" }
+                {c.data_points > 1   && `Only ${c.data_points} data points` }
               </span>
             </div>
           ))}
