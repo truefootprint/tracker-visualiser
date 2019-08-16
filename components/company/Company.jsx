@@ -35,7 +35,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
   return (
     <div className={css.company}>
       {auditor && <div className={css.auditor}>
-        <p className={css.text}>Audited by:</p>
+        <p className={css.text}>Assured by:</p>
 
         <img className={css.logo} src={auditor.logo} />
       </div>}

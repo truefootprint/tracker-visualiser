@@ -11,7 +11,7 @@ const Info = ({ ranking, children }) => (
     </div>}
 
     {ranking.auditor_name &&
-    <div className={css.auditor_name}>(Audited by {ranking.auditor_name} in {ranking.year})</div>}
+    <div className={css.auditor_name}>(Assured by {ranking.auditor_name} in {ranking.year})</div>}
   </div>
 );
 

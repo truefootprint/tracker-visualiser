@@ -56,7 +56,7 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, setS
   return (
     <div className={css.trend}>
       {auditor && <div className={css.auditor}>
-        <p className={css.text}>Audited by:</p>
+        <p className={css.text}>Assured by:</p>
 
         <img className={css.logo} src={auditor.logo} />
       </div>}

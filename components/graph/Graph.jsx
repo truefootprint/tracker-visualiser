@@ -80,7 +80,7 @@ const Graph = ({ rankings, current, threshold, year, setSubject, thumbnail, size
         .attr('class', css.highlighted);
 
       if (d.auditor_name) {
-        setTooltip(`Audited by ${d.auditor_name}`);
+        setTooltip(`Assured by ${d.auditor_name}`);
       }
     };
 
