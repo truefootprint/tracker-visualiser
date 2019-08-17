@@ -2,7 +2,11 @@ import axios from "axios";
 
 class Client {
   constructor(host) {
-    this.host = "http://localhost:3000";
+    if (process.env.NODE_ENV === "production") {
+      this.host = "http://tracker-backend.truefootprint.com";
+    } else {
+      this.host = "http://localhost:3000";
+    }
   }
 
   companyRankings(sector, distribution, threshold, year, { type, id }) {
