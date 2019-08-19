@@ -4,10 +4,9 @@ import Ranking from "../ranking";
 import TrendThumbnail from "../trend_thumbnail";
 import Year from "../year";
 import Info from "../info";
-import Client from "../../helpers/client";
 import css from "./styles.scss";
 
-const Company = ({ ancestry, rankings, sector, distribution, threshold, year, setYear, setSubject, esg }) => {
+const Company = ({ ancestry, rankings, sector, distribution, threshold, year, setYear, setSubject, esg, client }) => {
   const [auditor, setAuditor] = useState(null);
 
   const ranking = (member) => (
@@ -19,7 +18,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
 
   useEffect(() => {
     if (auditorId) {
-      (new Client()).company(auditorId).then(({ data }) => setAuditor(data));
+      client.company(auditorId).then(({ data }) => setAuditor(data));
     }
   }, [auditorId])
 
@@ -69,6 +68,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
             size={[240, 120]}
             nullText="Insufficient data points."
             suffix={` in ${sector}`}
+            client={client}
           />
         </div>
       </div>
@@ -91,6 +91,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
                   year={year}
                   size={[160, 80]}
                   nullText="Insufficient data points."
+                  client={client}
                 />
               </div>
             </div>
@@ -109,7 +110,8 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
                     distribution={distribution}
                     threshold={threshold}
                     year={year}
-                    size={[80, 40]}>
+                    size={[80, 40]}
+                    client={client}>
 
                     <Info ranking={r}>
                       <TrendThumbnail
@@ -117,7 +119,8 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
                         distribution={distribution}
                         threshold={threshold}
                         ranking={r}
-                        setSubject={setSubject} />
+                        setSubject={setSubject}
+                        client={client} />
                     </Info>
                   </Ranking>
                 </div>

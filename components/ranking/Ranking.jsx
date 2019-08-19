@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import Graph from "../graph";
 import Indicator from "../indicator";
 import Icon from "../icon";
-import Client from "../../helpers/client";
 import ordinal from "../../helpers/ordinal";
 import css from "./styles.scss";
 
-const Ranking = ({ ranking, setSubject, subject, sector, distribution, threshold, year, size, nullText, suffix, children }) => {
+const Ranking = ({ ranking, setSubject, subject, sector, distribution, threshold, year, size, nullText, suffix, client, children }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [rankings, setRankings] = useState(null);
   const text = nullText || `${ranking.company_name} did not answer.`;
@@ -22,8 +21,6 @@ const Ranking = ({ ranking, setSubject, subject, sector, distribution, threshold
     type: ranking.rankable_type.toLowerCase(),
     id: ranking.rankable_id
   };
-
-  const client = new Client();
 
   useEffect(() => {
     if (ranking.rank) {
@@ -43,7 +40,7 @@ const Ranking = ({ ranking, setSubject, subject, sector, distribution, threshold
 
       <a className={css.inner} onClick={() => setSubject(member)}>{inner}</a>
 
-      <Indicator sector={sector} distribution={distribution} threshold={threshold} year={year} ranking={ranking} />
+      <Indicator sector={sector} distribution={distribution} threshold={threshold} year={year} ranking={ranking} client={client} />
 
       {ranking.rankable_type === "Outcome" && ranking.value !== null && <span>
         <Icon name="info-circle" className={`${css.icon} ${showInfo && css.selected}`} onClick={toggleInfo} />

@@ -1,7 +1,9 @@
 import axios from "axios";
 
 class Client {
-  constructor(host) {
+  constructor(username, password) {
+    this.auth = { username, password };
+
     if (process.env.NODE_ENV === "production") {
       this.host = "http://tracker-backend.truefootprint.com";
     } else {
@@ -40,7 +42,7 @@ class Client {
   }
 
   get(path) {
-    return axios.get(`${this.host}${path}`);
+    return axios.get(`${this.host}${path}`, { auth: this.auth });
   }
 }
 

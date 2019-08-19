@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import Client from "../../helpers/client";
 import LineGraph from "../line_graph";
 import css from "./styles.scss";
 
-const TrendThumbnail = ({ sector, distribution, threshold, ranking, setSubject }) => {
+const TrendThumbnail = ({ sector, distribution, threshold, ranking, setSubject, client }) => {
   const [rankings, setRankings] = useState(null);
 
   const trend = {
@@ -12,7 +11,7 @@ const TrendThumbnail = ({ sector, distribution, threshold, ranking, setSubject }
   };
 
   useEffect(() => {
-    (new Client()).companyRankings(sector, distribution, threshold, null, trend)
+    client.companyRankings(sector, distribution, threshold, null, trend)
       .then(({ data }) => setRankings(data));
   }, [sector, distribution, threshold, ranking])
 

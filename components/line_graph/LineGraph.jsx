@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Client from "../../helpers/client";
 import Tooltip from "../tooltip";
 import Info from "../info";
 import * as d3 from "d3";

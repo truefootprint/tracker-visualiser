@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import Breadcrumbs from "../breadcrumbs";
 import LineGraph from "../line_graph";
 import CompanyDropdown from "../company_dropdown";
-import Client from "../../helpers/client";
 import css from "./styles.scss";
 
-const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, setSubject }) => {
+const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, setSubject, client }) => {
   const [auditor, setAuditor] = useState(null);
 
   const [comparisonIds, setComparisonIds] = useState([]);
@@ -17,7 +16,6 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, setS
   const auditorId = (typeof auditorRanking !== "undefined") ? auditorRanking.auditor_id : null;
 
   const companyId = rankings[0].company_id;
-  const client = new Client();
 
   useEffect(() => {
     if (auditorId) {

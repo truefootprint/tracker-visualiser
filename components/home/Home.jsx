@@ -5,10 +5,9 @@ import History from "../history";
 import Rankable from "../rankable";
 import Company from "../company";
 import Trend from "../trend";
+import Password from "../password";
 
 const Home = () => {
-  const client = new Client();
-
   const [sector, setSector] = useState("Mining");
   const [distribution, setDistribution] = useState("33-33-33");
   const [threshold, setThreshold] = useState("0.1");
@@ -17,17 +16,19 @@ const Home = () => {
 
   const [rankings, setRankings] = useState(null);
   const [ancestry, setAncestry] = useState(null);
+  const [password, setPassword] = useState(null);
 
   const esg = { type: "group", id: 1 };
+  const client = new Client("truefootprint", password);
 
   useEffect(() => {
     client.companyRankings(sector, distribution, threshold, year, subject).then(({ data }) => setRankings(data));
-  }, [sector, distribution, threshold, year, subject])
+  }, [sector, distribution, threshold, year, subject, password])
 
   useEffect(() => {
     const member = subject.type === "company" ? esg : subject;
     client.ancestry(member).then(({ data }) => setAncestry(data));
-  }, [subject]);
+  }, [subject, password]);
 
   const nullifyDataAndSetDistribution = (distribution) => {
     setRankings(null);
@@ -58,8 +59,16 @@ const Home = () => {
     subject, setSubject: nullifyDataAndSetSubject,
     rankings, setRankings,
     ancestry, setAncestry,
-    esg,
+    esg, client,
   };
+
+  if (password === null) {
+    return (
+      <Layout>
+        <Password onPassword={p => setPassword(p)}/>
+      </Layout>
+    );
+  }
 
   if (rankings === null || ancestry === null) {
     return (
