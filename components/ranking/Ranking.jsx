@@ -42,7 +42,7 @@ const Ranking = ({ ranking, setSubject, subject, sector, distribution, threshold
 
       <Indicator sector={sector} distribution={distribution} threshold={threshold} year={year} ranking={ranking} client={client} />
 
-      {children && ranking.value !== null && <span>
+      {children && ranking.value !== null && ranking.rank && <span>
         <Icon name="info-circle" className={`icon ${css.icon} ${showInfo && css.selected}`} onClick={toggleInfo} />
 
         {showInfo && <div className={css.info}>
