@@ -55,7 +55,7 @@ const Indicator = ({ sector, distribution, threshold, year, ranking, client }) =
   };
 
   return (
-    <span className={css.indicator}>
+    <span className={`indicator ${css.indicator}`}>
       <Icon name={icon} className={trend} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
       <Tooltip content={tooltip} />
     </span>

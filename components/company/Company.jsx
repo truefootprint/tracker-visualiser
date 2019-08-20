@@ -56,6 +56,18 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
             <Year year={year} setYear={setYear} />
           </div>
         </div>
+        <div className={css.trend}>
+          <p>Historical trend:</p>
+
+          <TrendThumbnail
+            sector={sector}
+            distribution={distribution}
+            threshold={threshold}
+            ranking={ranking(esg)}
+            setSubject={setSubject}
+            size={[240, 120]}
+            client={client} />
+        </div>
 
         <div className={css.ranking}>
           <Ranking
@@ -68,8 +80,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
             size={[240, 120]}
             nullText="Insufficient data points."
             suffix={` in ${sector}`}
-            client={client}
-          />
+            client={client} />
         </div>
       </div>
 
@@ -91,8 +102,21 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
                   year={year}
                   size={[160, 80]}
                   nullText="Insufficient data points."
-                  client={client}
-                />
+                  client={client}>
+
+                  <div className={css.info}>
+                    <Info ranking={r}>
+                      <TrendThumbnail
+                        sector={sector}
+                        distribution={distribution}
+                        threshold={threshold}
+                        ranking={r}
+                        setSubject={setSubject}
+                        size={[140, 65]}
+                        client={client} />
+                    </Info>
+                  </div>
+                </Ranking>
               </div>
             </div>
 

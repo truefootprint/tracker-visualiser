@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import LineGraph from "../line_graph";
 import css from "./styles.scss";
 
-const TrendThumbnail = ({ sector, distribution, threshold, ranking, setSubject, client }) => {
+const TrendThumbnail = ({ sector, distribution, threshold, ranking, setSubject, size, client }) => {
   const [rankings, setRankings] = useState(null);
 
   const trend = {
@@ -21,7 +21,7 @@ const TrendThumbnail = ({ sector, distribution, threshold, ranking, setSubject, 
 
   return (
     <a className={css.trend_thumbnail} onClick={() => setSubject(trend)}>
-      <LineGraph rankingGroups={[rankings]} thumbnail={true} size={[90, 45]} />
+      <LineGraph rankingGroups={[rankings]} thumbnail={true} size={size || [90, 45]} />
     </a>
   )
 };
