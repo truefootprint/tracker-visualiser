@@ -11,7 +11,7 @@ const Graph = ({ rankings, current, threshold, year, setSubject, thumbnail, size
   const [tooltip, setTooltip] = useState(null);
 
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
-  const [svgWidth, svgHeight] = size || [1100, 550];
+  const [svgWidth, svgHeight] = size || [1000, 500];
 
   const visitCompanyById = (id) => {
     setSubject({ type: "company", id: id });

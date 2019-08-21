@@ -100,7 +100,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
                   distribution={distribution}
                   threshold={threshold}
                   year={year}
-                  size={[160, 80]}
+                  size={[120, 60]}
                   nullText="Insufficient data points."
                   client={client}>
 
@@ -112,7 +112,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
                         threshold={threshold}
                         ranking={r}
                         setSubject={setSubject}
-                        size={[140, 65]}
+                        size={[120, 60]}
                         client={client} />
                     </Info>
                   </div>

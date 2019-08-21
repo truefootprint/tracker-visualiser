@@ -64,7 +64,7 @@
   border-right: 1px solid #ccc;
 
   .overall_ranking {
-    height: 15rem;
+    height: 14rem;
     border-bottom: 2px dashed #ccc;
 
     .title {
@@ -78,13 +78,12 @@
 
       :global(.icon) {
         position: relative;
-        top: 1.2rem;
+        top: 0.75rem;
       }
     }
 
     .info {
       float: right;
-      margin-top: -1rem;
     }
   }
 }

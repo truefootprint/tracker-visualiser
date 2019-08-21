@@ -8,7 +8,7 @@ const LineGraph = ({ rankingGroups, thumbnail, size }) => {
   const [tooltip, setTooltip] = useState(null);
 
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
-  const [svgWidth, svgHeight] = size || [1400, 400];
+  const [svgWidth, svgHeight] = size || [1250, 350];
 
   useEffect(() => {
     const handleMouseOver = (d) => {
