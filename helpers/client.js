@@ -5,7 +5,7 @@ class Client {
     this.auth = { username, password };
 
     if (process.env.NODE_ENV === "production") {
-      this.host = "http://tracker-backend.truefootprint.com";
+      this.host = "https://tracker-backend.truefootprint.com";
     } else {
       this.host = "http://localhost:3000";
     }
