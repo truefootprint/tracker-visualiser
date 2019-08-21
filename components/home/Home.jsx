@@ -64,7 +64,7 @@ const Home = () => {
 
   if (password === null) {
     return (
-      <Layout>
+      <Layout {...props}>
         <Password onPassword={p => setPassword(p)}/>
       </Layout>
     );

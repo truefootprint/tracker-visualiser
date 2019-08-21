@@ -4,6 +4,8 @@ import css from "./styles.scss";
 const Breadcrumbs = ({ ancestry, sector, above, below, current, setSubject }) => {
   const attributes = ancestry.attributes;
 
+  const visitHome = () => setSubject({ type: "group", id: 1 });
+
   const handleClick = (node) => {
     return () => {
       setSubject({ type: node.type.toLowerCase(), id: node.id });
@@ -34,8 +36,8 @@ const Breadcrumbs = ({ ancestry, sector, above, below, current, setSubject }) =>
 
   const topLevel = (
     <span className={css.breadcrumb}>
-      <a href=".">Home</a>{divider}
-      <a href=".">{sector}</a>{divider}
+      <a onClick={visitHome}>Home</a>{divider}
+      <a onClick={visitHome}>{sector}</a>{divider}
       {above && <>
         <a onClick={handleClick(above)}>{above.name}</a>{divider}
       </>}

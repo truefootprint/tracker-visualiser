@@ -4,12 +4,14 @@ import Settings from "../settings";
 import Icon from "../icon";
 import css from "./styles.scss";
 
-const NavBar = ({ distribution, setDistribution, threshold, setThreshold }) => {
+const NavBar = ({ distribution, setDistribution, threshold, setThreshold, setSubject }) => {
   const [showSettings, setShowSettings] = useState(false);
+
+  const visitHome = () => setSubject({ type: "group", id: 1 });
 
   return (
     <div className={css.nav_bar}>
-      <a href="." className={css.logo}>
+      <a onClick={visitHome} className={css.logo}>
         <Logo />
       </a>
 
