@@ -11,11 +11,11 @@ const History = ({ sector, year, subject, setSector, setYear, setSubject }) => {
     }
 
     const parts = anchor.substr(1).split("-");
-    const [sector, year, type, id] = parts;
+    const [sector, year, type, ...id] = parts;
 
     setSector(sector);
     setYear(year);
-    setSubject({ type, id });
+    setSubject({ type, id: id.join("-") });
   };
 
   if (!loaded) {
