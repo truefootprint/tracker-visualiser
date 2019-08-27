@@ -7,3 +7,29 @@
   margin: 2rem 0 2.5rem 217px;
   color: #333;
 }
+
+.tag_filters {
+  float: right;
+  margin: 2rem 4rem 0 0;
+  cursor: pointer;
+
+  .checkbox {
+    display: inline-block;
+    margin-left: 0.7rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    vertical-align: middle;
+    border: 1px solid #aaa;
+    border-radius: 10%;
+    font-size: 1.2rem;
+    text-align: center;
+
+    &.active {
+      background: #ffb;
+
+      &:before {
+        content: 'X';
+      }
+    }
+  }
+}

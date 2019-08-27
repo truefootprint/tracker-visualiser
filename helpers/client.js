@@ -11,13 +11,18 @@ class Client {
     }
   }
 
-  companyRankings(sector, distribution, threshold, year, { type, id }) {
+  companyRankings(sector, distribution, threshold, year, tags, { type, id }) {
     let t = threshold.toString().replace(".", "-");
+    let tagsParam = "";
+
+    if (tags) {
+      tagsParam = `?tags=${tags.join(",")}`;
+    }
 
     if (type === "trend") {
-      return this.get(`/company_rankings/${sector}/${distribution}/${t}/all/history/${id}`);
+      return this.get(`/company_rankings/${sector}/${distribution}/${t}/all/history/${id}${tagsParam}`);
     } else {
-      return this.get(`/company_rankings/${sector}/${distribution}/${t}/${year}/${type}/${id}`);
+      return this.get(`/company_rankings/${sector}/${distribution}/${t}/${year}/${type}/${id}${tagsParam}`);
     }
   }
 

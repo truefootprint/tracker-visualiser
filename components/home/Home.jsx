@@ -13,6 +13,7 @@ const Home = () => {
   const [threshold, setThreshold] = useState("0.1");
   const [year, setYear] = useState("2018");
   const [subject, setSubject] = useState({ type: "group", id: "1" });
+  const [tags, setTags] = useState(null);
 
   const [rankings, setRankings] = useState(null);
   const [ancestry, setAncestry] = useState(null);
@@ -22,8 +23,8 @@ const Home = () => {
   const client = new Client("truefootprint", password);
 
   useEffect(() => {
-    client.companyRankings(sector, distribution, threshold, year, subject).then(({ data }) => setRankings(data));
-  }, [sector, distribution, threshold, year, subject, password])
+    client.companyRankings(sector, distribution, threshold, year, tags, subject).then(({ data }) => setRankings(data));
+  }, [sector, distribution, threshold, year, tags, subject, password])
 
   useEffect(() => {
     const member = subject.type === "company" ? esg : subject;
@@ -51,11 +52,17 @@ const Home = () => {
     setYear(year);
   }
 
+  const nullifyDataAndSetTags = (tags) => {
+    setRankings(null);
+    setTags(tags);
+  }
+
   const props = {
     sector, setSector,
     distribution, setDistribution: nullifyDataAndSetDistribution,
     threshold, setThreshold: nullifyDataAndSetThreshold,
     year, setYear: nullifyDataAndSetYear,
+    tags, setTags: nullifyDataAndSetTags,
     subject, setSubject: nullifyDataAndSetSubject,
     rankings, setRankings,
     ancestry, setAncestry,

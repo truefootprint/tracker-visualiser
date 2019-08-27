@@ -11,7 +11,7 @@ const TrendThumbnail = ({ sector, distribution, threshold, ranking, setSubject, 
   };
 
   useEffect(() => {
-    client.companyRankings(sector, distribution, threshold, null, trend)
+    client.companyRankings(sector, distribution, threshold, null, null, trend)
       .then(({ data }) => setRankings(data));
   }, [sector, distribution, threshold, ranking])
 

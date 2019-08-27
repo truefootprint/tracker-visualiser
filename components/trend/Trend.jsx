@@ -34,7 +34,7 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, setS
         id: `${rankings[0].rankable_type}-${rankings[0].rankable_id}-${id}`
       };
 
-      client.companyRankings(sector, distribution, threshold, null, trend)
+      client.companyRankings(sector, distribution, threshold, null, null, trend)
         .then(({ data }) => setComparisons(prev => ({ ...prev, [id]: data })));
     });
   }, [sector, distribution, threshold, comparisonIds]);
@@ -45,7 +45,7 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, setS
       id: rankings[0].rankable_id
     };
 
-    client.companyRankings(sector, distribution, threshold, year, member).then(({ data }) => setCompanyListing(data));
+    client.companyRankings(sector, distribution, threshold, year, null, member).then(({ data }) => setCompanyListing(data));
   }, [sector, distribution, threshold, year]);
 
   let rankingGroups = comparisonIds.map(id => comparisons[id]).filter(v => v);

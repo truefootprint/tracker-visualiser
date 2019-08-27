@@ -24,7 +24,7 @@ const Ranking = ({ ranking, setSubject, subject, sector, distribution, threshold
 
   useEffect(() => {
     if (ranking.rank) {
-      client.companyRankings(sector, distribution, threshold, year, member).then(({ data }) => setRankings(data));
+      client.companyRankings(sector, distribution, threshold, year, null, member).then(({ data }) => setRankings(data));
     }
   }, [sector, distribution, threshold, year, ranking])
 

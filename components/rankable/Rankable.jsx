@@ -3,7 +3,7 @@ import Breadcrumbs from "../breadcrumbs";
 import Graph from "../graph";
 import css from "./styles.scss";
 
-const Rankable = ({ rankings, ancestry, sector, threshold, year, setYear, setSubject }) => (
+const Rankable = ({ rankings, ancestry, sector, threshold, year, setYear, tags, setTags, setSubject }) => (
   <div className={css.rankable}>
     <div className={css.left}>
       <Breadcrumbs
@@ -12,6 +12,12 @@ const Rankable = ({ rankings, ancestry, sector, threshold, year, setYear, setSub
         current={rankings[0].rankable_name}
         setSubject={setSubject}
       />
+
+      <div className={css.tag_filters} onClick={() => setTags(tags ? null : ["Gold"])}>
+        Gold mining companies?
+
+        <div className={`${tags && css.active} ${css.checkbox}`} />
+      </div>
 
       <h2 className={css.title}>
         {rankings[0].rankable_name}
