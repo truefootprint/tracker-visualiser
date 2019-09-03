@@ -105,16 +105,14 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
                   client={client}>
 
                   <div className={css.info}>
-                    <Info ranking={r}>
-                      <TrendThumbnail
-                        sector={sector}
-                        distribution={distribution}
-                        threshold={threshold}
-                        ranking={r}
-                        setSubject={setSubject}
-                        size={[120, 60]}
-                        client={client} />
-                    </Info>
+                    <TrendThumbnail
+                      sector={sector}
+                      distribution={distribution}
+                      threshold={threshold}
+                      ranking={r}
+                      setSubject={setSubject}
+                      size={[120, 60]}
+                      client={client} />
                   </div>
                 </Ranking>
               </div>

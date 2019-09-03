@@ -4,7 +4,7 @@ import Info from "../info";
 import * as d3 from "d3";
 import css from "./styles.scss";
 
-const LineGraph = ({ rankingGroups, thumbnail, size }) => {
+const LineGraph = ({ rankingGroups, rankBased, thumbnail, size }) => {
   const [tooltip, setTooltip] = useState(null);
 
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
@@ -35,15 +35,20 @@ const LineGraph = ({ rankingGroups, thumbnail, size }) => {
     const chart = svg.append('g').attr('transform', offset);
 
     const years = rankingGroups[0].map(d => d.year);
-
-    const values = rankingGroups.flatMap(group => group.map(d => parseFloat(d.value)));
-    const max = d3.max(values);
-
-    const axisMin = 0;
-    const axisMax = max;
-
     const xScale = d3.scaleBand().domain(years).range([0, width]);
-    const yScale = d3.scaleLinear().domain([axisMin, axisMax]).range([height, 0])
+
+    let y, yScale;
+
+    if (rankBased) {
+      const ranks = rankingGroups.flatMap(group => group.map(d => d.rank));
+      const max = d3.max(rankingGroups.flat().map(r => r.out_of));
+      yScale = d3.scaleLinear().domain([max, 1]).range([height, 0])
+      y = (d) => yScale(d.rank);
+    } else {
+      const values = rankingGroups.flatMap(group => group.map(d => parseFloat(d.value)));
+      yScale = d3.scaleLinear().domain([0, d3.max(values)]).range([height, 0])
+      y = (d) => yScale(d.value);
+    }
 
     // y-axis
     chart.append('g')
@@ -70,13 +75,18 @@ const LineGraph = ({ rankingGroups, thumbnail, size }) => {
       .text(axisLabel);
 
     const x = (d) => xScale(d.year) + xScale.bandwidth() / 2;
-    const y = (d) => yScale(d.value);
 
     const labelX = (d) => x(d) + 20;
     const labelY = (d) => y(d) + 6;
 
     const plot = (data, index) => {
-      const dataWithValues = data.filter(d => d.value !== null);
+      let dataWithValues;
+      if (rankBased) {
+        dataWithValues = data.filter(d => d.rank !== null);
+      } else {
+        dataWithValues = data.filter(d => d.value !== null);
+      }
+
       const companyLabel = thumbnail ? "" : data[0].company_name;
 
       const path = svg.append("path")
