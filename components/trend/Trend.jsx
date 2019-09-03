@@ -75,7 +75,10 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
       />
 
       <div className={css.top_level}>
-        <img className={css.logo} src={rankings[0].company_logo} />
+        <img
+          className={css.logo}
+          src={rankings[0].company_logo}
+          onClick={() => setSubject({ type: "company", id: companyId })} />
       </div>
 
       <h2 className={css.title}>
