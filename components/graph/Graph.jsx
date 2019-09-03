@@ -48,6 +48,8 @@ const Graph = ({ rankings, current, threshold, year, setSubject, thumbnail, size
       value: d.value,
       band: d.band,
       auditor_name: d.auditor_name,
+      url: d.url,
+      page: d.page,
     }));
 
     const names = data.map(d => d.name);
@@ -95,6 +97,17 @@ const Graph = ({ rankings, current, threshold, year, setSubject, thumbnail, size
       visitCompanyById(data[index].id);
     };
 
+    const visitPageReference = (d) => {
+      if (d.url === null || d.page === null) {
+        return;
+      }
+
+      const pageUrl = `${d.url}#page=${d.page}`;
+      const tab = window.open(pageUrl, '_blank');
+
+      tab.focus();
+    };
+
     if (!thumbnail) {
       if (year !== "2018") {
         chart.append('text')
@@ -130,7 +143,8 @@ const Graph = ({ rankings, current, threshold, year, setSubject, thumbnail, size
         .attr('y', d => yScale(d.name) + yScale.bandwidth() / 2 + 4)
         .text(d => round(d.value))
         .on('mouseover', handleMouseOver)
-        .on('mouseout', handleMouseOut);
+        .on('mouseout', handleMouseOut)
+        .on('click', visitPageReference);
 
       chart.selectAll('.tick text')
         .attr('data-index', (_, i) => i)
@@ -150,6 +164,7 @@ const Graph = ({ rankings, current, threshold, year, setSubject, thumbnail, size
         .attr('height', yScale.bandwidth())
         .on('mouseover', handleMouseOver)
         .on('mouseout', handleMouseOut)
+        .on('click', visitPageReference)
         .transition()
         .duration(500)
         .delay((_, i) => (data.length - i - 1) * 100)
