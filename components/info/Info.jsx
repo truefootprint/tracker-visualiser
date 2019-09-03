@@ -6,8 +6,16 @@ const Info = ({ ranking, children }) => {
   const showValue = ranking.rankable_type === "Outcome";
   const showAuditor = ranking.auditor_name && showValue;
 
-  const value = showValue ? round(ranking.value) : `ranked ${ordinal(ranking.rank)}`;
   const unit = showValue ? ranking.unit_name : ` in ${ranking.year}`;
+
+  let value;
+  if (showValue) {
+    value = round(ranking.value);
+  } else if (ranking.rank) {
+    value = `Ranked ${ordinal(ranking.rank)}`;
+  } else {
+    value = "Insufficient data to rank";
+  }
 
   return (
     <div className="info">
