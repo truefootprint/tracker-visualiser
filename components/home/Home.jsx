@@ -14,6 +14,7 @@ const Home = () => {
   const [year, setYear] = useState("2018");
   const [subject, setSubject] = useState({ type: "group", id: "1" });
   const [tags, setTags] = useState(null);
+  const [trendView, setTrendView] = useState("by_value");
 
   const [rankings, setRankings] = useState(null);
   const [ancestry, setAncestry] = useState(null);
@@ -64,6 +65,7 @@ const Home = () => {
     year, setYear: nullifyDataAndSetYear,
     tags, setTags: nullifyDataAndSetTags,
     subject, setSubject: nullifyDataAndSetSubject,
+    trendView, setTrendView,
     rankings, setRankings,
     ancestry, setAncestry,
     esg, client,

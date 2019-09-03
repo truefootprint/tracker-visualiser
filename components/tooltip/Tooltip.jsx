@@ -31,7 +31,7 @@ const Tooltip = ({ content }) => {
   const tooltip = useRef(null);
 
   return <>
-    {content && content.length > 0 && <div ref={tooltip} className={css.tooltip}>
+    {content && <div ref={tooltip} className={css.tooltip}>
       {content}
     </div>}
   </>;

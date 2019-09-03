@@ -6,7 +6,7 @@ const Info = ({ ranking, children }) => {
   const showValue = ranking.rankable_type === "Outcome";
   const showAuditor = ranking.auditor_name && showValue;
 
-  const value = showValue ? round(ranking.value) : `ranks ${ordinal(ranking.rank)}`;
+  const value = showValue ? round(ranking.value) : `ranked ${ordinal(ranking.rank)}`;
   const unit = showValue ? ranking.unit_name : ` in ${ranking.year}`;
 
   return (

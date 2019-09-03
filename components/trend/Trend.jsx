@@ -4,7 +4,7 @@ import LineGraph from "../line_graph";
 import CompanyDropdown from "../company_dropdown";
 import css from "./styles.scss";
 
-const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, setSubject, client }) => {
+const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, trendView, setSubject, client }) => {
   const [auditor, setAuditor] = useState(null);
 
   const [comparisonIds, setComparisonIds] = useState([]);
@@ -82,7 +82,7 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, setS
         {rankings[0].rankable_name}
       </h2>
 
-      <LineGraph rankingGroups={rankingGroups} />
+      <LineGraph rankingGroups={rankingGroups} rankBased={trendView === "by_rank"} />
     </div>
   );
 };

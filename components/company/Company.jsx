@@ -6,7 +6,7 @@ import Year from "../year";
 import Info from "../info";
 import css from "./styles.scss";
 
-const Company = ({ ancestry, rankings, sector, distribution, threshold, year, setYear, setSubject, esg, client }) => {
+const Company = ({ ancestry, rankings, sector, distribution, threshold, year, setYear, setSubject, setTrendView, esg, client }) => {
   const [auditor, setAuditor] = useState(null);
 
   const ranking = (member) => (
@@ -65,6 +65,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
             threshold={threshold}
             ranking={ranking(esg)}
             setSubject={setSubject}
+            setTrendView={setTrendView}
             size={[240, 120]}
             client={client} />
         </div>
@@ -73,6 +74,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
           <Ranking
             ranking={ranking(esg)}
             setSubject={setSubject}
+            setTrendView={setTrendView}
             sector={sector}
             distribution={distribution}
             threshold={threshold}
@@ -96,6 +98,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
                 <Ranking
                   ranking={r}
                   setSubject={setSubject}
+                  setTrendView={setTrendView}
                   sector={sector}
                   distribution={distribution}
                   threshold={threshold}
@@ -111,6 +114,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
                       threshold={threshold}
                       ranking={r}
                       setSubject={setSubject}
+                      setTrendView={setTrendView}
                       size={[120, 60]}
                       client={client} />
                   </div>
@@ -128,6 +132,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
                   <Ranking
                     ranking={r}
                     setSubject={setSubject}
+                    setTrendView={setTrendView}
                     sector={sector}
                     distribution={distribution}
                     threshold={threshold}
@@ -142,6 +147,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
                         threshold={threshold}
                         ranking={r}
                         setSubject={setSubject}
+                        setTrendView={setTrendView}
                         client={client} />
                     </Info>
                   </Ranking>
