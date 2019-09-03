@@ -2,11 +2,9 @@ import round from "../../helpers/round";
 import ordinal from "../../helpers/ordinal";
 import css from "./styles.scss";
 
-const Info = ({ ranking, children }) => {
-  const showValue = ranking.rankable_type === "Outcome";
+const Info = ({ ranking, children, trendView }) => {
+  const showValue = trendView === "by_value";
   const showAuditor = ranking.auditor_name && showValue;
-
-  const unit = showValue ? ranking.unit_name : ` in ${ranking.year}`;
 
   let value;
   if (showValue) {
@@ -17,13 +15,24 @@ const Info = ({ ranking, children }) => {
     value = "Insufficient data to rank";
   }
 
+  let prefix, suffix;
+  if (trendView === "by_rank") {
+    suffix = ` in ${ranking.year}`;
+  } else if (ranking.rankable_type === "Group") {
+    prefix = `${ranking.rankable_name} score: `;
+    suffix = ` in ${ranking.year}`;
+  } else if (showValue) {
+    suffix = ranking.unit_name;
+  }
+
   return (
     <div className="info">
       {children}
 
       {<div className={css.value}>
+        <span className={css.prefix}>{prefix}</span>
         <span className={css.value}>{value}</span>
-        <span className={css.unit}>{unit}</span>
+        <span className={css.suffix}>{suffix}</span>
       </div>}
 
       {showAuditor &&

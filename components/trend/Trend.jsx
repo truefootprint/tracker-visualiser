@@ -85,7 +85,7 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
         {rankings[0].rankable_name} {trendView === "by_rank" && <>(ranking over time)</>}
       </h2>
 
-      <LineGraph rankingGroups={rankingGroups} rankBased={trendView === "by_rank"} />
+      <LineGraph rankingGroups={rankingGroups} trendView={trendView} />
     </div>
   );
 };

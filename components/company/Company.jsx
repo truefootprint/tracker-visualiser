@@ -7,7 +7,7 @@ import Year from "../year";
 import Info from "../info";
 import css from "./styles.scss";
 
-const Company = ({ ancestry, rankings, sector, distribution, threshold, year, setYear, setSubject, setTrendView, esg, client }) => {
+const Company = ({ ancestry, rankings, sector, distribution, threshold, year, setYear, setSubject, setTrendView, trendView, esg, client }) => {
   const [auditor, setAuditor] = useState(null);
 
   const ranking = (member) => (
@@ -70,6 +70,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
             ranking={ranking(esg)}
             setSubject={setSubject}
             setTrendView={setTrendView}
+            trendView={trendView}
             size={[240, 120]}
             client={client} />
         </div>
@@ -119,6 +120,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
                       ranking={r}
                       setSubject={setSubject}
                       setTrendView={setTrendView}
+                      trendView={trendView}
                       size={[120, 60]}
                       client={client} />
                   </div>
@@ -144,7 +146,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
                     size={[80, 40]}
                     client={client}>
 
-                    <Info ranking={r}>
+                    <Info ranking={r} trendView={trendView}>
                       <TrendThumbnail
                         sector={sector}
                         distribution={distribution}
@@ -152,6 +154,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
                         ranking={r}
                         setSubject={setSubject}
                         setTrendView={setTrendView}
+                        trendView={trendView}
                         client={client} />
                     </Info>
                   </Ranking>

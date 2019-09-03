@@ -4,15 +4,17 @@ import Info from "../info";
 import * as d3 from "d3";
 import css from "./styles.scss";
 
-const LineGraph = ({ rankingGroups, rankBased, thumbnail, size }) => {
+const LineGraph = ({ rankingGroups, thumbnail, size, trendView }) => {
   const [tooltip, setTooltip] = useState(null);
 
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
   const [svgWidth, svgHeight] = size || [1250, 350];
 
+  const rankBased = trendView === "by_rank";
+
   useEffect(() => {
     const handleMouseOver = (d) => {
-      setTooltip(<Info ranking={d} />);
+      setTooltip(<Info ranking={d} trendView={trendView} />);
     };
 
     const handleMouseOut = (d) => {
