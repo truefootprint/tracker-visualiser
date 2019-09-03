@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import round from "../../helpers/round";
 import Breadcrumbs from "../breadcrumbs";
 import Ranking from "../ranking";
 import TrendThumbnail from "../trend_thumbnail";
@@ -56,8 +57,11 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
             <Year year={year} setYear={setYear} />
           </div>
         </div>
+
         <div className={css.trend}>
-          <p>Historical trend:</p>
+          <div className={css.esg_score}>
+            ESG score: <span>{round(ranking(esg).value)}</span>
+          </div>
 
           <TrendThumbnail
             sector={sector}
