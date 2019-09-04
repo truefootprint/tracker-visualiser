@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import Breadcrumbs from "../breadcrumbs";
 import LineGraph from "../line_graph";
 import CompanyDropdown from "../company_dropdown";
+import GoldFilter from "../gold_filter";
 import css from "./styles.scss";
 
-const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, trendView, setSubject, client }) => {
+const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, trendView, setSubject, tags, setTags, client }) => {
   const [auditor, setAuditor] = useState(null);
 
   const [comparisonIds, setComparisonIds] = useState([]);
@@ -51,8 +52,8 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
       id: rankings[0].rankable_id
     };
 
-    client.compareCompanies(sector, distribution, threshold, companyId, member).then(({ data }) => setCompanyListing(data));
-  }, [sector, distribution, threshold, companyId]);
+    client.compareCompanies(sector, distribution, threshold, companyId, tags, member).then(({ data }) => setCompanyListing(data));
+  }, [sector, distribution, threshold, companyId, tags]);
 
   let rankingGroups = comparisonIds.map(id => comparisons[id]).filter(v => v);
   rankingGroups.unshift(rankings);
@@ -68,7 +69,14 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
       <div className={css.company_dropdown}>
         <label>Compare to:</label>
 
-        <CompanyDropdown rankings={companyListing} trendView={trendView} onSelect={id => setComparisonIds([id])} />
+        <CompanyDropdown
+          rankings={companyListing}
+          trendView={trendView}
+          onSelect={ids => setComparisonIds(ids)} />
+      </div>
+
+      <div className={css.filters}>
+        <GoldFilter tags={tags} setTags={setTags} />
       </div>
 
       {pageReference && <div className={css.page_reference}>

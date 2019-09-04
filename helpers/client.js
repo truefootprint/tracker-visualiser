@@ -32,11 +32,16 @@ class Client {
     return this.get(`/company_rankings/${sector}/${distribution}/${t}/${year}/history/${type}-${id}-${company}`);
   }
 
-  compareCompanies(sector, distribution, threshold, excludedCompany, { type, id }) {
+  compareCompanies(sector, distribution, threshold, excludedCompany, tags, { type, id }) {
     let t = threshold.toString().replace(".", "-");
+    let tagsParam = "";
+
+    if (tags) {
+      tagsParam = `?tags=${tags.join(",")}`;
+    }
 
     return this.get(
-      `/company_rankings/${sector}/${distribution}/${t}/all/compare/${type}-${id}-${excludedCompany}`
+      `/company_rankings/${sector}/${distribution}/${t}/all/compare/${type}-${id}-${excludedCompany}${tagsParam}`
     );
   }
 

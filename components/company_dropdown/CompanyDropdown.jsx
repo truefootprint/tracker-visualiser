@@ -32,9 +32,20 @@ const CompanyDropdown = ({ rankings, trendView, onSelect }) => {
 
   const sorted = listing.sort((a, b) => a.name < b.name ? -1 : 1);
 
+  const handleChange = (event) => {
+    const value = event.target.value;
+
+    if (value === "All") {
+      onSelect(sorted.map(item => item.id));
+    } else {
+      onSelect([value]);
+    }
+  };
+
   return (
-    <select onChange={e => onSelect(e.target.value)}>
+    <select onChange={handleChange}>
       <option disabled selected value> -- select an option -- </option>
+      <option value="All">All</option>
 
       {sorted.map(({ id, name, count }) => (
 

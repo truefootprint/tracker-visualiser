@@ -4,18 +4,11 @@
   .company_label { fill: black; }
 }
 
-circle[data-index="0"]         { fill: #246 }
-.line[data-index="0"]          { stroke: #448AA9 }
-.company_label[data-index="0"] { fill: #246 }
-
-circle[data-index="1"]         { fill: #6D5908 }
-.line[data-index="1"]          { stroke: #D3BF6E }
-.company_label[data-index="1"] { fill: #6D5908 }
-
 .line {
   fill: none;
   stroke-width: 3;
 }
+
 
 .dot {
   cursor: pointer;
@@ -49,3 +42,99 @@ circle[data-index="1"]         { fill: #6D5908 }
      }
   }
 }
+
+.company_label[data-index="0"] { fill: #246 }
+.line[data-index="0"]          { stroke: #448AA9 }
+circle[data-index="0"]         { fill: #246 }
+
+.company_label[data-index="1"] { fill: #6D5908 }
+.line[data-index="1"]          { stroke: #D3BF6E }
+circle[data-index="1"]         { fill: #6D5908 }
+
+.company_label[data-index="2"] { fill: #b3b3b3 }
+.line[data-index="2"]          { stroke: #b3b3b3 }
+circle[data-index="2"]         { fill: #b3b3b3 }
+
+.company_label[data-index="3"] { fill: #525252 }
+.line[data-index="3"]          { stroke: #525252 }
+circle[data-index="3"]         { fill: #525252 }
+
+.company_label[data-index="4"] { fill: #775778 }
+.line[data-index="4"]          { stroke: #775778 }
+circle[data-index="4"]         { fill: #775778 }
+
+.company_label[data-index="5"] { fill: #77177a }
+.line[data-index="5"]          { stroke: #77177a }
+circle[data-index="5"]         { fill: #77177a }
+
+.company_label[data-index="6"] { fill: #bb80cf }
+.line[data-index="6"]          { stroke: #bb80cf }
+circle[data-index="6"]         { fill: #bb80cf }
+
+.company_label[data-index="7"] { fill: #371469 }
+.line[data-index="7"]          { stroke: #371469 }
+circle[data-index="7"]         { fill: #371469 }
+
+.company_label[data-index="8"] { fill: #ac93cf }
+.line[data-index="8"]          { stroke: #ac93cf }
+circle[data-index="8"]         { fill: #ac93cf }
+
+.company_label[data-index="9"] { fill: #1859cc }
+.line[data-index="9"]          { stroke: #1859cc }
+circle[data-index="9"]         { fill: #1859cc }
+
+.company_label[data-index="10"] { fill: #7c94bf }
+.line[data-index="10"]          { stroke: #7c94bf }
+circle[data-index="10"]         { fill: #7c94bf }
+
+.company_label[data-index="11"] { fill: #9bd1cd }
+.line[data-index="11"]          { stroke: #9bd1cd }
+circle[data-index="11"]         { fill: #9bd1cd }
+
+.company_label[data-index="12"] { fill: #3f706c }
+.line[data-index="12"]          { stroke: #3f706c }
+circle[data-index="12"]         { fill: #3f706c }
+
+.company_label[data-index="13"] { fill: #45703f }
+.line[data-index="13"]          { stroke: #45703f }
+circle[data-index="13"]         { fill: #45703f }
+
+.company_label[data-index="14"] { fill: #1a750b }
+.line[data-index="14"]          { stroke: #1a750b }
+circle[data-index="14"]         { fill: #1a750b }
+
+.company_label[data-index="15"] { fill: #9dd194 }
+.line[data-index="15"]          { stroke: #9dd194 }
+circle[data-index="15"]         { fill: #9dd194 }
+
+.company_label[data-index="16"] { fill: #d0d194 }
+.line[data-index="16"]          { stroke: #d0d194 }
+circle[data-index="16"]         { fill: #d0d194 }
+
+.company_label[data-index="17"] { fill: #9ea10e }
+.line[data-index="17"]          { stroke: #9ea10e }
+circle[data-index="17"]         { fill: #9ea10e }
+
+.company_label[data-index="18"] { fill: #dec58e }
+.line[data-index="18"]          { stroke: #dec58e }
+circle[data-index="18"]         { fill: #dec58e }
+
+.company_label[data-index="19"] { fill: #8a691e }
+.line[data-index="19"]          { stroke: #8a691e }
+circle[data-index="19"]         { fill: #8a691e }
+
+.company_label[data-index="20"] { fill: #d49e20 }
+.line[data-index="20"]          { stroke: #d49e20 }
+circle[data-index="20"]         { fill: #d49e20 }
+
+.company_label[data-index="21"] { fill: #c2acac }
+.line[data-index="21"]          { stroke: #c2acac }
+circle[data-index="21"]         { fill: #c2acac }
+
+.company_label[data-index="22"] { fill: #730a0a }
+.line[data-index="22"]          { stroke: #730a0a }
+circle[data-index="22"]         { fill: #730a0a }
+
+.company_label[data-index="23"] { fill: #bd6d6d }
+.line[data-index="23"]          { stroke: #bd6d6d }
+circle[data-index="23"]         { fill: #bd6d6d }

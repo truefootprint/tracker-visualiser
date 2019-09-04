@@ -1,6 +1,7 @@
 import SideBar from "../side_bar";
 import Breadcrumbs from "../breadcrumbs";
 import Graph from "../graph";
+import GoldFilter from "../gold_filter";
 import css from "./styles.scss";
 
 const Rankable = ({ rankings, ancestry, sector, threshold, year, setYear, tags, setTags, subject, setSubject }) => (
@@ -13,10 +14,8 @@ const Rankable = ({ rankings, ancestry, sector, threshold, year, setYear, tags, 
         setSubject={setSubject}
       />
 
-      <div className={css.tag_filters} onClick={() => setTags(tags ? null : ["Gold"])}>
-        Gold mining companies?
-
-        <div className={`${tags && css.active} ${css.checkbox}`} />
+      <div className={css.filters}>
+        <GoldFilter tags={tags} setTags={setTags} />
       </div>
 
       <h2 className={css.title}>
