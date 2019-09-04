@@ -32,6 +32,14 @@ class Client {
     return this.get(`/company_rankings/${sector}/${distribution}/${t}/${year}/history/${type}-${id}-${company}`);
   }
 
+  compareCompanies(sector, distribution, threshold, excludedCompany, { type, id }) {
+    let t = threshold.toString().replace(".", "-");
+
+    return this.get(
+      `/company_rankings/${sector}/${distribution}/${t}/all/compare/${type}-${id}-${excludedCompany}`
+    );
+  }
+
   company(id) {
     return this.get(`/companies/${id}`);
   }

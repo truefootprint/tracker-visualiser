@@ -51,8 +51,8 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
       id: rankings[0].rankable_id
     };
 
-    client.companyRankings(sector, distribution, threshold, year, null, member).then(({ data }) => setCompanyListing(data));
-  }, [sector, distribution, threshold, year]);
+    client.compareCompanies(sector, distribution, threshold, companyId, member).then(({ data }) => setCompanyListing(data));
+  }, [sector, distribution, threshold, companyId]);
 
   let rankingGroups = comparisonIds.map(id => comparisons[id]).filter(v => v);
   rankingGroups.unshift(rankings);
@@ -68,7 +68,7 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
       <div className={css.company_dropdown}>
         <label>Compare to:</label>
 
-        <CompanyDropdown rankings={companyListing} exclusionId={companyId} onSelect={id => setComparisonIds([id])} />
+        <CompanyDropdown rankings={companyListing} trendView={trendView} onSelect={id => setComparisonIds([id])} />
       </div>
 
       {pageReference && <div className={css.page_reference}>
