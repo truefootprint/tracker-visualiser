@@ -4,7 +4,7 @@ import round from "../../helpers/round";
 import Tooltip from "../tooltip";
 import css from "./styles.scss";
 
-const Graph = ({ rankings, current, threshold, year, setSubject, thumbnail, size }) => {
+const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbnail, size }) => {
   const index = rankings.findIndex(r => r.company_id === (current && current.company_id));
 
   const [unranked, setUnranked] = useState([]);
@@ -14,7 +14,7 @@ const Graph = ({ rankings, current, threshold, year, setSubject, thumbnail, size
   const [svgWidth, svgHeight] = size || [1000, 500];
 
   const visitCompanyById = (id) => {
-    setSubject({ type: "company", id: id });
+    setSubject({ type: "trend", id: `${subject.type}-${subject.id}-${id}` });
   }
 
   const thresholdPercentage = parseFloat(threshold) * 100;
