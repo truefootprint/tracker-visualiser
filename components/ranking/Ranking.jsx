@@ -35,8 +35,8 @@ const Ranking = ({ ranking, setSubject, setTrendView, subject, sector, distribut
   const visitTrendRank = () => {
     const trend = { type: "trend", id: `${member.type}-${member.id}-${ranking.company_id}` };
 
-    setTrendView("by_rank");
     setSubject(trend);
+    setTrendView("by_rank");
   };
 
   return (

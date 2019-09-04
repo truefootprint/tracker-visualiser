@@ -11,8 +11,8 @@ const TrendThumbnail = ({ sector, distribution, threshold, ranking, setSubject, 
   };
 
   const visitTrendValue = () => {
-    setTrendView("by_value");
     setSubject(trend);
+    setTrendView("by_value");
   };
 
   useEffect(() => {

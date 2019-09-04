@@ -45,6 +45,7 @@ const Home = () => {
   const nullifyDataAndSetSubject = (subject) => {
     setRankings(null);
     setAncestry(null);
+    setTrendView("by_value");
     setSubject(subject);
   }
 
