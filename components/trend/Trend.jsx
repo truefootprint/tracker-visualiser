@@ -66,6 +66,15 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
         <img className={css.logo} src={auditor.logo} />
       </div>}
 
+      <Breadcrumbs
+        ancestry={ancestry}
+        sector={sector}
+        above={{ type: "company", id: rankings[0].company_id, name: rankings[0].company_name }}
+        below={{ type: "outcome", id: rankings[0].rankable_id, name: rankings[0].rankable_name }}
+        current="History"
+        setSubject={setSubject}
+      />
+
       <div className={css.company_dropdown}>
         <label>Compare to:</label>
 
@@ -83,14 +92,6 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
         <a href={pageReference} target="_blank">View data source</a>
       </div>}
 
-      <Breadcrumbs
-        ancestry={ancestry}
-        sector={sector}
-        above={{ type: "company", id: rankings[0].company_id, name: rankings[0].company_name }}
-        below={{ type: "outcome", id: rankings[0].rankable_id, name: rankings[0].rankable_name }}
-        current="History"
-        setSubject={setSubject}
-      />
 
       <div className={css.top_level}>
         <img
