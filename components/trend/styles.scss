@@ -36,6 +36,18 @@
   }
 }
 
+.page_reference {
+  float: right;
+  margin: 3.5rem 2rem 0 0;
+  clear: both;
+  font-size: 1.2rem;
+
+  a {
+    color: #448AA9;
+    text-decoration: none;
+  }
+}
+
 .title {
   font-size: 1.8rem;
   margin: 2rem 0 2.5rem 100px;

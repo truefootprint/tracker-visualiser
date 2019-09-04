@@ -17,6 +17,12 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
 
   const companyId = rankings[0].company_id;
 
+  let pageRefRanking = rankings.find(r => r.url);
+  let pageReference;
+  if (pageRefRanking) {
+    pageReference = `${pageRefRanking.url}#page=${pageRefRanking.page}`;
+  }
+
   useEffect(() => {
     if (auditorId) {
       client.company(auditorId).then(({ data }) => setAuditor(data));
@@ -64,6 +70,10 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
 
         <CompanyDropdown rankings={companyListing} exclusionId={companyId} onSelect={id => setComparisonIds([id])} />
       </div>
+
+      {pageReference && <div className={css.page_reference}>
+        <a href={pageReference} target="_blank">View data source</a>
+      </div>}
 
       <Breadcrumbs
         ancestry={ancestry}
