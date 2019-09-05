@@ -8,6 +8,7 @@ const NavBar = ({ distribution, setDistribution, threshold, setThreshold, setSub
   const [showSettings, setShowSettings] = useState(false);
 
   const visitHome = () => setSubject({ type: "group", id: 1 });
+  const iconClass = showSettings ? css.selected : undefined;
 
   return (
     <div className={css.nav_bar}>
@@ -21,7 +22,7 @@ const NavBar = ({ distribution, setDistribution, threshold, setThreshold, setSub
 
       <div className={css.icons}>
         <Icon name="search" />
-        <Icon name="cog" className={showSettings && css.selected} onClick={() => setShowSettings(!showSettings)} />
+        <Icon name="cog" className={iconClass} onClick={() => setShowSettings(!showSettings)} />
       </div>
 
       {showSettings && <Settings

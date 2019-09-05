@@ -43,8 +43,8 @@ const CompanyDropdown = ({ rankings, trendView, onSelect }) => {
   };
 
   return (
-    <select onChange={handleChange}>
-      <option disabled selected value> -- select an option -- </option>
+    <select onChange={handleChange} value="select-an-option">
+      <option disabled value="select-an-option"> -- select an option -- </option>
       <option value="All">All</option>
 
       {sorted.map(({ id, name, count }) => (
