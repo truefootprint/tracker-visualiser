@@ -74,12 +74,22 @@
   border-right: 1px solid #ccc;
 
   .overall_ranking {
-    height: 14rem;
+    height: 19rem;
     border-bottom: 2px dashed #ccc;
 
     .title {
       font-size: 1.5rem;
       margin: 0 0 2rem 2rem;
+    }
+
+    .completeness {
+      font-size: 1.3rem;
+      margin: 0 0 2rem 2rem;
+      line-height: 1.3;
+
+      span {
+        color: #f46;
+      }
     }
 
     .ranking {
@@ -122,4 +132,20 @@
 
 .title {
   line-height: 1.3;
+}
+
+:global(.hide-aggregation) {
+  .top_level {
+    .esg_rating, .ranking, .trend {
+      display: none;
+    }
+  }
+
+  .breakdown .overall_ranking {
+    height: 10rem;
+
+    .ranking {
+      display: none;
+    }
+  }
 }

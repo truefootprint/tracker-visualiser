@@ -51,7 +51,9 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
         <img className={css.logo} src={rankings[0].company_logo} />
 
         <div className={css.title}>
-          {ranking(esg).rankable_name} rating:
+          <span className={css.esg_rating}>
+            {ranking(esg).rankable_name} rating:
+          </span>
 
           <div className={css.year}>
             <Year year={year} setYear={setYear} />
@@ -97,6 +99,10 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
             <div className={css.overall_ranking}>
               <div className={css.title}>
                 {r.rankable_name}:
+              </div>
+
+              <div className={css.completeness}>
+                This company has only provided <span>{r.children.filter(({ rank }) => rank !== null).length} out of {r.children.length}</span> available data points.
               </div>
 
               <div className={css.ranking}>

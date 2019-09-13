@@ -4,11 +4,12 @@ import Settings from "../settings";
 import Icon from "../icon";
 import css from "./styles.scss";
 
-const NavBar = ({ distribution, setDistribution, threshold, setThreshold, setSubject }) => {
+const NavBar = ({ distribution, setDistribution, threshold, setThreshold, setSubject, showAggregation, setShowAggregation }) => {
   const [showSettings, setShowSettings] = useState(false);
 
   const visitHome = () => setSubject({ type: "group", id: 1 });
-  const iconClass = showSettings ? css.selected : undefined;
+  const slidersClass = showAggregation ? css.selected : undefined;
+  const cogClass = showSettings ? css.selected : undefined;
 
   return (
     <div className={css.nav_bar}>
@@ -21,8 +22,9 @@ const NavBar = ({ distribution, setDistribution, threshold, setThreshold, setSub
       </h1>
 
       <div className={css.icons}>
+        <Icon name="sliders" className={slidersClass} onClick={() => setShowAggregation(!showAggregation)} />
         <Icon name="search" />
-        <Icon name="cog" className={iconClass} onClick={() => setShowSettings(!showSettings)} />
+        <Icon name="cog" className={cogClass} onClick={() => setShowSettings(!showSettings)} />
       </div>
 
       {showSettings && <Settings
