@@ -24,11 +24,13 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
   }, [auditorId])
 
   const rootRanking = ranking(esg);
+  if (!rootRanking) return null;
 
-  rootRanking.children = ancestry.descendents.map(child => {
+  rootRanking.children = ancestry.descendents.flatMap(child => {
     const childRanking = ranking(child);
-    childRanking.children = child.descendents.map(grandchild => ranking(grandchild));
+    if (!childRanking) return;
 
+    childRanking.children = child.descendents.map(grandchild => ranking(grandchild));
     return childRanking;
   });
 

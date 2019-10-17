@@ -12,7 +12,7 @@ const Home = () => {
   const [distribution, setDistribution] = useState("33-33-33");
   const [threshold, setThreshold] = useState("0.1");
   const [year, setYear] = useState("2018");
-  const [subject, setSubject] = useState({ type: "company", id: "1" });
+  const [subject, setSubject] = useState({ type: "outcome", id: "4" });
   const [tags, setTags] = useState(null);
   const [trendView, setTrendView] = useState("by_value");
 

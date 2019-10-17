@@ -14,9 +14,9 @@ const Rankable = ({ rankings, ancestry, sector, threshold, year, setYear, tags, 
         setSubject={setSubject}
       />
 
-      <div className={css.filters}>
+      {sector === "Mining" && <div className={css.filters}>
         <GoldFilter tags={tags} setTags={setTags} />
-      </div>
+      </div>}
 
       <h2 className={css.title}>
         {rankings[0].rankable_name}

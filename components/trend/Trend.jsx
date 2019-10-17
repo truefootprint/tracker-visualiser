@@ -84,9 +84,9 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
           onSelect={ids => setComparisonIds(ids)} />
       </div>
 
-      <div className={css.filters}>
+      {sector === "Mining" && <div className={css.filters}>
         <GoldFilter tags={tags} setTags={setTags} />
-      </div>
+      </div>}
 
       {pageReference && <div className={css.page_reference}>
         <a href={pageReference} target="_blank">View data source</a>
