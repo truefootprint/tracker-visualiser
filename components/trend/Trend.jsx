@@ -101,7 +101,9 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
       </div>
 
       <h2 className={css.title}>
-        {rankings[0].rankable_name} {trendView === "by_rank" && <>(ranking over time)</>}
+        {rankings[0].rankable_name}
+        {rankings[0].rankable_type === "Group" && " score"}
+        {trendView === "by_rank" && <> (ranking over time)</>}
       </h2>
 
       <LineGraph rankingGroups={rankingGroups} trendView={trendView} />

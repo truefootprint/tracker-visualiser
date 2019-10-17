@@ -20,6 +20,7 @@ const Rankable = ({ rankings, ancestry, sector, threshold, year, setYear, tags, 
 
       <h2 className={css.title}>
         {rankings[0].rankable_name}
+        {rankings[0].rankable_type === "Group" && " score"}
       </h2>
 
       <Graph rankings={rankings} threshold={threshold} year={year} subject={subject} setSubject={setSubject} />
