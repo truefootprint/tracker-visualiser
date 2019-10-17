@@ -57,7 +57,7 @@
 }
 
 .y_axis {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #448AA9;
 
  :global(.tick) line, :global(.domain) {
@@ -101,9 +101,10 @@
     display: inline-block;
     width: 215px;
     text-align: right;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #448AA9;
     cursor: pointer;
+    line-height: 0.9;
 
     &:hover {
       font-weight: bold;
