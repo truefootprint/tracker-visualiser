@@ -108,23 +108,6 @@ const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbn
       tab.focus();
     };
 
-    chart.selectAll()
-        .data(data)
-        .enter()
-        .append('rect')
-        .attr('data-index', (_, i) => i)
-        .attr('data-band', d => d.band)
-        .attr('data-current', (_, i) => i === index)
-        .attr('y', d => yScale(d.name))
-        .attr('height', yScale.bandwidth())
-        .on('mouseover', handleMouseOver)
-        .on('mouseout', handleMouseOut)
-        .on('click', visitPageReference)
-        .transition()
-        .duration(500)
-        .delay((_, i) => (data.length - i - 1) * 100)
-        .attr('width', d => xScale(d.value))
-
     if (!thumbnail) {
       if (year !== "2018") {
         chart.append('text')
@@ -155,6 +138,23 @@ const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbn
         .on('mouseout', handleMouseOut)
         .on('click', (_, i) => visitCompanyByIndex(i));
     }
+
+    chart.selectAll()
+        .data(data)
+        .enter()
+        .append('rect')
+        .attr('data-index', (_, i) => i)
+        .attr('data-band', d => d.band)
+        .attr('data-current', (_, i) => i === index)
+        .attr('y', d => yScale(d.name))
+        .attr('height', yScale.bandwidth())
+        .on('mouseover', handleMouseOver)
+        .on('mouseout', handleMouseOut)
+        .on('click', visitPageReference)
+        .transition()
+        .duration(500)
+        .delay((_, i) => (data.length - i - 1) * 100)
+        .attr('width', d => xScale(d.value))
   }, [rankings]);
 
   return (
