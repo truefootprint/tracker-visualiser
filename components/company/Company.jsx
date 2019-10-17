@@ -54,7 +54,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
 
         <div className={css.title}>
           <span className={css.esg_rating}>
-            {ranking(esg).rankable_name} rating:
+            {ranking(esg).rankable_name} ranking:
           </span>
 
           <div className={css.year}>
