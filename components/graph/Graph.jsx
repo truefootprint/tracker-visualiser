@@ -108,39 +108,6 @@ const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbn
       tab.focus();
     };
 
-    if (!thumbnail) {
-      if (year !== "2018") {
-        chart.append('text')
-              .attr('class', css.year)
-              .attr('y', height)
-              .text(year);
-      }
-
-      chart.append('g')
-        .attr('class', css.y_axis)
-        .call(d3.axisLeft(yScale));
-
-      chart.append('g')
-        .attr('transform', translateAxis)
-        .attr('class', css.x_axis)
-        .call(d3.axisBottom(xScale)
-          .ticks(3)
-          .tickSize(-height, 0, 0));
-
-      svg.append('text')
-        .attr('x', svgWidth - marginRight)
-        .attr('y', height + marginY * 0.8)
-        .attr('class', css.x_axis_label)
-        .attr('text-anchor', 'middle')
-        .text(axisLabel);
-
-      chart.selectAll('.tick text')
-        .attr('data-index', (_, i) => i)
-        .on('mouseover', handleMouseOver)
-        .on('mouseout', handleMouseOut)
-        .on('click', (_, i) => visitCompanyByIndex(i));
-    }
-
     chart.selectAll()
         .data(data)
         .enter()
@@ -157,6 +124,37 @@ const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbn
         .duration(500)
         .delay((_, i) => (data.length - i - 1) * 100)
         .attr('width', d => xScale(d.value))
+
+    if (!thumbnail) {
+      if (year !== "2018") {
+        chart.append('text')
+              .attr('class', css.year)
+              .attr('y', height)
+              .text(year);
+      }
+
+      chart.append('g')
+        .attr('class', css.y_axis)
+        .call(d3.axisLeft(yScale));
+
+      chart.append('g')
+        .attr('transform', translateAxis)
+        .attr('class', css.x_axis)
+        .call(d3.axisBottom(xScale));
+
+      svg.append('text')
+        .attr('x', svgWidth - marginRight)
+        .attr('y', height + marginY * 0.8)
+        .attr('class', css.x_axis_label)
+        .attr('text-anchor', 'middle')
+        .text(axisLabel);
+
+      chart.selectAll('.tick text')
+        .attr('data-index', (_, i) => i)
+        .on('mouseover', handleMouseOver)
+        .on('mouseout', handleMouseOut)
+        .on('click', (_, i) => visitCompanyByIndex(i));
+    }
   }, [rankings]);
 
   return (
