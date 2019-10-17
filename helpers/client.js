@@ -11,12 +11,12 @@ class Client {
     }
   }
 
-  companyRankings(sector, distribution, threshold, year, tags, { type, id }) {
+  companyRankings(sector, distribution, threshold, year, metal, { type, id }) {
     let t = threshold.toString().replace(".", "-");
     let tagsParam = "";
 
-    if (tags) {
-      tagsParam = `?tags=${tags.join(",")}`;
+    if (metal && metal === "Gold") {
+      tagsParam = `?tags=${metal}`;
     }
 
     if (type === "trend") {
@@ -32,12 +32,12 @@ class Client {
     return this.get(`/company_rankings/${sector}/${distribution}/${t}/${year}/history/${type}-${id}-${company}`);
   }
 
-  compareCompanies(sector, distribution, threshold, excludedCompany, tags, { type, id }) {
+  compareCompanies(sector, distribution, threshold, excludedCompany, metal, { type, id }) {
     let t = threshold.toString().replace(".", "-");
     let tagsParam = "";
 
-    if (tags) {
-      tagsParam = `?tags=${tags.join(",")}`;
+    if (metal && metal === "Gold") {
+      tagsParam = `?tags=${metal}`;
     }
 
     return this.get(

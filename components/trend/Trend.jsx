@@ -5,7 +5,7 @@ import CompanyDropdown from "../company_dropdown";
 import GoldFilter from "../gold_filter";
 import css from "./styles.scss";
 
-const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, trendView, setSubject, tags, setTags, client }) => {
+const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, trendView, setSubject, metal, setMetal, client }) => {
   const [auditor, setAuditor] = useState(null);
 
   const [comparisonIds, setComparisonIds] = useState([]);
@@ -52,8 +52,8 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
       id: rankings[0].rankable_id
     };
 
-    client.compareCompanies(sector, distribution, threshold, companyId, tags, member).then(({ data }) => setCompanyListing(data));
-  }, [sector, distribution, threshold, companyId, tags]);
+    client.compareCompanies(sector, distribution, threshold, companyId, metal, member).then(({ data }) => setCompanyListing(data));
+  }, [sector, distribution, threshold, companyId, metal]);
 
   let rankingGroups = comparisonIds.map(id => comparisons[id]).filter(v => v);
   rankingGroups.unshift(rankings);
@@ -75,23 +75,9 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
         setSubject={setSubject}
       />
 
-      <div className={css.company_dropdown}>
-        <label>Compare to:</label>
-
-        <CompanyDropdown
-          rankings={companyListing}
-          trendView={trendView}
-          onSelect={ids => setComparisonIds(ids)} />
-      </div>
-
-      {sector === "Mining" && <div className={css.filters}>
-        <GoldFilter tags={tags} setTags={setTags} />
-      </div>}
-
       {pageReference && <div className={css.page_reference}>
         <a href={pageReference} target="_blank">View data source</a>
       </div>}
-
 
       <div className={css.top_level}>
         <img
@@ -105,6 +91,17 @@ const Trend = ({ ancestry, sector, distribution, threshold, rankings, year, tren
         {rankings[0].rankable_type === "Group" && " score"}
         {trendView === "by_rank" && <> (ranking over time)</>}
       </h2>
+
+      <div className={css.filters}>
+        {sector === "Mining" && <GoldFilter metal={metal} setMetal={setMetal} />}
+
+        <div className={css.company_dropdown}>
+          <CompanyDropdown
+            rankings={companyListing}
+            trendView={trendView}
+            onSelect={ids => setComparisonIds(ids)} />
+        </div>
+      </div>
 
       <LineGraph rankingGroups={rankingGroups} trendView={trendView} />
     </div>

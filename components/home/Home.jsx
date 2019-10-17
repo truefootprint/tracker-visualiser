@@ -12,8 +12,8 @@ const Home = () => {
   const [distribution, setDistribution] = useState("33-33-33");
   const [threshold, setThreshold] = useState("0.1");
   const [year, setYear] = useState("2018");
+  const [metal, setMetal] = useState(null);
   const [subject, setSubject] = useState({ type: "outcome", id: "4" });
-  const [tags, setTags] = useState(null);
   const [trendView, setTrendView] = useState("by_value");
 
   const [rankings, setRankings] = useState(null);
@@ -24,8 +24,10 @@ const Home = () => {
   const client = new Client("truefootprint", password);
 
   useEffect(() => {
-    client.companyRankings(sector, distribution, threshold, year, tags, subject).then(({ data }) => setRankings(data));
-  }, [sector, distribution, threshold, year, tags, subject, password])
+    client.companyRankings(sector, distribution, threshold, year, metal, subject).then(({ data }) => {
+      setRankings(data)
+    });
+  }, [sector, distribution, threshold, year, metal, subject, password])
 
   useEffect(() => {
     const member = subject.type === "company" ? esg : subject;
@@ -54,9 +56,9 @@ const Home = () => {
     setYear(year);
   }
 
-  const nullifyDataAndSetTags = (tags) => {
+  const nullifyDataAndSetMetal = (metal) => {
     setRankings(null);
-    setTags(tags);
+    setMetal(metal);
   }
 
   const props = {
@@ -64,7 +66,7 @@ const Home = () => {
     distribution, setDistribution: nullifyDataAndSetDistribution,
     threshold, setThreshold: nullifyDataAndSetThreshold,
     year, setYear: nullifyDataAndSetYear,
-    tags, setTags: nullifyDataAndSetTags,
+    metal, setMetal: nullifyDataAndSetMetal,
     subject, setSubject: nullifyDataAndSetSubject,
     trendView, setTrendView,
     rankings, setRankings,

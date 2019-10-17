@@ -1,4 +1,3 @@
-import Year from "../year";
 import DrillDown from "../drill_down";
 import css from "./styles.scss";
 
@@ -29,10 +28,6 @@ const SideBar = ({ rankings, year, setYear, ancestry, setSubject }) => {
 
   return (
     <div className={css.side_bar}>
-      <div className={css.year}>
-        <Year year={year} setYear={setYear} />
-      </div>
-
       {numerator && denominator && outcomeRatio()}
 
       {showSubtitle && (

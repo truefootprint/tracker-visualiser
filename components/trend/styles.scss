@@ -9,15 +9,15 @@
 }
 
 .company_dropdown {
-  float: right;
-  margin: 3rem 5.5rem 0 0;
+  display: inline-block;
+  margin-left: 2rem;
 
   label {
     margin-right: 0.5rem;
   }
 
   select {
-    font-size: 1rem;
+    font-size: 1.4rem;
     background: white;
   }
 }
@@ -49,12 +49,13 @@
 }
 
 .title {
-  font-size: 1.8rem;
+  display: inline-block;
+  font-size: 1.6rem;
   margin: 2rem 0 2.5rem 2rem;
   color: #333;
 }
 
 .filters {
-  float: right;
-  margin: 3rem 4rem 0 0;
+  display: inline-block;
+  margin-left: 6rem;
 }
