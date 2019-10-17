@@ -9,4 +9,8 @@
   &:hover {
     border: 1px solid #9bf;
   }
+
+  :global(.tick) line {
+    display: none;
+  }
 }

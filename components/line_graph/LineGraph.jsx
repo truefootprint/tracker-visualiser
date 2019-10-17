@@ -24,7 +24,7 @@ const LineGraph = ({ rankingGroups, thumbnail, size, trendView }) => {
     d3.select(`#${id}`).html("");
 
     const marginLeft = thumbnail ? 8 : 100;
-    const marginRight = thumbnail ? 0 : 80;
+    const marginRight = thumbnail ? 8 : 80;
     const marginTop = thumbnail ? 4 : 25;
     const marginBottom = thumbnail ? 8 : 30;
 
