@@ -134,18 +134,6 @@ const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbn
         .attr('text-anchor', 'middle')
         .text(axisLabel);
 
-      chart.selectAll()
-        .data(data)
-        .enter()
-        .append('text')
-        .attr('data-index', (_, i) => i)
-        .attr('x', d => xScale(d.value) + 10)
-        .attr('y', d => yScale(d.name) + yScale.bandwidth() / 2 + 4)
-        .text(d => round(d.value))
-        .on('mouseover', handleMouseOver)
-        .on('mouseout', handleMouseOut)
-        .on('click', visitPageReference);
-
       chart.selectAll('.tick text')
         .attr('data-index', (_, i) => i)
         .on('mouseover', handleMouseOver)
