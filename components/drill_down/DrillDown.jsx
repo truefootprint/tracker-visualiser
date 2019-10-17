@@ -19,7 +19,7 @@ const DrillDown = ({ ancestry, setSubject }) => {
 
   const link = (child, index) => (
     <a key={index} className={css.link} onClick={handleClick(child)}>
-      &gt; {child.name}
+      {child.name}
     </a>
   );
 

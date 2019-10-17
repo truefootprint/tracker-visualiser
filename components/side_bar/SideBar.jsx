@@ -12,7 +12,7 @@ const SideBar = ({ rankings, year, setYear, ancestry, setSubject }) => {
   const outcomeRatio = () => (
     <div className={css.outcome_ratio}>
       <a className={css.link} onClick={() => handleClick(numerator)}>
-        &gt; {numerator.outcome_name}
+        {numerator.outcome_name}
       </a>
 
       <div className={css.divided_by}>
@@ -20,7 +20,7 @@ const SideBar = ({ rankings, year, setYear, ancestry, setSubject }) => {
       </div>
 
       <a className={css.link} onClick={() => handleClick(denominator)}>
-        &gt; {denominator.outcome_name}
+        {denominator.outcome_name}
       </a>
     </div>
   );
