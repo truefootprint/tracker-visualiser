@@ -1,11 +1,16 @@
 .side_bar {
-  border-left: 1px solid #ccc;
   justify-content: center;
-  margin-right: 1rem;
+  margin: 8.8rem 1rem 0 0;
 }
 
 .year {
-  margin: 4.7rem 0 0 7.3rem;
+  display: none;
+  margin: 4.7rem 0 0 0;
+}
+
+.based_on {
+  font-size: 1.4rem;
+  margin-left: 2rem;
 }
 
 .outcome_ratio {

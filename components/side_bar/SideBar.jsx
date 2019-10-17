@@ -25,6 +25,8 @@ const SideBar = ({ rankings, year, setYear, ancestry, setSubject }) => {
     </div>
   );
 
+  const showSubtitle = ancestry.children.length > 0;
+
   return (
     <div className={css.side_bar}>
       <div className={css.year}>
@@ -32,6 +34,12 @@ const SideBar = ({ rankings, year, setYear, ancestry, setSubject }) => {
       </div>
 
       {numerator && denominator && outcomeRatio()}
+
+      {showSubtitle && (
+        <p className={css.based_on}>
+          {rankings[0].rankable_name} score based on:
+        </p>
+      )}
 
       {ancestry && <DrillDown ancestry={ancestry} setSubject={setSubject} />}
     </div>

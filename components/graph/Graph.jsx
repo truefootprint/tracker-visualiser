@@ -58,7 +58,7 @@ const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbn
     const max = d3.max(values);
 
     const marginLeft = thumbnail ? 0 : 220;
-    const marginRight = thumbnail ? 0 : 100;
+    const marginRight = thumbnail ? 0 : 30;
     const marginY = thumbnail ? 0 : 50;
 
     const width = svgWidth - marginLeft - marginRight;
@@ -140,10 +140,10 @@ const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbn
       chart.append('g')
         .attr('transform', translateAxis)
         .attr('class', css.x_axis)
-        .call(d3.axisBottom(xScale));
+        .call(d3.axisBottom(xScale).ticks(5));
 
       svg.append('text')
-        .attr('x', svgWidth - marginRight)
+        .attr('x', svgWidth - 80)
         .attr('y', height + marginY * 0.8)
         .attr('class', css.x_axis_label)
         .attr('text-anchor', 'middle')
