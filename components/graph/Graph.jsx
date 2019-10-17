@@ -81,9 +81,12 @@ const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbn
       chart.selectAll(`*[data-index='${index}']`)
         .attr('class', css.highlighted);
 
-      if (d.auditor_name) {
-        setTooltip(`Assured by ${d.auditor_name}`);
-      }
+      const datum = data[index];
+
+      setTooltip(<>
+        <p>{round(datum.value)} {rankings[0].unit_name || " points"}</p>
+        {datum.auditor_name && <p>Assured by {datum.auditor_name}</p>}
+      </>);
     };
 
     const handleMouseOut = (d, index) => {
