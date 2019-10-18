@@ -34,6 +34,25 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
     return childRanking;
   });
 
+  const stableSort = (rankings) => {
+    let ranksWithIndices = rankings.map((r, i) => ({ r, i }));
+
+    ranksWithIndices.sort(({ r: a, i: ai }, { r: b, i: bi }) => {
+      const aHasARank = !!a.rank;
+      const bHasARank = !!b.rank;
+
+      if (aHasARank && bHasARank || !aHasARank && !bHasARank) {
+        return ai - bi;
+      } else if (aHasARank) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+
+    return ranksWithIndices.map(({ r }) => r);
+  };
+
   return (
     <div className={css.company}>
       {auditor && <div className={css.auditor}>
@@ -136,7 +155,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
               </div>
             </div>
 
-            {r.children.map((r, i) => (
+            {stableSort(r.children).map((r, i) => (
               <div key={i} className={css.outcome}>
                 <div className={css.title}>
                   {r.rankable_name}
