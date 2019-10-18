@@ -1,0 +1,39 @@
+.logo_pair {
+  border: 1px solid #ccc;
+  padding: 1.5rem;
+  display: inline-block;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+}
+
+.company_logo_on_its_own {
+  display: inline-block;
+  max-width: 15rem;
+  max-height: 8rem;
+}
+
+.company_logo {
+  display: inline-block;
+  max-width: 15rem;
+  max-height: 8rem;
+
+  border-right: 1px solid #ccc;
+  padding-right: 2rem;
+  margin-right: 2rem;
+}
+
+.auditor_logo {
+  display: inline-block;
+  max-width: 7.5rem;
+  max-height: 4rem;
+}
+
+.assured_by {
+  margin-right: 2rem;
+  font-size: 1.5rem;
+  color: #aaa;
+}
+

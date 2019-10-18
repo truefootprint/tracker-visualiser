@@ -5,6 +5,7 @@ import Ranking from "../ranking";
 import TrendThumbnail from "../trend_thumbnail";
 import Year from "../year";
 import Info from "../info";
+import LogoPair from "../logo_pair";
 import css from "./styles.scss";
 
 const Company = ({ ancestry, rankings, sector, distribution, threshold, year, setYear, setSubject, setTrendView, trendView, esg, client }) => {
@@ -55,12 +56,6 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
 
   return (
     <div className={css.company}>
-      {auditor && <div className={css.auditor}>
-        <p className={css.text}>Assured by:</p>
-
-        <img className={css.logo} src={auditor.logo} />
-      </div>}
-
       <Breadcrumbs
         ancestry={ancestry}
         sector={sector}
@@ -69,7 +64,7 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
       />
 
       <div className={css.top_level}>
-        <img className={css.logo} src={rankings[0].company_logo} />
+        <LogoPair ranking={rankings[0]} auditor={auditor} />
 
         <div className={css.title}>
           <span className={css.esg_rating}>
