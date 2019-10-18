@@ -1,5 +1,5 @@
 import round from "../../helpers/round";
-import ordinal from "../../helpers/ordinal";
+import Ordinal from "../ordinal";
 import css from "./styles.scss";
 
 const Info = ({ ranking, children, trendView }) => {
@@ -10,7 +10,7 @@ const Info = ({ ranking, children, trendView }) => {
   if (showValue) {
     value = round(ranking.value);
   } else if (ranking.rank) {
-    value = `Ranked ${ordinal(ranking.rank)}`;
+    value = <>Ranked <Ordinal number={ranking.rank} /></>;
   } else {
     value = "Insufficient data to rank";
   }

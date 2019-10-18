@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Tooltip from "../tooltip";
-import ordinal from "../../helpers/ordinal";
+import Ordinal from "../ordinal";
 import css from "./styles.scss";
 import Icon from "../icon";
 
@@ -44,10 +44,10 @@ const Indicator = ({ sector, distribution, threshold, year, ranking, client }) =
 
   const handleMouseOver = () => {
     const prevYear = year - 1;
-    const rank = ordinal(previousRanking.rank);
+    const rank = <Ordinal number={previousRanking.rank} />;
     const outOf = previousRanking.out_of;
 
-    setTooltip(`In ${prevYear}, ranked ${rank} out of ${outOf}`);
+    setTooltip(<>In {prevYear}, ranked {rank} out of {outOf}</>);
   };
 
   const handleMouseOut = () => {

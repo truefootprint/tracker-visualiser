@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Graph from "../graph";
 import Indicator from "../indicator";
 import Icon from "../icon";
-import ordinal from "../../helpers/ordinal";
+import Ordinal from "../ordinal";
 import css from "./styles.scss";
 
 const Ranking = ({ ranking, setSubject, setTrendView, subject, sector, distribution, threshold, year, size, nullText, suffix, client, children }) => {
@@ -12,7 +12,7 @@ const Ranking = ({ ranking, setSubject, setTrendView, subject, sector, distribut
 
   let inner;
   if (ranking.rank) {
-    inner = <><b>{ordinal(ranking.rank)}</b> out of {ranking.out_of}{suffix}</>;
+    inner = <><b><Ordinal number={ranking.rank} /></b> out of {ranking.out_of}{suffix}</>;
   } else {
     inner = <span className={css.none}>{text}</span>;
   }
