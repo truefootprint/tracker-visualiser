@@ -27,13 +27,17 @@ const Company = ({ ancestry, rankings, sector, distribution, threshold, year, se
   const rootRanking = ranking(esg);
   if (!rootRanking) return null;
 
-  rootRanking.children = ancestry.descendents.flatMap(child => {
+  rootRanking.children = ancestry.descendents.map(child => {
     const childRanking = ranking(child);
     if (!childRanking) return;
 
-    childRanking.children = child.descendents.map(grandchild => ranking(grandchild));
+    childRanking.children = child.descendents
+      .map(grandchild => ranking(grandchild))
+      .filter(x => x)
+      .filter(x => x.out_of > 0);
+
     return childRanking;
-  });
+  }).filter(x => x);
 
   const stableSort = (rankings) => {
     let ranksWithIndices = rankings.map((r, i) => ({ r, i }));
