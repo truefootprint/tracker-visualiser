@@ -49,13 +49,13 @@ class Client {
     return this.get(`/companies/${id}`);
   }
 
-  ancestry({ type, id }) {
+  ancestry({ type, id, sector }) {
     if (type === "trend") {
       const [rankableType, rankableId] = id.split("-");
 
-      return this.get(`/ancestry/${rankableType.toLowerCase()}/${rankableId}`);
+      return this.get(`/ancestry/${sector}/${rankableType.toLowerCase()}/${rankableId}`);
     } else {
-      return this.get(`/ancestry/${type}/${id}`);
+      return this.get(`/ancestry/${sector}/${type}/${id}`);
     }
   }
 

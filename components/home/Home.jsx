@@ -31,7 +31,7 @@ const Home = () => {
 
   useEffect(() => {
     const member = subject.type === "company" ? esg : subject;
-    client.ancestry(member).then(({ data }) => setAncestry(data));
+    client.ancestry({ ...member, sector }).then(({ data }) => setAncestry(data));
   }, [subject, password]);
 
   const nullifyDataAndSetDistribution = (distribution) => {
