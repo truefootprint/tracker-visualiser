@@ -82,6 +82,7 @@ const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbn
         .attr('class', css.highlighted);
 
       const datum = data[index];
+      if (!datum) return;
 
       setTooltip(<>
         <p>{round(datum.value)} {rankings[0].unit_name || " points"}</p>
@@ -97,7 +98,10 @@ const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbn
     };
 
     const visitCompanyByIndex = (index) => {
-      visitCompanyById(data[index].id);
+      const datum = data[index];
+      if (!datum) return;
+
+      visitCompanyById(datum.id);
     };
 
     const visitPageReference = (d) => {
