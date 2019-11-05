@@ -18,7 +18,7 @@ const NavBar = ({ distribution, setDistribution, threshold, setThreshold, setSub
       </a>
 
       <h1 className={css.title}>
-        Tracker
+        Outcome Tracker
       </h1>
 
       <div className={css.icons}>
