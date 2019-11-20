@@ -6,7 +6,7 @@ import "./reset.scss";
 import "./typography.scss";
 
 const Layout = ({ distribution, setDistribution, threshold, setThreshold, setSubject, children }) => {
-  const [showAggregation, setShowAggregation] = useState(false);
+  const [showAggregation, setShowAggregation] = useState(true);
 
   return <>
     <Head>
