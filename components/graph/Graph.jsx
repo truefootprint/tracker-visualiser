@@ -72,8 +72,10 @@ const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbn
     const axisMin = optionalMin || 0;
     const axisMax = optionalMax || max;
 
+    const padding = Math.max(0.9 - (names.length - 1) * 0.05, 0.4);
+
     const xScale = d3.scaleLinear().range([0, width]).domain([axisMin, axisMax]);
-    const yScale = d3.scaleBand().range([0, height]).domain(names).padding(0.4);
+    const yScale = d3.scaleBand().range([0, height]).domain(names).padding(padding);
 
     const translateAxis = `translate(0, ${height})`;
 
