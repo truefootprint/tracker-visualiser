@@ -77,6 +77,14 @@ const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbn
 
     const translateAxis = `translate(0, ${height})`;
 
+    const unitName = (ranking) => {
+      if (ranking.rankable_type === "Group") {
+        return "points";
+      } else {
+        return ranking.unit_name || "";
+      }
+    };
+
     const handleMouseOver = (d, index) => {
       chart.selectAll(`*[data-index='${index}']`)
         .attr('class', css.highlighted);
@@ -85,7 +93,7 @@ const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbn
       if (!datum) return;
 
       setTooltip(<>
-        <p>{round(datum.value)} {rankings[0].unit_name || " points"}</p>
+        <p>{round(datum.value)} {unitName(rankings[0])}</p>
         {datum.auditor_name && <p>Assured by {datum.auditor_name}</p>}
       </>);
     };
