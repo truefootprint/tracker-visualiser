@@ -12,6 +12,15 @@ const LineGraph = ({ rankingGroups, thumbnail, size, trendView }) => {
 
   const rankBased = trendView === "by_rank";
 
+  function year_format(year){
+    if (window.location.href.includes("Water")){
+      year = parseInt(year) + 1;      
+    } else {
+      year = year
+    }
+    return year;
+  }
+
   useEffect(() => {
     const handleMouseOver = (d) => {
       setTooltip(<Info ranking={d} trendView={trendView} />);
@@ -36,7 +45,7 @@ const LineGraph = ({ rankingGroups, thumbnail, size, trendView }) => {
     const offset = `translate(${marginLeft}, ${marginTop})`;
     const chart = svg.append('g').attr('transform', offset);
 
-    const years = rankingGroups[0].map(d => d.year);
+    const years = rankingGroups[0].map(d => year_format(d.year));
     const xScale = d3.scaleBand().domain(years).range([0, width]);
 
     let y, yScale;
