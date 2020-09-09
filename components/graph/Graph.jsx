@@ -126,11 +126,18 @@ const Graph = ({ rankings, current, threshold, year, subject, setSubject, thumbn
     };
 
     if (!thumbnail) {
-      if (year !== "2018") {
+      console.log(window.location.href.includes("Water"))
+      if (window.location.href.includes("Water") && year !== "2018"){
+        year = parseInt(year) + 1  //alert("yes")
         chart.append('text')
               .attr('class', css.year)
               .attr('y', height)
               .text(year);
+      } else if (!window.location.href.includes("Water") && year !== "2018") {
+        chart.append('text')
+        .attr('class', css.year)
+        .attr('y', height)
+        .text(year);
       }
 
       chart.append('g')

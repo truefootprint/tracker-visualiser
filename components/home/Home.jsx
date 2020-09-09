@@ -8,7 +8,7 @@ import Trend from "../trend";
 import Password from "../password";
 
 const Home = () => {
-  const [sector, setSector] = useState("Mining");
+  const [sector, setSector] = useState("Water");
   const [distribution, setDistribution] = useState("33-33-33");
   const [threshold, setThreshold] = useState("0.1");
   const [year, setYear] = useState("2018");
