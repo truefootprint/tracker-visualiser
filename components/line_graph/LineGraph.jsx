@@ -5,21 +5,13 @@ import * as d3 from "d3";
 import css from "./styles.scss";
 
 const LineGraph = ({ rankingGroups, thumbnail, size, trendView }) => {
+  
   const [tooltip, setTooltip] = useState(null);
 
   const id = Math.random().toString(36).replace(/[^a-z]+/g, '');
   const [svgWidth, svgHeight] = size || [1250, 350];
 
   const rankBased = trendView === "by_rank";
-
-  function year_format(year){
-    if (window.location.href.includes("Water")){
-      year = parseInt(year) + 1;      
-    } else {
-      year = year
-    }
-    return year;
-  }
 
   useEffect(() => {
     const handleMouseOver = (d) => {
@@ -45,7 +37,8 @@ const LineGraph = ({ rankingGroups, thumbnail, size, trendView }) => {
     const offset = `translate(${marginLeft}, ${marginTop})`;
     const chart = svg.append('g').attr('transform', offset);
 
-    const years = rankingGroups[0].map(d => year_format(d.year));
+    const years = rankingGroups[0].map(d => d.year);
+    
     const xScale = d3.scaleBand().domain(years).range([0, width]);
 
     let y, yScale;
@@ -98,6 +91,16 @@ const LineGraph = ({ rankingGroups, thumbnail, size, trendView }) => {
         dataWithValues = data.filter(d => d.value !== null);
       }
 
+      for (const data of dataWithValues){
+        console.warn("ALIKO");      
+        console.log(data.year)
+        if (window.location.href.includes("Water")){      
+          data.year  = parseInt(data.year) + 1;      
+        } else {
+          data.year  = data.year;
+        }
+      }
+      console.log(dataWithValues);
       const companyLabel = thumbnail ? "" : data[0].company_name;
 
       const path = svg.append("path")
